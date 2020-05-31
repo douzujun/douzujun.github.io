@@ -302,6 +302,7 @@
 </ul></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(x &lt; <span class="number">3</span>)</span><br><span class="line">print(x == <span class="number">3</span>)</span><br><span class="line">print(x*<span class="number">2</span> == <span class="number">25</span> - <span class="number">4</span>*x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 例子: 样本中有多少小于3岁的人</span></span><br><span class="line">np.sum(x &lt;= <span class="number">3</span>)</span><br><span class="line">np.count_nonzero(x &lt;= <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否有为0的元素, 有任意一个数为 0 则返回True</span></span><br><span class="line">np.any(x == <span class="number">0</span>)   </span><br><span class="line">np.any(x &lt; <span class="number">0</span>)   <span class="comment"># 有一个 小于0 则返回 True</span></span><br><span class="line">np.all(x &gt; <span class="number">0</span>)   <span class="comment"># 所有元素都 &gt; 0 则返回 True</span></span><br><span class="line"></span><br><span class="line">print(x)</span><br><span class="line">np.sum(~(x==<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">print(X[X[:, <span class="number">3</span>] % <span class="number">3</span> == <span class="number">0</span>, :])</span><br></pre></td></tr></table></figure>
+<h2 id="matplotlib">7.2 matplotlib</h2>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -309,6 +310,124 @@
       <tags>
         <tag>python</tag>
         <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>深度学习</title>
+    <url>/posts/48513.html</url>
+    <content><![CDATA[<h1 id="深度学习概述">1. 深度学习概述</h1>
+<a id="more"></a>
+<h1 id="第一讲-深度学习概述">第一讲 深度学习概述</h1>
+<h2 id="深度学习的引出">1.1 深度学习的引出</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531195431320-1095966772.png"></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531195404449-620553540.png"></p>
+<p><strong>特点：</strong></p>
+<ul>
+<li>通过 <strong>组合低层特征</strong>，形成了更加抽象的 <strong>高层特征</strong>。</li>
+<li>表达式中的 u，w参数需要在训练中通过 <strong>反向传播多次迭代调整</strong>，使得整体的 <strong>分类误差最小</strong>。</li>
+<li>深度学习网络往往 <strong>包含多个中间层（隐藏层）</strong>，且网络结构要更复杂一些。</li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531195908274-1184672399.png"></p>
+<h2 id="数据集及其拆分">1.2 数据集及其拆分</h2>
+<blockquote>
+<ul>
+<li><p>Iris（鸢尾花）数据集</p></li>
+<li><p>分类特征：花萼和花瓣的宽度和长度</p></li>
+</ul>
+</blockquote>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531201335444-1594057517.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<blockquote>
+<p>数据集在数学上通常表示为 $ {(x_1,y_1),(x_2,y_2),...,(x_i,y_i),...,(x_m,y_m)}​$</p>
+<ul>
+<li>其中 <span class="math inline">\(x_i​\)</span> 为样本特征。由于样本（即一行）一般有多个特征，因而 <span class="math inline">\(x_i = \{x_i^1, x_i^2,..., x_i^n\} ​\)</span></li>
+<li>而 <span class="math inline">\(y_i\)</span> 表示 <strong>样本i</strong> 的 <strong>类别标签</strong>。</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>类别标签的ground truth 与 gold standard</strong></li>
+</ul>
+<blockquote>
+<p>ground truth：翻译为地面实况。机器学习领域一般用于表示真实值、标准答案等，表示通过直接观察收集到的真实结果。</p>
+<p>gold standard：金标准，医学上一般指诊断疾病公认的最可靠的方法。</p>
+<p>机器学习领域更倾向于使用ground truth，如果用gold standard则表示可以很好地代表ground truth。</p>
+</blockquote>
+<h3 id="数据集与有监督学习">1.21 数据集与有监督学习</h3>
+<p>有监督学习中数据通常分成 <strong>训练集</strong>、<strong>测试集</strong> 两部分。</p>
+<ul>
+<li>训练集( training set)：用来<strong>训练模型</strong>，即被用来 <strong>学习</strong> 得到系统的 <strong>参数取值</strong>。</li>
+<li>测试集( testing set)：用于最终报告模型的<strong>评价结果</strong>，因此在训练阶段测试集中的样本应该是不可见的。</li>
+<li>对<strong>训练集</strong>做进一步划分为 <strong>训练集、验证集 validation set</strong>。
+<ul>
+<li>验证集：与测试集类似，也是用于评估模型的性能。</li>
+<li><strong>区别</strong>：是 验证集 主要 用于 模型选择 和 调整超参数，因而一般不用于报告最终结果。</li>
+</ul></li>
+</ul>
+<h3 id="训练集测试集拆分">1.22 训练集测试集拆分</h3>
+<ul>
+<li>留出法( Hold-out Method)数据拆分步骤</li>
+</ul>
+<p>​ 1.将数据随机分为两组，一组做为<strong>训练集</strong>，一组做为<strong>测试集</strong></p>
+<p>​ 2.利用训练集训练分类器,然后利用测试集评估模型，记录最后的分类准确率为此分类器的性能指标</p>
+<ul>
+<li><strong>K折交叉验证 </strong></li>
+</ul>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531205502620-1463495587.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<ul>
+<li>分层抽样策略（Stratified k-fold）</li>
+</ul>
+<p><strong><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531210645121-2064840159.png" alt="img"></strong></p>
+<blockquote>
+<ul>
+<li><strong>过程：</strong>
+<ul>
+<li>将数据集划分成k份，特点在于，划分的k份中 ——</li>
+<li>每一份内各个类别数据的比例 和 原始数据集中各个类别的比例 <strong>相同</strong>。</li>
+</ul></li>
+</ul>
+</blockquote>
+<h3 id="k折交叉验证的应用-用网格搜索来调超参数">1.23 K折交叉验证的应用-用网格搜索来调超参数</h3>
+<ul>
+<li>什么是超参数？
+<ul>
+<li>指在学习过程之前 需要设置其值的一些变量</li>
+<li>而不是通过训练得到的参数数据。如深度学习中的学习速率（learning rate）等就是超参数。</li>
+</ul></li>
+<li><p>什么是网格搜索?</p></li>
+<li><ul>
+<li>假设模型中有2个超参数：A和B。</li>
+<li>A的可能取值为 <span class="math inline">\({a1,a2,a3}\)</span>；</li>
+<li>B的可能取值为连续的，如在区间[0-1]。由于B值为连续，通常进行离散化，如变为 {0, 0.25, 0.5, 0.75, 1.0}</li>
+<li>如果使用网格搜索，就是尝试各种可能的 (A,B)对值，找到 能使的模型取得最高性能的 (A,B)值对。</li>
+</ul></li>
+<li><figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531211413656-595539233.png" alt="img"><figcaption>img</figcaption>
+</figure></li>
+<li><blockquote>
+<p>网格搜索与K折交叉验证结合调整超参数的具体步骤:</p>
+<ol type="1">
+<li>确定评价指标（准确率等）</li>
+<li>对于超参数取值的每种组合,在 <u>训练集</u> 上使用 <u>交叉验证的方法</u> 求得 其 <strong>K次评价的性能均值</strong></li>
+<li>最后，比较哪种超参数取值组合的性能最好，从而得到最优超参数的取值组合。</li>
+</ol>
+</blockquote></li>
+</ul>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531213050368-402591670.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<h2 id="分类及其性能度量">1.3 分类及其性能度量</h2>
+<h2 id="回归问题及其性能度量">1.4 回归问题及其性能度量</h2>
+<h2 id="一致性的评价方法">1.5 一致性的评价方法</h2>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
