@@ -419,6 +419,115 @@
 <img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531213050368-402591670.png" alt="img"><figcaption>img</figcaption>
 </figure>
 <h2 id="分类及其性能度量">1.3 分类及其性能度量</h2>
+<ul>
+<li>分类问题是有监督学习的一个核心问题。分类解决的是要预测样本属于哪个或者哪些预定义的类别。此时输出变量通常取有限个离散值。</li>
+<li><p>分类的机器学习的两大阶段</p>
+<ol type="1">
+<li>从训练数据中学习得到一个 分类决策函数 或 分类模型，称为 分类器( classifier)；</li>
+<li>利用学习得到的分类器对新的输入样本进行类别预测。</li>
+</ol></li>
+<li><strong>两类分类问题 与 多类分类问题：</strong>
+<ul>
+<li>多类分类问题也可以转化为两类分类问题解决，如采用 一对其余（One-Vs-Rest） 的方法：</li>
+<li>将其中一个类标记为正类，然后将剩余的其它类都标记成负类。</li>
+</ul></li>
+</ul>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531214407794-638106591.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<h3 id="分类性能度量"><strong>分类性能度量</strong></h3>
+<ul>
+<li>假设只有两类样本，即 <u>正例( <strong>p</strong>ositive)</u> 和 <u>负例 (<strong>n</strong>egative)</u>。</li>
+<li>通常以关注的类为正类，其他类为负类。</li>
+</ul>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531235150870-1333469783.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<ul>
+<li>表中AB模式：
+<ul>
+<li>第二个符号表示：预测的类别 ( <strong>P</strong>ositive or <strong>N</strong>egative )</li>
+<li>第一个表示：预测结果 ( <strong>T</strong>rue or <strong>F</strong>alse)</li>
+</ul></li>
+<li><p><strong>分类准确率( accuracy)</strong>：分类器正确分类的样本数与总样本数之比：</p>
+<ul>
+<li><span class="math inline">\(accuracy = {\frac{TP+TN}{P+N} }\)</span></li>
+</ul></li>
+<li><strong><u>精确率( precision)</u></strong>：反映了模型 <strong>判定的正例中真正正例的比重</strong>。在垃圾短信分类器中，是指预测出的垃圾短信中真正垃圾短信的比例。
+<ul>
+<li><span class="math inline">\(precison = \frac{TP}{TP+FP}\)</span></li>
+</ul></li>
+<li><u><strong>召回率{ recall)</strong></u>：反映了 <strong>总正例</strong> 中被模型 <strong>正确判定正例</strong> 的比重。
+<ul>
+<li>医学领域也叫做灵敏度( sensitivity)。在垃圾短信分类器中,指所有真的垃圾短信被分类器正确找出来的比例。</li>
+<li><span class="math inline">\(recall = \frac{TP}{P}\)</span></li>
+</ul></li>
+<li><p><u><strong>P-R 曲线</strong></u></p></li>
+</ul>
+<p><strong><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601004256480-1605353804.png" alt="img"></strong></p>
+<p><strong>Area</strong>( Area Under Curve，或者简称AUC)：</p>
+<ul>
+<li>Area的定义（p-r曲线下的面积）：
+<ul>
+<li><span class="math inline">\(Area = \int_0^1p(r)dr\)</span></li>
+</ul></li>
+<li>有助于弥补P、R的单点值局限性，可以 <u>反映全局性能</u>。</li>
+</ul>
+<p><strong>如何绘制P-R曲线：</strong></p>
+<ul>
+<li><p>要得到PR曲线，需要一系列 Precision和Recall的值。这些系列值是通过阈值来形成的。对于每个测试样本，分类器一般都会给了“Score”值，表示该样本多大概率上属于正例。</p></li>
+<li><p><strong>步骤：</strong></p></li>
+</ul>
+<ol type="1">
+<li>从高到低将“ Score&quot;值排序，并依此作为阈值 threshold；</li>
+<li>对于每个阈值，“ Score&quot;值大于或等于这个 threshold的测试样本被认为正例，其它为负例。从而形成一组预测数据。（每个样本设置不同阈值，算出precison和recall，从而形成一组数据）</li>
+</ol>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601005651528-980151809.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<ul>
+<li><strong><u>F值</u></strong>
+<ul>
+<li>F 值 (<span class="math inline">\(F_\beta-score​\)</span>) 是 精确率 和 召回率 的 调和平均：
+<ul>
+<li><span class="math inline">\(F_\beta-score=\frac{(1+\beta^2)*precison*recall}{(\beta^2*precision+recall)}\)</span></li>
+<li><strong><span class="math inline">\(\beta一般大于0。当\beta=1时，退化为 F1\)</span></strong> (同等重要)</li>
+<li><span class="math inline">\(F_1\)</span> 是最常用的 评价指标，即 表示二者同等重要</li>
+</ul></li>
+</ul></li>
+<li><u><strong>ROC</strong>（受试者工作特征曲线，receiver operating characteristic curve）</u>
+<ul>
+<li>描绘了分类器在 <span class="math inline">\(tp rate\)</span> （真正正例占总正例的比率，反映<strong>命中概率</strong>，纵轴) 和</li>
+<li><span class="math inline">\(fp rate\)</span>（错误的正例占反例的比率，反映误诊率、假阳性率、虚惊概率，橫轴)间的trade-off。</li>
+<li>ROC曲线绘制和P-R曲线类似。</li>
+</ul></li>
+</ul>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601010728072-509837196.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012244248-36051544.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<ul>
+<li><u><strong>ROC- AUC ( Area Under Curve)定义为ROC曲线下的面积</strong></u>
+<ul>
+<li>AUC值提供了分类器的一个整体数值。通常AUC越大,分类器更好。</li>
+<li>取值范围为[0,1]</li>
+</ul></li>
+</ul>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012534423-1615403709.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<ul>
+<li>分类性能可视化
+<ul>
+<li>混淆矩阵的可视化：可用热图（heatmap）直观展现类别的混淆情况</li>
+<li>分类报告：显示每个类的分类性能，包括每个类标签的精确率、召回率、F1值等。</li>
+</ul></li>
+</ul>
+<figure>
+<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012749910-1908185568.png" alt="img"><figcaption>img</figcaption>
+</figure>
 <h2 id="回归问题及其性能度量">1.4 回归问题及其性能度量</h2>
 <h2 id="一致性的评价方法">1.5 一致性的评价方法</h2>
 ]]></content>
