@@ -334,9 +334,7 @@
 <li><p>分类特征：花萼和花瓣的宽度和长度</p></li>
 </ul>
 </blockquote>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531201335444-1594057517.png" alt="img"><figcaption>img</figcaption>
-</figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531201335444-1594057517.png"></p>
 <blockquote>
 <p>数据集在数学上通常表示为 $ {(x_1,y_1),(x_2,y_2),...,(x_i,y_i),...,(x_m,y_m)}​$</p>
 <ul>
@@ -372,12 +370,10 @@
 <ul>
 <li><strong><u>K折交叉验证</u> </strong></li>
 </ul>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531205502620-1463495587.png" alt="img"><figcaption>img</figcaption>
-</figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531205502620-1463495587.png"></p>
 <ul>
 <li><p>分层抽样策略（Stratified k-fold）</p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531210645121-2064840159.png" alt="img">*</p></li>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531210645121-2064840159.png">*</p></li>
 </ul>
 <blockquote>
 <ul>
@@ -402,9 +398,7 @@
 <li>B的可能取值为连续的，如在区间[0-1]。由于B值为连续，通常进行离散化，如变为 {0, 0.25, 0.5, 0.75, 1.0}</li>
 <li>如果使用网格搜索，就是尝试各种可能的 (A,B)对值，找到 能使的模型取得最高性能的 (A,B)值对。</li>
 </ul>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531211413656-595539233.png" alt="img"><figcaption>img</figcaption>
-</figure></li>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531211413656-595539233.png"></p></li>
 <li><blockquote>
 <p>网格搜索与K折交叉验证结合调整超参数的具体步骤:</p>
 <ol type="1">
@@ -414,9 +408,7 @@
 </ol>
 </blockquote></li>
 </ul>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531213050368-402591670.png" alt="img"><figcaption>img</figcaption>
-</figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531213050368-402591670.png"></p>
 <h2 id="分类及其性能度量">分类及其性能度量</h2>
 <ul>
 <li>分类问题是有监督学习的一个核心问题。分类解决的是要预测样本属于哪个或者哪些预定义的类别。此时输出变量通常取有限个离散值。</li>
@@ -431,17 +423,13 @@
 <li>将其中一个类标记为正类，然后将剩余的其它类都标记成负类。</li>
 </ul></li>
 </ul>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531214407794-638106591.png" alt="img"><figcaption>img</figcaption>
-</figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531214407794-638106591.png"></p>
 <h3 id="分类性能度量"><strong>分类性能度量</strong></h3>
 <ul>
 <li>假设只有两类样本，即 <u>正例( <strong>p</strong>ositive)</u> 和 <u>负例 (<strong>n</strong>egative)</u>。</li>
 <li>通常以关注的类为正类，其他类为负类。</li>
 </ul>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531235150870-1333469783.png" alt="img"><figcaption>img</figcaption>
-</figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531235150870-1333469783.png"></p>
 <ul>
 <li>表中AB模式：
 <ul>
@@ -463,12 +451,12 @@
 </ul></li>
 <li><p><u><strong>P-R 曲线</strong></u></p></li>
 </ul>
-<p><strong><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601004256480-1605353804.png" alt="img"></strong></p>
+<p><strong><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601004256480-1605353804.png"></strong></p>
 <p><strong>Area</strong>( Area Under Curve，或者简称AUC)：</p>
 <ul>
 <li>Area的定义（p-r曲线下的面积）：
 <ul>
-<li><span class="math inline">\(Area = \int_0^1p(r)dr\)</span></li>
+<li><span class="math inline">\(Area = \int_0^1p(r)dr​\)</span></li>
 </ul></li>
 <li>有助于弥补P、R的单点值局限性，可以 <u>反映全局性能</u>。</li>
 </ul>
@@ -481,9 +469,7 @@
 <li>从高到低将“ Score&quot;值排序，并依此作为阈值 threshold；</li>
 <li>对于每个阈值，“ Score&quot;值大于或等于这个 threshold的测试样本被认为正例，其它为负例。从而形成一组预测数据。（每个样本设置不同阈值，算出precison和recall，从而形成一组数据）</li>
 </ol>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601005651528-980151809.png" alt="img"><figcaption>img</figcaption>
-</figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601005651528-980151809.png"></p>
 <ul>
 <li><strong><u>F值</u></strong>
 <ul>
@@ -501,12 +487,8 @@
 <li>ROC曲线绘制和P-R曲线类似。</li>
 </ul></li>
 </ul>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601010728072-509837196.png" alt="img"><figcaption>img</figcaption>
-</figure>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012244248-36051544.png" alt="img"><figcaption>img</figcaption>
-</figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601010728072-509837196.png"></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012244248-36051544.png"></p>
 <ul>
 <li><u><strong>ROC- AUC ( Area Under Curve)定义为ROC曲线下的面积</strong></u>
 <ul>
@@ -514,9 +496,7 @@
 <li>取值范围为[0,1]</li>
 </ul></li>
 </ul>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012534423-1615403709.png" alt="img"><figcaption>img</figcaption>
-</figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012534423-1615403709.png"></p>
 <ul>
 <li>分类性能可视化
 <ul>
@@ -524,9 +504,7 @@
 <li>分类报告：显示每个类的分类性能，包括每个类标签的精确率、召回率、F1值等。</li>
 </ul></li>
 </ul>
-<figure>
-<img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012749910-1908185568.png" alt="img"><figcaption>img</figcaption>
-</figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012749910-1908185568.png"></p>
 <h2 id="回归问题及其性能度量">回归问题及其性能度量</h2>
 <h2 id="一致性的评价方法">一致性的评价方法</h2>
 ]]></content>
