@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-01 10:24:44" itemprop="dateModified" datetime="2020-06-01T10:24:44+08:00">2020-06-01</time>
+                <time title="修改时间：2020-06-01 13:07:08" itemprop="dateModified" datetime="2020-06-01T13:07:08+08:00">2020-06-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,14 +246,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
+              <span>4.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -360,6 +360,7 @@
 </ul>
 <p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531213050368-402591670.png"></p>
 <h2 id="分类及其性能度量">分类及其性能度量</h2>
+<h3 id="分类">分类</h3>
 <ul>
 <li>分类问题是有监督学习的一个核心问题。分类解决的是要预测样本属于哪个或者哪些预定义的类别。此时输出变量通常取有限个离散值。</li>
 <li><p>分类的机器学习的两大阶段</p>
@@ -456,6 +457,76 @@
 </ul>
 <p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012749910-1908185568.png"></p>
 <h2 id="回归问题及其性能度量">回归问题及其性能度量</h2>
+<h3 id="回归分析-regression-analysis">回归分析( regression analysis)</h3>
+<blockquote>
+<p>回归分析( regression analysis)：</p>
+<ul>
+<li>是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法</li>
+<li>和分类问题不同：
+<ul>
+<li><strong>回归</strong> 通常输出为 <u>一个实数数值。</u></li>
+<li><strong>分类</strong> 通常输出为 <u>若干指定的类别标签。</u></li>
+</ul></li>
+</ul>
+</blockquote>
+<h3 id="常用的回归性能度量方法">常用的回归性能度量方法</h3>
+<ul>
+<li><strong><u>平均绝对误差 MAE</u> (mean_absolute_error)</strong>
+<ul>
+<li>MAE ( Mean absolute error) 是 绝对误差损失( absolute error loss)的期望值。　　</li>
+<li>如果 <span class="math inline">\(\hat{y_i}​\)</span> 是 第 <span class="math inline">\(i​\)</span> 个样本的 预测值，<span class="math inline">\(y_i​\)</span>是相应的真实值，那么在 <span class="math inline">\(n_{samples}​\)</span>个测试样本上的 <u>平均绝对误差</u> (MAE) 的定义如下：
+<ul>
+<li><strong><span class="math inline">\(MAE(y, \hat{y}) = \frac{1}{n_{sample}}\sum_{i=0}^{n_{samplee}-1}|y_i - \hat{y_i}|​\)</span></strong></li>
+</ul></li>
+</ul></li>
+<li><strong><u>均方误差 MSE</u> (mean_squared_error) 及 均方根差 RMSE</strong>
+<ul>
+<li><strong>MSE( Mean squared error)，</strong>该指标对应于 平方误差损失( squared errorloss)的期望值。</li>
+<li>如果 <span class="math inline">\(\hat{y_i}​\)</span> 是 第 <span class="math inline">\(i​\)</span> 个样本的 预测值，<span class="math inline">\(y_i​\)</span>是相应的真实值，那么在 <span class="math inline">\(n_samples​\)</span>个测试样本上的 <u>均方差</u> 的定义如下：
+<ul>
+<li><strong><span class="math inline">\(MSE(y, \hat{y}) = \frac{1}{n_{sample}}\sum_{i=0}^{n_{samplee}-1}|y_i - \hat{y_i}|^2\)</span></strong></li>
+</ul></li>
+<li>均方根差RMSE：是MSE的平方根</li>
+</ul></li>
+<li><u><strong>logistic回归损失（二类）</strong></u>
+<ul>
+<li><p><strong>简称 Log loss，或交叉熵损失( cross-entropy loss)</strong></p>
+<ul>
+<li>常用于评价 逻辑回归LR 和 神经网络</li>
+</ul></li>
+<li><p>对于二类分类问题：</p>
+<ol type="1">
+<li><p>假设某样本的真实标签为 y (取值为0或1)，概率估计为 <span class="math inline">\(p = pr(y = 1)\)</span></p></li>
+<li><p>每个样本的 <u>log loss</u> 是对 分类器 给定 <u>真实标签</u> 的 <u>负log似然估计(negative log-likelihood)</u></p>
+<ul>
+<li><span class="math inline">\(L_{log}(y, p) = -log(pr(y|p)) = -(ylog(p) + (1- y)log(1-p))​\)</span></li>
+</ul></li>
+<li><p>实例：</p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601114310559-692506753.png"></p></li>
+</ol></li>
+</ul></li>
+<li><p><u><strong>logistic回归损失（多类）</strong></u></p>
+<ul>
+<li><p>对于多类问题( multiclass problem)，可将样本的真实标签( true label) 编码成 1-of-K( K为类别总数)的 <strong>二元指示矩阵Y</strong>：</p></li>
+<li><p><strong>转换举例：假设 K = 3，即三个类</strong></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601121532421-1050468040.png"></p></li>
+<li><p>假设模型对测试样本的概率估计结果为P，则在测试集（假设测试样本总数为N）上的 <u>交叉熵损失</u> 表示如下：</p>
+<ul>
+<li><strong><span class="math inline">\(L_{log}(Y, P) = -\frac{1}{N}\sum_{k=0}^{k-1}y_{i, k}logp_{i, k}\)</span></strong></li>
+<li><strong><span class="math inline">\(y_{i,k}\)</span></strong> ：表示第 <span class="math inline">\(i\)</span> 个样本的第 <span class="math inline">\(k\)</span> 个标签的 真实值</li>
+<li>即ground truth，具体含义为第 <span class="math inline">\(i\)</span> 个样本，是否属于第 <span class="math inline">\(k\)</span> 个标签，注意由于表示为 “1-of-K模式，因此每个样本只有其中一个标签值为1，其余均为0。</li>
+<li><strong><span class="math inline">\(p_{i,k}\)</span></strong> ：表示模型对第 <span class="math inline">\(i\)</span> 个样本的 第 <span class="math inline">\(k​\)</span> 个标签的 预测值。</li>
+</ul></li>
+<li><p><strong>举例：6个样本，三个类</strong></p></li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601123659686-988076227.png"></p>
+<ul>
+<li>回归评价的真实标签（即ground truth）如何获得？
+<ul>
+<li>MAE，RMSE(MSE) 常用于评分预测评价，eg 很多提供推荐服务的网站都有一个让用户给物品打分的功能预测用广对物品评分的行为称为 <u>评分预测</u>。</li>
+</ul></li>
+</ul>
 <h2 id="一致性的评价方法">一致性的评价方法</h2>
 
       
@@ -878,12 +949,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">49k</span>
+    <span title="站点总字数">51k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">45 分钟</span>
+    <span title="站点阅读时长">46 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
