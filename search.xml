@@ -1,302 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/posts/16107.html</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>深度学习</title>
-    <url>/posts/48513.html</url>
-    <content><![CDATA[<p>[TOC]</p>
-<a id="more"></a>
-<h1 id="第一讲-深度学习概述">第一讲 深度学习概述</h1>
-<h2 id="深度学习的引出">深度学习的引出</h2>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531195431320-1095966772.png"></p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531195404449-620553540.png"></p>
-<p><strong>特点：</strong></p>
-<ul>
-<li>通过 <strong>组合低层特征</strong>，形成了更加抽象的 <strong>高层特征</strong>。</li>
-<li>表达式中的 u，w参数需要在训练中通过 <strong>反向传播多次迭代调整</strong>，使得整体的 <strong>分类误差最小</strong>。</li>
-<li>深度学习网络往往 <strong>包含多个中间层（隐藏层）</strong>，且网络结构要更复杂一些。</li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531195908274-1184672399.png"></p>
-<h2 id="数据集及其拆分">数据集及其拆分</h2>
-<blockquote>
-<ul>
-<li><p>Iris（鸢尾花）数据集</p></li>
-<li><p>分类特征：花萼和花瓣的宽度和长度</p></li>
-</ul>
-</blockquote>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531201335444-1594057517.png"></p>
-<blockquote>
-<p>数据集在数学上通常表示为 $ {(x_1,y_1),(x_2,y_2),...,(x_i,y_i),...,(x_m,y_m)}​$</p>
-<ul>
-<li>其中 <span class="math inline">\(x_i​\)</span> 为样本特征。由于样本（即一行）一般有多个特征，因而 <span class="math inline">\(x_i = \{x_i^1, x_i^2,..., x_i^n\} ​\)</span></li>
-<li>而 <span class="math inline">\(y_i\)</span> 表示 <strong>样本i</strong> 的 <strong>类别标签</strong>。</li>
-</ul>
-</blockquote>
-<ul>
-<li><strong>类别标签的ground truth 与 gold standard</strong></li>
-</ul>
-<blockquote>
-<p>ground truth：翻译为地面实况。机器学习领域一般用于表示真实值、标准答案等，表示通过直接观察收集到的真实结果。</p>
-<p>gold standard：金标准，医学上一般指诊断疾病公认的最可靠的方法。</p>
-<p>机器学习领域更倾向于使用ground truth，如果用gold standard则表示可以很好地代表ground truth。</p>
-</blockquote>
-<h3 id="数据集与有监督学习">数据集与有监督学习</h3>
-<p>有监督学习中数据通常分成 <strong>训练集</strong>、<strong>测试集</strong> 两部分。</p>
-<ul>
-<li>训练集( training set)：用来<strong>训练模型</strong>，即被用来 <strong>学习</strong> 得到系统的 <strong>参数取值</strong>。</li>
-<li>测试集( testing set)：用于最终报告模型的<strong>评价结果</strong>，因此在训练阶段测试集中的样本应该是不可见的。</li>
-<li>对<strong>训练集</strong>做进一步划分为 <strong>训练集、验证集 validation set</strong>。
-<ul>
-<li>验证集：与测试集类似，也是用于评估模型的性能。</li>
-<li><strong>区别</strong>：是 验证集 主要 用于 模型选择 和 调整超参数，因而一般不用于报告最终结果。</li>
-</ul></li>
-</ul>
-<h3 id="训练集测试集拆分">训练集测试集拆分</h3>
-<ul>
-<li>留出法( Hold-out Method)数据拆分步骤</li>
-</ul>
-<p>​ 1.将数据随机分为两组，一组做为<strong>训练集</strong>，一组做为<strong>测试集</strong></p>
-<p>​ 2.利用训练集训练分类器,然后利用测试集评估模型，记录最后的分类准确率为此分类器的性能指标</p>
-<ul>
-<li><strong><u>K折交叉验证</u> </strong></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531205502620-1463495587.png"></p>
-<ul>
-<li><p>分层抽样策略（Stratified k-fold）</p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531210645121-2064840159.png"></p></li>
-</ul>
-<blockquote>
-<ul>
-<li><strong>过程：</strong>
-<ul>
-<li>将数据集划分成k份，特点在于，划分的k份中 ——</li>
-<li>每一份内各个类别数据的比例 和 原始数据集中各个类别的比例 <strong>相同</strong>。</li>
-</ul></li>
-</ul>
-</blockquote>
-<h3 id="k折交叉验证的应用-用网格搜索来调超参数">K折交叉验证的应用-用网格搜索来调超参数</h3>
-<ul>
-<li>什么是超参数？
-<ul>
-<li>指在学习过程之前 需要设置其值的一些变量</li>
-<li>而不是通过训练得到的参数数据。如深度学习中的学习速率（learning rate）等就是超参数。</li>
-</ul></li>
-<li><p>什么是网格搜索?</p></li>
-<li><ul>
-<li>假设模型中有2个超参数：A和B。</li>
-<li>A的可能取值为 <span class="math inline">\({a1,a2,a3}\)</span>；</li>
-<li>B的可能取值为连续的，如在区间[0-1]。由于B值为连续，通常进行离散化，如变为 {0, 0.25, 0.5, 0.75, 1.0}</li>
-<li>如果使用网格搜索，就是尝试各种可能的 (A,B)对值，找到 能使的模型取得最高性能的 (A,B)值对。</li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531211413656-595539233.png"></p></li>
-<li><blockquote>
-<p>网格搜索与K折交叉验证结合调整超参数的具体步骤:</p>
-<ol type="1">
-<li>确定评价指标（准确率等）</li>
-<li>对于超参数取值的每种组合,在 <u>训练集</u> 上使用 <u>交叉验证的方法</u> 求得 其 <strong>K次评价的性能均值</strong></li>
-<li>最后，比较哪种超参数取值组合的性能最好，从而得到最优超参数的取值组合。</li>
-</ol>
-</blockquote></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531213050368-402591670.png"></p>
-<h2 id="分类及其性能度量">分类及其性能度量</h2>
-<h3 id="分类">分类</h3>
-<ul>
-<li>分类问题是有监督学习的一个核心问题。分类解决的是要预测样本属于哪个或者哪些预定义的类别。此时输出变量通常取有限个离散值。</li>
-<li><p>分类的机器学习的两大阶段</p>
-<ol type="1">
-<li>从训练数据中学习得到一个 分类决策函数 或 分类模型，称为 分类器( classifier)；</li>
-<li>利用学习得到的分类器对新的输入样本进行类别预测。</li>
-</ol></li>
-<li><strong>两类分类问题 与 多类分类问题：</strong>
-<ul>
-<li>多类分类问题也可以转化为两类分类问题解决，如采用 一对其余（One-Vs-Rest） 的方法：</li>
-<li>将其中一个类标记为正类，然后将剩余的其它类都标记成负类。</li>
-</ul></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531214407794-638106591.png"></p>
-<h3 id="分类性能度量"><strong>分类性能度量</strong></h3>
-<ul>
-<li>假设只有两类样本，即 <u>正例( <strong>p</strong>ositive)</u> 和 <u>负例 (<strong>n</strong>egative)</u>。</li>
-<li>通常以关注的类为正类，其他类为负类。</li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531235150870-1333469783.png"></p>
-<ul>
-<li>表中AB模式：
-<ul>
-<li>第二个符号表示：预测的类别 ( <strong>P</strong>ositive or <strong>N</strong>egative )</li>
-<li>第一个表示：预测结果 ( <strong>T</strong>rue or <strong>F</strong>alse)</li>
-</ul></li>
-<li><p><strong>分类准确率( accuracy)</strong>：分类器正确分类的样本数与总样本数之比：</p>
-<ul>
-<li><span class="math inline">\(accuracy = {\frac{TP+TN}{P+N} }\)</span></li>
-</ul></li>
-<li><strong><u>精确率( precision)</u></strong>：反映了模型 <strong>判定的正例中真正正例的比重</strong>。在垃圾短信分类器中，是指预测出的垃圾短信中真正垃圾短信的比例。
-<ul>
-<li><span class="math inline">\(precison = \frac{TP}{TP+FP}\)</span></li>
-</ul></li>
-<li><u><strong>召回率{ recall)</strong></u>：反映了 <strong>总正例</strong> 中被模型 <strong>正确判定正例</strong> 的比重。
-<ul>
-<li>医学领域也叫做灵敏度( sensitivity)。在垃圾短信分类器中,指所有真的垃圾短信被分类器正确找出来的比例。</li>
-<li><span class="math inline">\(recall = \frac{TP}{P}\)</span></li>
-</ul></li>
-<li><p><u><strong>P-R 曲线</strong></u></p></li>
-</ul>
-<p><strong><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601004256480-1605353804.png"></strong></p>
-<p><strong>Area</strong>( Area Under Curve，或者简称AUC)：</p>
-<ul>
-<li>Area的定义（p-r曲线下的面积）：
-<ul>
-<li><span class="math inline">\(Area = \int_0^1p(r)dr​\)</span></li>
-</ul></li>
-<li>有助于弥补P、R的单点值局限性，可以 <u>反映全局性能</u>。</li>
-</ul>
-<p><strong>如何绘制P-R曲线：</strong></p>
-<ul>
-<li><p>要得到PR曲线，需要一系列 Precision和Recall的值。这些系列值是通过阈值来形成的。对于每个测试样本，分类器一般都会给了“Score”值，表示该样本多大概率上属于正例。</p></li>
-<li><p><strong>步骤：</strong></p></li>
-</ul>
-<ol type="1">
-<li>从高到低将“ Score&quot;值排序，并依此作为阈值 threshold；</li>
-<li>对于每个阈值，“ Score&quot;值大于或等于这个 threshold的测试样本被认为正例，其它为负例。从而形成一组预测数据。（每个样本设置不同阈值，算出precison和recall，从而形成一组数据）</li>
-</ol>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601005651528-980151809.png"></p>
-<ul>
-<li><strong><u>F值</u></strong>
-<ul>
-<li>F 值 (<span class="math inline">\(F_\beta-score​\)</span>) 是 精确率 和 召回率 的 调和平均：
-<ul>
-<li><span class="math inline">\(F_\beta-score=\frac{(1+\beta^2)*precison*recall}{(\beta^2*precision+recall)}\)</span></li>
-<li><strong><span class="math inline">\(\beta一般大于0。当\beta=1时，退化为 F1\)</span></strong> (同等重要)</li>
-<li><span class="math inline">\(F_1\)</span> 是最常用的 评价指标，即 表示二者同等重要</li>
-</ul></li>
-</ul></li>
-<li><u><strong>ROC</strong>（受试者工作特征曲线，receiver operating characteristic curve）</u>
-<ul>
-<li>描绘了分类器在 <span class="math inline">\(tp rate\)</span> （真正正例占总正例的比率，反映<strong>命中概率</strong>，纵轴) 和</li>
-<li><span class="math inline">\(fp rate\)</span>（错误的正例占反例的比率，反映误诊率、假阳性率、虚惊概率，橫轴)间的trade-off。</li>
-<li>ROC曲线绘制和P-R曲线类似。</li>
-</ul></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601010728072-509837196.png"></p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012244248-36051544.png"></p>
-<ul>
-<li><u><strong>ROC- AUC ( Area Under Curve)定义为ROC曲线下的面积</strong></u>
-<ul>
-<li>AUC值提供了分类器的一个整体数值。通常AUC越大,分类器更好。</li>
-<li>取值范围为[0,1]</li>
-</ul></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012534423-1615403709.png"></p>
-<ul>
-<li>分类性能可视化
-<ul>
-<li>混淆矩阵的可视化：可用热图（heatmap）直观展现类别的混淆情况</li>
-<li>分类报告：显示每个类的分类性能，包括每个类标签的精确率、召回率、F1值等。</li>
-</ul></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012749910-1908185568.png"></p>
-<h2 id="回归问题及其性能度量">回归问题及其性能度量</h2>
-<h3 id="回归分析-regression-analysis">回归分析( regression analysis)</h3>
-<blockquote>
-<p>回归分析( regression analysis)：</p>
-<ul>
-<li>是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法</li>
-<li>和分类问题不同：
-<ul>
-<li><strong>回归</strong> 通常输出为 <u>一个实数数值。</u></li>
-<li><strong>分类</strong> 通常输出为 <u>若干指定的类别标签。</u></li>
-</ul></li>
-</ul>
-</blockquote>
-<h3 id="常用的回归性能度量方法">常用的回归性能度量方法</h3>
-<ul>
-<li><strong><u>平均绝对误差 MAE</u> (mean_absolute_error)</strong>
-<ul>
-<li>MAE ( Mean absolute error) 是 绝对误差损失( absolute error loss)的期望值。　　</li>
-<li>如果 <span class="math inline">\(\hat{y_i}​\)</span> 是 第 <span class="math inline">\(i​\)</span> 个样本的 预测值，<span class="math inline">\(y_i​\)</span>是相应的真实值，那么在 <span class="math inline">\(n_{samples}​\)</span>个测试样本上的 <u>平均绝对误差</u> (MAE) 的定义如下：
-<ul>
-<li><strong><span class="math inline">\(MAE(y, \hat{y}) = \frac{1}{n_{sample}}\sum_{i=0}^{n_{samplee}-1}|y_i - \hat{y_i}|​\)</span></strong></li>
-</ul></li>
-</ul></li>
-<li><strong><u>均方误差 MSE</u> (mean_squared_error) 及 均方根差 RMSE</strong>
-<ul>
-<li><strong>MSE( Mean squared error)，</strong>该指标对应于 平方误差损失( squared errorloss)的期望值。</li>
-<li>如果 <span class="math inline">\(\hat{y_i}​\)</span> 是 第 <span class="math inline">\(i​\)</span> 个样本的 预测值，<span class="math inline">\(y_i​\)</span>是相应的真实值，那么在 <span class="math inline">\(n_samples​\)</span>个测试样本上的 <u>均方差</u> 的定义如下：
-<ul>
-<li><strong><span class="math inline">\(MSE(y, \hat{y}) = \frac{1}{n_{sample}}\sum_{i=0}^{n_{samplee}-1}|y_i - \hat{y_i}|^2\)</span></strong></li>
-</ul></li>
-<li>均方根差RMSE：是MSE的平方根</li>
-</ul></li>
-<li><u><strong>logistic回归损失（二类）</strong></u>
-<ul>
-<li><p><strong>简称 Log loss，或交叉熵损失( cross-entropy loss)</strong></p>
-<ul>
-<li>常用于评价 逻辑回归LR 和 神经网络</li>
-</ul></li>
-<li><p>对于二类分类问题：</p>
-<ol type="1">
-<li><p>假设某样本的真实标签为 y (取值为0或1)，概率估计为 <span class="math inline">\(p = pr(y = 1)\)</span></p></li>
-<li><p>每个样本的 <u>log loss</u> 是对 分类器 给定 <u>真实标签</u> 的 <u>负log似然估计(negative log-likelihood)</u></p>
-<ul>
-<li><span class="math inline">\(L_{log}(y, p) = -log(pr(y|p)) = -(ylog(p) + (1- y)log(1-p))​\)</span></li>
-</ul></li>
-<li><p>实例：</p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601114310559-692506753.png"></p></li>
-</ol></li>
-</ul></li>
-<li><p><u><strong>logistic回归损失（多类）</strong></u></p>
-<ul>
-<li><p>对于多类问题( multiclass problem)，可将样本的真实标签( true label) 编码成 1-of-K( K为类别总数)的 <strong>二元指示矩阵Y</strong>：</p></li>
-<li><p><strong>转换举例：假设 K = 3，即三个类</strong></p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601121532421-1050468040.png"></p></li>
-<li><p>假设模型对测试样本的概率估计结果为P，则在测试集（假设测试样本总数为N）上的 <u>交叉熵损失</u> 表示如下：</p>
-<ul>
-<li><strong><span class="math inline">\(L_{log}(Y, P) = -\frac{1}{N}\sum_{k=0}^{k-1}y_{i, k}logp_{i, k}\)</span></strong></li>
-<li><strong><span class="math inline">\(y_{i,k}\)</span></strong> ：表示第 <span class="math inline">\(i\)</span> 个样本的第 <span class="math inline">\(k\)</span> 个标签的 真实值</li>
-<li>即ground truth，具体含义为第 <span class="math inline">\(i\)</span> 个样本，是否属于第 <span class="math inline">\(k\)</span> 个标签，注意由于表示为 “1-of-K模式，因此每个样本只有其中一个标签值为1，其余均为0。</li>
-<li><strong><span class="math inline">\(p_{i,k}\)</span></strong> ：表示模型对第 <span class="math inline">\(i\)</span> 个样本的 第 <span class="math inline">\(k​\)</span> 个标签的 预测值。</li>
-</ul></li>
-<li><p><strong>举例：6个样本，三个类</strong></p></li>
-</ul></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601123659686-988076227.png"></p>
-<ul>
-<li>回归评价的真实标签（即ground truth）如何获得？
-<ul>
-<li>MAE，RMSE(MSE) 常用于评分预测评价，eg 很多提供推荐服务的网站都有一个让用户给物品打分的功能预测用广对物品评分的行为称为 <u>评分预测</u>。</li>
-</ul></li>
-</ul>
-<h2 id="一致性的评价方法">一致性的评价方法</h2>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>机器学习</title>
     <url>/posts/29139.html</url>
     <content><![CDATA[<h1 id="导学">1. 导学</h1>
@@ -586,6 +290,305 @@
       <tags>
         <tag>python</tag>
         <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/posts/16107.html</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>深度学习</title>
+    <url>/posts/48513.html</url>
+    <content><![CDATA[<ul>
+<li>深度学习概述</li>
+<li>特征工程</li>
+</ul>
+<a id="more"></a>
+<h1 id="第一讲-深度学习概述">第一讲 深度学习概述</h1>
+<h2 id="深度学习的引出">深度学习的引出</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531195431320-1095966772.png"></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531195404449-620553540.png"></p>
+<p><strong>特点：</strong></p>
+<ul>
+<li>通过 <strong>组合低层特征</strong>，形成了更加抽象的 <strong>高层特征</strong>。</li>
+<li>表达式中的 u，w参数需要在训练中通过 <strong>反向传播多次迭代调整</strong>，使得整体的 <strong>分类误差最小</strong>。</li>
+<li>深度学习网络往往 <strong>包含多个中间层（隐藏层）</strong>，且网络结构要更复杂一些。</li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531195908274-1184672399.png"></p>
+<h2 id="数据集及其拆分">数据集及其拆分</h2>
+<blockquote>
+<ul>
+<li><p>Iris（鸢尾花）数据集</p></li>
+<li><p>分类特征：花萼和花瓣的宽度和长度</p></li>
+</ul>
+</blockquote>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531201335444-1594057517.png"></p>
+<blockquote>
+<p>数据集在数学上通常表示为 $ {(x_1,y_1),(x_2,y_2),...,(x_i,y_i),...,(x_m,y_m)}​$</p>
+<ul>
+<li>其中 <span class="math inline">\(x_i​\)</span> 为样本特征。由于样本（即一行）一般有多个特征，因而 <span class="math inline">\(x_i = \{x_i^1, x_i^2,..., x_i^n\} ​\)</span></li>
+<li>而 <span class="math inline">\(y_i\)</span> 表示 <strong>样本i</strong> 的 <strong>类别标签</strong>。</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>类别标签的ground truth 与 gold standard</strong></li>
+</ul>
+<blockquote>
+<p>ground truth：翻译为地面实况。机器学习领域一般用于表示真实值、标准答案等，表示通过直接观察收集到的真实结果。</p>
+<p>gold standard：金标准，医学上一般指诊断疾病公认的最可靠的方法。</p>
+<p>机器学习领域更倾向于使用ground truth，如果用gold standard则表示可以很好地代表ground truth。</p>
+</blockquote>
+<h3 id="数据集与有监督学习">数据集与有监督学习</h3>
+<p>有监督学习中数据通常分成 <strong>训练集</strong>、<strong>测试集</strong> 两部分。</p>
+<ul>
+<li>训练集( training set)：用来<strong>训练模型</strong>，即被用来 <strong>学习</strong> 得到系统的 <strong>参数取值</strong>。</li>
+<li>测试集( testing set)：用于最终报告模型的<strong>评价结果</strong>，因此在训练阶段测试集中的样本应该是不可见的。</li>
+<li>对<strong>训练集</strong>做进一步划分为 <strong>训练集、验证集 validation set</strong>。
+<ul>
+<li>验证集：与测试集类似，也是用于评估模型的性能。</li>
+<li><strong>区别</strong>：是 验证集 主要 用于 模型选择 和 调整超参数，因而一般不用于报告最终结果。</li>
+</ul></li>
+</ul>
+<h3 id="训练集测试集拆分">训练集测试集拆分</h3>
+<ul>
+<li>留出法( Hold-out Method)数据拆分步骤</li>
+</ul>
+<p>​ 1.将数据随机分为两组，一组做为<strong>训练集</strong>，一组做为<strong>测试集</strong></p>
+<p>​ 2.利用训练集训练分类器,然后利用测试集评估模型，记录最后的分类准确率为此分类器的性能指标</p>
+<ul>
+<li><strong><u>K折交叉验证</u> </strong></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531205502620-1463495587.png"></p>
+<ul>
+<li><p>分层抽样策略（Stratified k-fold）</p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531210645121-2064840159.png"></p></li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>过程：</strong>
+<ul>
+<li>将数据集划分成k份，特点在于，划分的k份中 ——</li>
+<li>每一份内各个类别数据的比例 和 原始数据集中各个类别的比例 <strong>相同</strong>。</li>
+</ul></li>
+</ul>
+</blockquote>
+<h3 id="k折交叉验证的应用-用网格搜索来调超参数">K折交叉验证的应用-用网格搜索来调超参数</h3>
+<ul>
+<li>什么是超参数？
+<ul>
+<li>指在学习过程之前 需要设置其值的一些变量</li>
+<li>而不是通过训练得到的参数数据。如深度学习中的学习速率（learning rate）等就是超参数。</li>
+</ul></li>
+<li><p>什么是网格搜索?</p></li>
+<li><ul>
+<li>假设模型中有2个超参数：A和B。</li>
+<li>A的可能取值为 <span class="math inline">\({a1,a2,a3}\)</span>；</li>
+<li>B的可能取值为连续的，如在区间[0-1]。由于B值为连续，通常进行离散化，如变为 {0, 0.25, 0.5, 0.75, 1.0}</li>
+<li>如果使用网格搜索，就是尝试各种可能的 (A,B)对值，找到 能使的模型取得最高性能的 (A,B)值对。</li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531211413656-595539233.png"></p></li>
+<li><blockquote>
+<p>网格搜索与K折交叉验证结合调整超参数的具体步骤:</p>
+<ol type="1">
+<li>确定评价指标（准确率等）</li>
+<li>对于超参数取值的每种组合,在 <u>训练集</u> 上使用 <u>交叉验证的方法</u> 求得 其 <strong>K次评价的性能均值</strong></li>
+<li>最后，比较哪种超参数取值组合的性能最好，从而得到最优超参数的取值组合。</li>
+</ol>
+</blockquote></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531213050368-402591670.png"></p>
+<h2 id="分类及其性能度量">分类及其性能度量</h2>
+<h3 id="分类">分类</h3>
+<ul>
+<li>分类问题是有监督学习的一个核心问题。分类解决的是要预测样本属于哪个或者哪些预定义的类别。此时输出变量通常取有限个离散值。</li>
+<li><p>分类的机器学习的两大阶段</p>
+<ol type="1">
+<li>从训练数据中学习得到一个 分类决策函数 或 分类模型，称为 分类器( classifier)；</li>
+<li>利用学习得到的分类器对新的输入样本进行类别预测。</li>
+</ol></li>
+<li><strong>两类分类问题 与 多类分类问题：</strong>
+<ul>
+<li>多类分类问题也可以转化为两类分类问题解决，如采用 一对其余（One-Vs-Rest） 的方法：</li>
+<li>将其中一个类标记为正类，然后将剩余的其它类都标记成负类。</li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531214407794-638106591.png"></p>
+<h3 id="分类性能度量"><strong>分类性能度量</strong></h3>
+<ul>
+<li>假设只有两类样本，即 <u>正例( <strong>p</strong>ositive)</u> 和 <u>负例 (<strong>n</strong>egative)</u>。</li>
+<li>通常以关注的类为正类，其他类为负类。</li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531235150870-1333469783.png"></p>
+<ul>
+<li>表中AB模式：
+<ul>
+<li>第二个符号表示：预测的类别 ( <strong>P</strong>ositive or <strong>N</strong>egative )</li>
+<li>第一个表示：预测结果 ( <strong>T</strong>rue or <strong>F</strong>alse)</li>
+</ul></li>
+<li><p><strong>分类准确率( accuracy)</strong>：分类器正确分类的样本数与总样本数之比：</p>
+<ul>
+<li><span class="math inline">\(accuracy = {\frac{TP+TN}{P+N} }\)</span></li>
+</ul></li>
+<li><strong><u>精确率( precision)</u></strong>：反映了模型 <strong>判定的正例中真正正例的比重</strong>。在垃圾短信分类器中，是指预测出的垃圾短信中真正垃圾短信的比例。
+<ul>
+<li><span class="math inline">\(precison = \frac{TP}{TP+FP}\)</span></li>
+</ul></li>
+<li><u><strong>召回率{ recall)</strong></u>：反映了 <strong>总正例</strong> 中被模型 <strong>正确判定正例</strong> 的比重。
+<ul>
+<li>医学领域也叫做灵敏度( sensitivity)。在垃圾短信分类器中,指所有真的垃圾短信被分类器正确找出来的比例。</li>
+<li><span class="math inline">\(recall = \frac{TP}{P}\)</span></li>
+</ul></li>
+<li><p><u><strong>P-R 曲线</strong></u></p></li>
+</ul>
+<p><strong><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601004256480-1605353804.png"></strong></p>
+<p><strong>Area</strong>( Area Under Curve，或者简称AUC)：</p>
+<ul>
+<li>Area的定义（p-r曲线下的面积）：
+<ul>
+<li><span class="math inline">\(Area = \int_0^1p(r)dr​\)</span></li>
+</ul></li>
+<li>有助于弥补P、R的单点值局限性，可以 <u>反映全局性能</u>。</li>
+</ul>
+<p><strong>如何绘制P-R曲线：</strong></p>
+<ul>
+<li><p>要得到PR曲线，需要一系列 Precision和Recall的值。这些系列值是通过阈值来形成的。对于每个测试样本，分类器一般都会给了“Score”值，表示该样本多大概率上属于正例。</p></li>
+<li><p><strong>步骤：</strong></p></li>
+</ul>
+<ol type="1">
+<li>从高到低将“ Score&quot;值排序，并依此作为阈值 threshold；</li>
+<li>对于每个阈值，“ Score&quot;值大于或等于这个 threshold的测试样本被认为正例，其它为负例。从而形成一组预测数据。（每个样本设置不同阈值，算出precison和recall，从而形成一组数据）</li>
+</ol>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601005651528-980151809.png"></p>
+<ul>
+<li><strong><u>F值</u></strong>
+<ul>
+<li>F 值 (<span class="math inline">\(F_\beta-score​\)</span>) 是 精确率 和 召回率 的 调和平均：
+<ul>
+<li><span class="math inline">\(F_\beta-score=\frac{(1+\beta^2)*precison*recall}{(\beta^2*precision+recall)}\)</span></li>
+<li><strong><span class="math inline">\(\beta一般大于0。当\beta=1时，退化为 F1\)</span></strong> (同等重要)</li>
+<li><span class="math inline">\(F_1\)</span> 是最常用的 评价指标，即 表示二者同等重要</li>
+</ul></li>
+</ul></li>
+<li><u><strong>ROC</strong>（受试者工作特征曲线，receiver operating characteristic curve）</u>
+<ul>
+<li>描绘了分类器在 <span class="math inline">\(tp rate\)</span> （真正正例占总正例的比率，反映<strong>命中概率</strong>，纵轴) 和</li>
+<li><span class="math inline">\(fp rate\)</span>（错误的正例占反例的比率，反映误诊率、假阳性率、虚惊概率，橫轴)间的trade-off。</li>
+<li>ROC曲线绘制和P-R曲线类似。</li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601010728072-509837196.png"></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012244248-36051544.png"></p>
+<ul>
+<li><u><strong>ROC- AUC ( Area Under Curve)定义为ROC曲线下的面积</strong></u>
+<ul>
+<li>AUC值提供了分类器的一个整体数值。通常AUC越大,分类器更好。</li>
+<li>取值范围为[0,1]</li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012534423-1615403709.png"></p>
+<ul>
+<li>分类性能可视化
+<ul>
+<li>混淆矩阵的可视化：可用热图（heatmap）直观展现类别的混淆情况</li>
+<li>分类报告：显示每个类的分类性能，包括每个类标签的精确率、召回率、F1值等。</li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601012749910-1908185568.png"></p>
+<h2 id="回归问题及其性能度量">回归问题及其性能度量</h2>
+<h3 id="回归分析-regression-analysis">回归分析( regression analysis)</h3>
+<blockquote>
+<p>回归分析( regression analysis)：</p>
+<ul>
+<li>是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法</li>
+<li>和分类问题不同：
+<ul>
+<li><strong>回归</strong> 通常输出为 <u>一个实数数值。</u></li>
+<li><strong>分类</strong> 通常输出为 <u>若干指定的类别标签。</u></li>
+</ul></li>
+</ul>
+</blockquote>
+<h3 id="常用的回归性能度量方法">常用的回归性能度量方法</h3>
+<ul>
+<li><strong><u>平均绝对误差 MAE</u> (mean_absolute_error)</strong>
+<ul>
+<li>MAE ( Mean absolute error) 是 绝对误差损失( absolute error loss)的期望值。　　</li>
+<li>如果 <span class="math inline">\(\hat{y_i}​\)</span> 是 第 <span class="math inline">\(i​\)</span> 个样本的 预测值，<span class="math inline">\(y_i​\)</span>是相应的真实值，那么在 <span class="math inline">\(n_{samples}​\)</span>个测试样本上的 <u>平均绝对误差</u> (MAE) 的定义如下：
+<ul>
+<li><strong><span class="math inline">\(MAE(y, \hat{y}) = \frac{1}{n_{sample}}\sum_{i=0}^{n_{samplee}-1}|y_i - \hat{y_i}|​\)</span></strong></li>
+</ul></li>
+</ul></li>
+<li><strong><u>均方误差 MSE</u> (mean_squared_error) 及 均方根差 RMSE</strong>
+<ul>
+<li><strong>MSE( Mean squared error)，</strong>该指标对应于 平方误差损失( squared errorloss)的期望值。</li>
+<li>如果 <span class="math inline">\(\hat{y_i}​\)</span> 是 第 <span class="math inline">\(i​\)</span> 个样本的 预测值，<span class="math inline">\(y_i​\)</span>是相应的真实值，那么在 <span class="math inline">\(n_samples​\)</span>个测试样本上的 <u>均方差</u> 的定义如下：
+<ul>
+<li><strong><span class="math inline">\(MSE(y, \hat{y}) = \frac{1}{n_{sample}}\sum_{i=0}^{n_{samplee}-1}|y_i - \hat{y_i}|^2\)</span></strong></li>
+</ul></li>
+<li>均方根差RMSE：是MSE的平方根</li>
+</ul></li>
+<li><u><strong>logistic回归损失（二类）</strong></u>
+<ul>
+<li><p><strong>简称 Log loss，或交叉熵损失( cross-entropy loss)</strong></p>
+<ul>
+<li>常用于评价 逻辑回归LR 和 神经网络</li>
+</ul></li>
+<li><p>对于二类分类问题：</p>
+<ol type="1">
+<li><p>假设某样本的真实标签为 y (取值为0或1)，概率估计为 <span class="math inline">\(p = pr(y = 1)\)</span></p></li>
+<li><p>每个样本的 <u>log loss</u> 是对 分类器 给定 <u>真实标签</u> 的 <u>负log似然估计(negative log-likelihood)</u></p>
+<ul>
+<li><span class="math inline">\(L_{log}(y, p) = -log(pr(y|p)) = -(ylog(p) + (1- y)log(1-p))​\)</span></li>
+</ul></li>
+<li><p>实例：</p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601114310559-692506753.png"></p></li>
+</ol></li>
+</ul></li>
+<li><p><u><strong>logistic回归损失（多类）</strong></u></p>
+<ul>
+<li><p>对于多类问题( multiclass problem)，可将样本的真实标签( true label) 编码成 1-of-K( K为类别总数)的 <strong>二元指示矩阵Y</strong>：</p></li>
+<li><p><strong>转换举例：假设 K = 3，即三个类</strong></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601121532421-1050468040.png"></p></li>
+<li><p>假设模型对测试样本的概率估计结果为P，则在测试集（假设测试样本总数为N）上的 <u>交叉熵损失</u> 表示如下：</p>
+<ul>
+<li><strong><span class="math inline">\(L_{log}(Y, P) = -\frac{1}{N}\sum_{k=0}^{k-1}y_{i, k}logp_{i, k}\)</span></strong></li>
+<li><strong><span class="math inline">\(y_{i,k}\)</span></strong> ：表示第 <span class="math inline">\(i\)</span> 个样本的第 <span class="math inline">\(k\)</span> 个标签的 真实值</li>
+<li>即ground truth，具体含义为第 <span class="math inline">\(i\)</span> 个样本，是否属于第 <span class="math inline">\(k\)</span> 个标签，注意由于表示为 “1-of-K模式，因此每个样本只有其中一个标签值为1，其余均为0。</li>
+<li><strong><span class="math inline">\(p_{i,k}\)</span></strong> ：表示模型对第 <span class="math inline">\(i\)</span> 个样本的 第 <span class="math inline">\(k​\)</span> 个标签的 预测值。</li>
+</ul></li>
+<li><p><strong>举例：6个样本，三个类</strong></p></li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200601123659686-988076227.png"></p>
+<ul>
+<li>回归评价的真实标签（即ground truth）如何获得？
+<ul>
+<li>MAE，RMSE(MSE) 常用于评分预测评价，eg 很多提供推荐服务的网站都有一个让用户给物品打分的功能预测用广对物品评分的行为称为 <u>评分预测</u>。</li>
+</ul></li>
+</ul>
+<h2 id="一致性的评价方法">一致性的评价方法</h2>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
