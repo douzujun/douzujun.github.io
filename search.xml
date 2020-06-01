@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/posts/16107.html</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>机器学习</title>
     <url>/posts/29139.html</url>
     <content><![CDATA[<h1 id="导学">1. 导学</h1>
@@ -290,51 +310,6 @@
       <tags>
         <tag>python</tag>
         <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/posts/16107.html</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>深度学习代码索引</title>
-    <url>/posts/8245.html</url>
-    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
-<a id="more"></a>
-<h1 id="机器学习">机器学习</h1>
-<h2 id="分类性能度量">分类性能度量</h2>
-<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h1 id="深度学习">深度学习</h1>
-<h1 id="自然语言处理">自然语言处理</h1>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-        <category>自然语言处理</category>
-        <category>pytorch</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-        <tag>自然语言处理</tag>
-        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -751,6 +726,31 @@
       <tags>
         <tag>python</tag>
         <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>深度学习代码索引</title>
+    <url>/posts/8245.html</url>
+    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
+<a id="more"></a>
+<h1 id="机器学习">机器学习</h1>
+<h2 id="分类性能度量">分类性能度量</h2>
+<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h1 id="深度学习">深度学习</h1>
+<h1 id="自然语言处理">自然语言处理</h1>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>自然语言处理</category>
+        <category>pytorch</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>自然语言处理</tag>
+        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
