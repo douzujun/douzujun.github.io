@@ -21,321 +21,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>机器学习</title>
-    <url>/posts/29139.html</url>
-    <content><![CDATA[<h1 id="导学">1. 导学</h1>
-<blockquote>
-<ul>
-<li>如何使用算法</li>
-<li>如何评价算法的好坏</li>
-<li>如何解决过拟合和欠拟合</li>
-<li>如何调节算法的参数</li>
-<li>如何验证算法的正确性</li>
-</ul>
-</blockquote>
-<a id="more"></a>
-<h2 id="要求">1.1 要求</h2>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530144215672-1765480003.png"></p>
-<h2 id="如何使用算法">1.2 如何使用算法</h2>
-<ul>
-<li>如何评价算法的好坏</li>
-<li>如何解决过拟合和欠拟合</li>
-<li>如何调节算法的参数</li>
-<li>如何验证算法的正确性</li>
-</ul>
-<h1 id="机器学习的数据">2. 机器学习的数据</h1>
-<h2 id="样本">2.1 样本</h2>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530150853222-770665335.png" style="zoom:100%"></p>
-<h2 id="特征">2.2 特征</h2>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530152307608-1496852643.png" style="zoom:100%"></p>
-<h2 id="特征空间">2.3 特征空间</h2>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530153351376-1807219682.png" style="zoom:100%"></p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530153849062-558615798.png" style="zoom:100%"></p>
-<h1 id="机器学习分类">3. 机器学习分类</h1>
-<h2 id="监督学习">3.1 监督学习</h2>
-<blockquote>
-<p>给机器的训练数据拥有 “标记” 或者 “答案”</p>
-</blockquote>
-<ul>
-<li>k近邻</li>
-<li>线性回归和多项式回归</li>
-<li>逻辑回归</li>
-<li>SVM</li>
-<li>决策树和随机森林</li>
-</ul>
-<h2 id="非监督学习">3.2 非监督学习</h2>
-<blockquote>
-<p>给机器的训练数据没有任何“标记” 或者 “答案”</p>
-<p>对没有“标记”的数据进行分类--聚类分析</p>
-</blockquote>
-<p><strong>意义：</strong></p>
-<ul>
-<li><strong>对数据进行降维处理</strong>
-<ul>
-<li><strong>特征提取： </strong> 信用卡的信用评级 和 人的胖瘦无关？</li>
-<li><strong>特征压缩：</strong> PCA （不损失数据的情况下，将高维数据压缩成低维数据）</li>
-<li><strong>降维处理的意义：方便可视化</strong></li>
-</ul></li>
-<li><strong>异常检测：</strong></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530181603890-284389522.png" style="zoom:90%"></p>
-<h2 id="半监督学习">3.3 半监督学习</h2>
-<blockquote>
-<p>一部分数据有“标记” 或者 “答案“， 另一部分数据没有</p>
-<p>更常见：各种原因产生的标记缺失</p>
-<p>通常都先使用 <strong>无监督学习手段对数据做处理</strong>，之后使用 <strong>监督学习手段做模型的训练和预测</strong></p>
-</blockquote>
-<h2 id="增强学习">3.4 增强学习</h2>
-<blockquote>
-<ul>
-<li>无人驾驶</li>
-<li>机器人</li>
-</ul>
-</blockquote>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530184358774-1028653002.png" style="zoom:80%"></p>
-<h1 id="机器学习的其他分类">4. 机器学习的其他分类</h1>
-<h2 id="在线学习和批量学习">4.1 在线学习和批量学习</h2>
-<ul>
-<li><strong>批量学习 Batch Learning（离线学习, 为主）</strong></li>
-</ul>
-<blockquote>
-<ul>
-<li><p>优点： 简单</p></li>
-<li>问题：如何适应环境变化
-<ul>
-<li>解决方案：定时重新批量学习</li>
-</ul></li>
-<li><p>缺点：每次重新批量学习，运算量巨大;</p></li>
-</ul>
-</blockquote>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530185519551-841258350.png" style="zoom:80%"></p>
-<ul>
-<li><strong>在线学习 Online Learning</strong></li>
-</ul>
-<blockquote>
-<ul>
-<li><p>优点：及时反映新的环境变化</p></li>
-<li>问题：新的数据带来不会的变化
-<ul>
-<li>解决方案：需要加强对数据进行监控</li>
-</ul></li>
-<li><p>其他：也适用于数据量巨大，完全无法批量学习的环境</p></li>
-</ul>
-</blockquote>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530190034224-207594180.png" style="zoom:80%"></p>
-<h2 id="参数学习和非参数学习">4.2 参数学习和非参数学习</h2>
-<ul>
-<li><strong>参数学习 Parametric Learning</strong></li>
-</ul>
-<blockquote>
-<p>一旦学到参数，就不再需要原有的数据集</p>
-</blockquote>
-<ul>
-<li><strong>非参数学习 Nonparametric Learning</strong></li>
-</ul>
-<blockquote>
-<ul>
-<li>不对模型进行过多假设</li>
-<li>非参数不等于没参数</li>
-</ul>
-</blockquote>
-<h1 id="监督学习任务">5. 监督学习任务</h1>
-<h2 id="分类任务">5.1 分类任务</h2>
-<ul>
-<li><strong>二分类</strong></li>
-</ul>
-<blockquote>
-<ul>
-<li>判断邮件是否为垃圾邮件</li>
-<li>判断发给客户信用卡是否有风险</li>
-<li>判断病患是良性肿瘤；恶性肿瘤</li>
-<li>判断股票涨跌</li>
-</ul>
-</blockquote>
-<ul>
-<li><strong>多分类</strong></li>
-</ul>
-<blockquote>
-<ul>
-<li>手写数字识别</li>
-<li>图像识别</li>
-<li>判断发给客户信用卡的风险评级</li>
-<li>2048游戏：转换为多分类，是否上移动，下移，左移等</li>
-<li>围棋</li>
-<li>无人车：根据环境信息，设置方向盘，油门、刹车</li>
-<li><strong>多分类的任务可以转换成二分类任务</strong></li>
-</ul>
-</blockquote>
-<ul>
-<li><strong>多标签分类</strong></li>
-</ul>
-<blockquote>
-<p>一个图片分到多个类别</p>
-</blockquote>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530155230571-734693011.png" style="zoom:65%"></p>
-<h2 id="回归任务">5.2 回归任务</h2>
-<ul>
-<li><strong>结果是一个连续的数字的值，而非一个类别</strong></li>
-</ul>
-<blockquote>
-<ul>
-<li>房屋预测</li>
-<li>市场分析</li>
-<li>学生成绩</li>
-<li>股票价格</li>
-</ul>
-</blockquote>
-<ul>
-<li><strong>一般情况下，回归任务可以简化成分类任务</strong></li>
-</ul>
-<blockquote>
-<ul>
-<li>无人驾驶</li>
-</ul>
-</blockquote>
-<h2 id="工作流程">5.3 工作流程</h2>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530160139974-1127480687.png" style="zoom:70%"></p>
-<h1 id="jupyter-notebook">6. jupyter notebook</h1>
-<h2 id="快捷键">6.1 快捷键</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">run cell: ctrl + enter</span><br><span class="line">change cell to md: m</span><br><span class="line">change cell to code: c</span><br><span class="line">delete cell: x</span><br><span class="line">line number: L</span><br></pre></td></tr></table></figure>
-<h2 id="魔法命令">6.2 魔法命令</h2>
-<ul>
-<li><strong>%run：在 jupyter 中加载 .py文件代码</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%run ./magic.py              <span class="comment"># ./为文件路径</span></span><br><span class="line"></span><br><span class="line">[out1]: hello(<span class="string">'python'</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> MagicTest.FirstML  <span class="comment"># 导入magictest的模块</span></span><br><span class="line">MagicTest.FirstML.predict(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">[out2]: predict: ?</span><br></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> MagicTest <span class="keyword">import</span> FirstML</span><br><span class="line">FirstML.predict(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">[out3]: predict: ?</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>%timeit: 测试代码性能</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%timeit L = [i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>)]</span><br><span class="line"></span><br><span class="line">[out1]: <span class="number">535</span> µs ± <span class="number">11.4</span> µs per loop (mean ± std. dev. of <span class="number">7</span> runs, <span class="number">1000</span> loops each)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%timeit L = [i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line"></span><br><span class="line">[out1]: <span class="number">5.89</span> s ± <span class="number">923</span> ms per loop (mean ± std. dev. of <span class="number">7</span> runs, <span class="number">1</span> loop each)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%%timeit</span><br><span class="line">L = []</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    L.append(n ** <span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">[out]: <span class="number">603</span> µs ± <span class="number">16.8</span> µs per loop (mean ± std. dev. of <span class="number">7</span> runs, <span class="number">1000</span> loops each)</span><br></pre></td></tr></table></figure>
-<h3 id="time-代码计时不用重复">%time: 代码计时(不用重复)</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%time L = [i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>)]</span><br><span class="line"></span><br><span class="line">[out1]: Wall time: <span class="number">1e+03</span> µs</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%%time</span><br><span class="line">L = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    L.append(i**<span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">[out2]: Wall time: <span class="number">2</span> ms</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>其他魔法命令</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%lsmagic</span><br><span class="line"></span><br><span class="line">[out1]: </span><br><span class="line">Available line magics:</span><br><span class="line">%alias  %alias_magic  %autoawait  %autocall  %automagic  %autosave  %bookmark  %cd  %clear  %cls  %colors  %conda  %config  %connect_info  %copy  %ddir  %debug  %dhist  %dirs  %doctest_mode  %echo  %ed  %edit  %env  %gui  %hist  %history  %killbgscripts  %ldir  %less  %load  %load_ext  %loadpy  %logoff  %logon  %logstart  %logstate  %logstop  %ls  %lsmagic  %macro  %magic  %matplotlib  %mkdir  %more  %notebook  %page  %pastebin  %pdb  %pdef  %pdoc  %pfile  %pinfo  %pinfo2  %pip  %popd  %pprint  %precision  %prun  %psearch  %psource  %pushd  %pwd  %pycat  %pylab  %qtconsole  %quickref  %recall  %rehashx  %reload_ext  %ren  %rep  %rerun  %reset  %reset_selective  %rmdir  %run  %save  %sc  %set_env  %store  %sx  %system  %tb  %time  %timeit  %unalias  %unload_ext  %who  %who_ls  %whos  %xdel  %xmode</span><br><span class="line"></span><br><span class="line">Available cell magics:</span><br><span class="line">%%!  %%HTML  %%SVG  %%bash  %%capture  %%cmd  %%debug  %%file  %%html  %%javascript  %%js  %%latex  %%markdown  %%perl  %%prun  %%pypy  %%python  %%python2  %%python3  %%ruby  %%script  %%sh  %%svg  %%sx  %%system  %%time  %%timeit  %%writefile</span><br><span class="line"></span><br><span class="line">Automagic <span class="keyword">is</span> ON, % prefix IS NOT needed <span class="keyword">for</span> line magics.</span><br></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">%run?   # 查看文档</span><br></pre></td></tr></table></figure>
-<h1 id="numpy和matplotlib">7. numpy和matplotlib</h1>
-<h2 id="numpy">7.1 Numpy</h2>
-<h3 id="numpy.array">7.11 Numpy.array</h3>
-<ul>
-<li><strong>使用一：</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">L = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">print(L)</span><br><span class="line">L[<span class="number">5</span>] = <span class="string">'Machine Learning'</span></span><br><span class="line">print(L)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> array</span><br><span class="line">arr = array.array(<span class="string">'i'</span>, [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)])  <span class="comment"># 只能定义一种类型</span></span><br><span class="line">print(arr)</span><br><span class="line">arr[<span class="number">5</span>] = <span class="number">100</span></span><br><span class="line">print(arr)</span><br><span class="line"></span><br><span class="line">nparr = np.array([i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)])      <span class="comment"># 只能定义一种类型</span></span><br><span class="line">print(nparr)</span><br><span class="line">print(nparr.dtype)</span><br><span class="line"></span><br><span class="line">nparr = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3.0</span>])   <span class="comment"># float</span></span><br><span class="line">print(nparr.dtype)</span><br><span class="line"></span><br><span class="line">[out1]: </span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="string">'Machine Learning'</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">array(<span class="string">'i'</span>, [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line">array(<span class="string">'i'</span>, [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">100</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line">[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">int32</span><br><span class="line">float64</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>使用二：</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 全为0，默认浮点型</span></span><br><span class="line">print(<span class="string">'=================np.zero==================='</span>)</span><br><span class="line">print(np.zeros(<span class="number">10</span>))</span><br><span class="line">print(np.zeros(<span class="number">10</span>).dtype)                     </span><br><span class="line">print(np.zeros(<span class="number">10</span>, dtype=int)) </span><br><span class="line">print(np.zeros(shape=(<span class="number">3</span>, <span class="number">5</span>), dtype=int))</span><br><span class="line"></span><br><span class="line">print(<span class="string">'=================np.ones==================='</span>)</span><br><span class="line"><span class="comment"># 全为1，默认浮点型</span></span><br><span class="line">print(np.ones(<span class="number">10</span>))          <span class="comment"># 向量</span></span><br><span class="line">print(np.ones( (<span class="number">3</span>, <span class="number">5</span>) ))    <span class="comment"># 矩阵</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'=================np.full================='</span>)</span><br><span class="line"><span class="comment"># 指定值</span></span><br><span class="line">print(np.full(shape=(<span class="number">3</span>, <span class="number">5</span>), fill_value=<span class="number">666</span>))   <span class="comment"># 为指定类型</span></span><br><span class="line">print(np.full(shape=(<span class="number">3</span>, <span class="number">5</span>), fill_value=<span class="number">666.0</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">'=================np.full================='</span>)</span><br><span class="line"><span class="comment"># arange</span></span><br><span class="line">print(np.arange(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0.2</span>))   <span class="comment"># 可以有浮点数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># linspace</span></span><br><span class="line">print(<span class="string">'=================np.linspace==================='</span>)</span><br><span class="line">print(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">10</span>))   <span class="comment"># [0,20]区间，生成10个等差数列</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># random</span></span><br><span class="line">print(<span class="string">'=================np.random==================='</span>)</span><br><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">print(np.random.randint(<span class="number">0</span>, <span class="number">1</span>, <span class="number">10</span>))   <span class="comment"># [0, 1), 不包含1</span></span><br><span class="line">print(np.random.randint(<span class="number">4</span>, <span class="number">8</span>, size=(<span class="number">3</span>, <span class="number">5</span>)))</span><br><span class="line">print(np.random.randint(<span class="number">4</span>, <span class="number">8</span>, size=<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成10个0-1之间均匀的浮点数</span></span><br><span class="line">print(np.random.random(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 正态分布</span></span><br><span class="line">print(np.random.normal())</span><br><span class="line">print(np.random.normal(<span class="number">10</span>, <span class="number">100</span>))  <span class="comment"># [10, 100)</span></span><br><span class="line">print(np.random.normal(<span class="number">0</span>, <span class="number">1</span>, (<span class="number">3</span>, <span class="number">5</span>)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[out1]:</span><br><span class="line">=================np.zero===================</span><br><span class="line">[<span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]</span><br><span class="line">float64</span><br><span class="line">[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line">[[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]]</span><br><span class="line">=================np.ones===================</span><br><span class="line">[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">[[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]]</span><br><span class="line">=================np.full=================</span><br><span class="line">[[<span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span>]</span><br><span class="line"> [<span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span>]</span><br><span class="line"> [<span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span>]]</span><br><span class="line">[[<span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span>]</span><br><span class="line"> [<span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span>]</span><br><span class="line"> [<span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span>]]</span><br><span class="line">=================np.full=================</span><br><span class="line">[<span class="number">0.</span>  <span class="number">0.2</span> <span class="number">0.4</span> <span class="number">0.6</span> <span class="number">0.8</span>]</span><br><span class="line">=================np.linspace===================</span><br><span class="line">[ <span class="number">0.</span>          <span class="number">2.22222222</span>  <span class="number">4.44444444</span>  <span class="number">6.66666667</span>  <span class="number">8.88888889</span> <span class="number">11.11111111</span></span><br><span class="line"> <span class="number">13.33333333</span> <span class="number">15.55555556</span> <span class="number">17.77777778</span> <span class="number">20.</span>        ]</span><br><span class="line">=================np.random===================</span><br><span class="line">[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line">[[<span class="number">4</span> <span class="number">4</span> <span class="number">7</span> <span class="number">7</span> <span class="number">7</span>]</span><br><span class="line"> [<span class="number">7</span> <span class="number">4</span> <span class="number">6</span> <span class="number">6</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">6</span> <span class="number">5</span> <span class="number">6</span> <span class="number">6</span> <span class="number">6</span>]]</span><br><span class="line">[<span class="number">6</span> <span class="number">5</span> <span class="number">4</span> <span class="number">4</span> <span class="number">7</span> <span class="number">4</span> <span class="number">7</span> <span class="number">4</span> <span class="number">6</span> <span class="number">4</span>]</span><br><span class="line">[<span class="number">0.56229626</span> <span class="number">0.00581719</span> <span class="number">0.30742321</span> <span class="number">0.95018431</span> <span class="number">0.12665424</span> <span class="number">0.07898787</span></span><br><span class="line"> <span class="number">0.31135313</span> <span class="number">0.63238359</span> <span class="number">0.69935892</span> <span class="number">0.64196495</span>]</span><br><span class="line"><span class="number">-0.23028508500632336</span></span><br><span class="line"><span class="number">58.09241158682933</span></span><br><span class="line">[[<span class="number">-1.26691058</span>  <span class="number">0.27100509</span>  <span class="number">2.14076322</span>  <span class="number">0.47536904</span>  <span class="number">0.24652489</span>]</span><br><span class="line"> [<span class="number">-1.08417396</span> <span class="number">-2.3815826</span>  <span class="number">-0.4363488</span>  <span class="number">-2.07241186</span> <span class="number">-1.29543984</span>]</span><br><span class="line"> [<span class="number">-0.46402358</span> <span class="number">-0.05702664</span>  <span class="number">0.27592974</span>  <span class="number">1.49451522</span>  <span class="number">0.56682064</span>]]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查询相应文档</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">np.random?</span><br><span class="line">help(np.random.normal)</span><br></pre></td></tr></table></figure>
-<h3 id="numpy基本操作">7.12 numpy基本操作</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">10</span>)</span><br><span class="line">print(<span class="string">'x: '</span>, x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换 维度</span></span><br><span class="line">X = np.arange(<span class="number">15</span>).reshape(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">print(<span class="string">'X:'</span>, X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本属性</span></span><br><span class="line">print(<span class="string">'x维度:'</span>, x.ndim)    <span class="comment"># 查看维度属性</span></span><br><span class="line">print(<span class="string">'X维度:'</span>, X.ndim)</span><br><span class="line">print(<span class="string">'X.shape: '</span>, X.shape)</span><br><span class="line">print(<span class="string">'X.size: '</span>, X.size)</span><br><span class="line"></span><br><span class="line"><span class="comment"># numpy.array的数据访问</span></span><br><span class="line">print(<span class="string">'X:'</span>, X)</span><br><span class="line">print(<span class="string">'X[0][0]: (不推荐)'</span>, X[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">print(<span class="string">'X[2, 2]: (推荐) '</span>, X[<span class="number">2</span>, <span class="number">2</span>])</span><br><span class="line">print(<span class="string">'X[:2, :3]: (前2行前3列)'</span>, X[:<span class="number">2</span>, :<span class="number">3</span>])</span><br><span class="line">print(<span class="string">'X[:2][:3]: (预料不符)'</span>, X[:<span class="number">2</span>][:<span class="number">3</span>])</span><br><span class="line">print(<span class="string">'X[:2, ::2]: '</span>, X[:<span class="number">2</span>, ::<span class="number">2</span>])</span><br><span class="line">print(<span class="string">'X[: , 0]: (取一列) '</span>, X[:, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">subX = X[:<span class="number">2</span>, :<span class="number">3</span>]         <span class="comment"># 浅拷贝</span></span><br><span class="line">print(<span class="string">"subX:"</span>, subX)</span><br><span class="line">print(<span class="string">"X: "</span>, X)</span><br><span class="line"></span><br><span class="line">X[<span class="number">0</span>, <span class="number">0</span>] = <span class="number">999</span></span><br><span class="line">print(<span class="string">"subX:"</span>, subX)</span><br><span class="line">print(<span class="string">"X: "</span>, X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 深拷贝</span></span><br><span class="line">subX = X[:<span class="number">2</span>, :<span class="number">3</span>].copy()</span><br><span class="line">X[<span class="number">0</span>, <span class="number">0</span>] = <span class="number">888</span></span><br><span class="line">print(<span class="string">"subX:"</span>, subX)</span><br><span class="line">print(<span class="string">"X: "</span>, X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Reshape</span></span><br><span class="line">print(<span class="string">'x.shape: '</span>, x.shape)</span><br><span class="line">A = x.reshape((<span class="number">2</span>, <span class="number">5</span>))</span><br><span class="line">print(<span class="string">'x.reshape(2, 5): '</span>, A)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只想要十行</span></span><br><span class="line">tenlines = x.reshape(<span class="number">10</span>, <span class="number">-1</span>)    <span class="comment"># 每行元素自动计算</span></span><br><span class="line">print(<span class="string">"转换为10行: "</span>, tenlines)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[out]:</span><br><span class="line">x:  [<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">X: [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>]</span><br><span class="line"> [ <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line"> [<span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]]</span><br><span class="line">x维度: <span class="number">1</span></span><br><span class="line">X维度: <span class="number">2</span></span><br><span class="line">X.shape:  (<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">X.size:  <span class="number">15</span></span><br><span class="line">X: [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>]</span><br><span class="line"> [ <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line"> [<span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]]</span><br><span class="line">X[<span class="number">0</span>][<span class="number">0</span>]: (不推荐) <span class="number">0</span></span><br><span class="line">X[<span class="number">2</span>, <span class="number">2</span>]: (推荐)  <span class="number">12</span></span><br><span class="line">X[:<span class="number">2</span>, :<span class="number">3</span>]: (前<span class="number">2</span>行前<span class="number">3</span>列) [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">5</span> <span class="number">6</span> <span class="number">7</span>]]</span><br><span class="line">X[:<span class="number">2</span>][:<span class="number">3</span>]: (预料不符) [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]]</span><br><span class="line">X[:<span class="number">2</span>, ::<span class="number">2</span>]:  [[<span class="number">0</span> <span class="number">2</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">5</span> <span class="number">7</span> <span class="number">9</span>]]</span><br><span class="line">X[: , <span class="number">0</span>]: (取一列)  [ <span class="number">0</span>  <span class="number">5</span> <span class="number">10</span>]</span><br><span class="line">subX: [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">5</span> <span class="number">6</span> <span class="number">7</span>]]</span><br><span class="line">X:  [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>]</span><br><span class="line"> [ <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line"> [<span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]]</span><br><span class="line">subX: [[<span class="number">999</span>   <span class="number">1</span>   <span class="number">2</span>]</span><br><span class="line"> [  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>]]</span><br><span class="line">X:  [[<span class="number">999</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>]</span><br><span class="line"> [  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span>]</span><br><span class="line"> [ <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>]]</span><br><span class="line">subX: [[<span class="number">999</span>   <span class="number">1</span>   <span class="number">2</span>]</span><br><span class="line"> [  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>]]</span><br><span class="line">X:  [[<span class="number">888</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>]</span><br><span class="line"> [  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span>]</span><br><span class="line"> [ <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>]]</span><br><span class="line">x.shape:  (<span class="number">10</span>,)</span><br><span class="line">x.reshape(<span class="number">2</span>, <span class="number">5</span>):  [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>] [<span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]]</span><br><span class="line">[[<span class="number">0</span>] [<span class="number">1</span>] [<span class="number">2</span>] [<span class="number">3</span>] [<span class="number">4</span>] [<span class="number">5</span>] [<span class="number">6</span>] [<span class="number">7</span>] [<span class="number">8</span>] [<span class="number">9</span>]]</span><br></pre></td></tr></table></figure>
-<h3 id="合并操作">7.13 合并操作</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>])</span><br><span class="line">print(<span class="string">'x: '</span>, x)</span><br><span class="line">print(<span class="string">'y: '</span>, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并操作</span></span><br><span class="line">print(<span class="string">"合并x, y: "</span>, np.concatenate([x, y]))</span><br><span class="line"></span><br><span class="line">z = np.array([<span class="number">666</span>, <span class="number">666</span>, <span class="number">666</span>])</span><br><span class="line">print(<span class="string">'合并x, y, z: '</span>, np.concatenate([x, y, z]))</span><br><span class="line"></span><br><span class="line">A = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line">print(<span class="string">'合并两个A: '</span>, np.concatenate([A, A]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 沿着不同维度来合并操作</span></span><br><span class="line"><span class="comment"># axis = 0: 按行来拼接</span></span><br><span class="line"><span class="comment"># axis = 1 按列来拼接</span></span><br><span class="line">print(<span class="string">'axis=0: '</span>, np.concatenate([A, A], axis=<span class="number">0</span>))</span><br><span class="line">print(<span class="string">'axos=1: '</span>, np.concatenate([A, A], axis=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将向量和矩阵合并(按行)，不能使用concatenate</span></span><br><span class="line">print(<span class="string">'A和x合并: '</span>, np.concatenate([A, x.reshape(<span class="number">1</span>, <span class="number">-1</span>)]))</span><br><span class="line">      </span><br><span class="line">print(<span class="string">'使用vstack来拼接A和x: (按行)'</span>, np.vstack([A, x]))</span><br><span class="line"></span><br><span class="line">B = np.full((<span class="number">2</span>, <span class="number">2</span>), <span class="number">100</span>)</span><br><span class="line">print(<span class="string">'使用hstack来拼接A和B: (按列)'</span>, np.hstack([A, B]))</span><br><span class="line"></span><br><span class="line">[out1]:</span><br><span class="line">x:  [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">y:  [<span class="number">3</span> <span class="number">2</span> <span class="number">1</span>]</span><br><span class="line">合并x, y:  [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span>]</span><br><span class="line">合并x, y, z:  [  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">3</span>   <span class="number">2</span>   <span class="number">1</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span>]</span><br><span class="line">合并两个A:  [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br><span class="line">axis=<span class="number">0</span>:  [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br><span class="line">axos=<span class="number">1</span>:  [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br><span class="line">A和x合并:  [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]]</span><br><span class="line">使用vstack来拼接A和x: (按行) [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]]</span><br><span class="line">使用hstack来拼接A和B: (按列) [[  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span> <span class="number">100</span> <span class="number">100</span>]</span><br><span class="line"> [  <span class="number">4</span>   <span class="number">5</span>   <span class="number">6</span> <span class="number">100</span> <span class="number">100</span>]]</span><br></pre></td></tr></table></figure>
-<h3 id="分割操作">7.14 分割操作</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = np.arange(<span class="number">10</span>)</span><br><span class="line">print(<span class="string">'x: \n'</span>, x)</span><br><span class="line"></span><br><span class="line">x1, x2, x3 = np.split(x, [<span class="number">3</span>, <span class="number">7</span>])</span><br><span class="line">print(<span class="string">'x1: \n'</span>, x1)</span><br><span class="line">print(<span class="string">'x2: \n'</span>, x2)</span><br><span class="line">print(<span class="string">'x3: \n'</span>, x3)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'='</span>*<span class="number">20</span>)</span><br><span class="line">A = np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">print(<span class="string">'A: \n'</span>, A)</span><br><span class="line"></span><br><span class="line">A1, A2 = np.split(A, [<span class="number">2</span>])           <span class="comment"># np.vsplit(A, [2]): 从第二行开始分割 </span></span><br><span class="line">print(<span class="string">'A1: \n'</span>, A1)</span><br><span class="line">print(<span class="string">'A2; \n'</span>, A2)</span><br><span class="line"> </span><br><span class="line">B1, B2 = np.split(A, [<span class="number">2</span>], axis=<span class="number">1</span>)   <span class="comment"># np.hsplit(A, [2]): 从第二列开始分割</span></span><br><span class="line">print(<span class="string">'B1: \n'</span>, B1)</span><br><span class="line">print(<span class="string">'B2: \n'</span>, B2)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'='</span>*<span class="number">20</span>)</span><br><span class="line">data = np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">x, y =  np.hsplit(data, [<span class="number">-1</span>])     <span class="comment"># 分离特征 和 标签值</span></span><br><span class="line">print(<span class="string">'x: \n'</span>, x)</span><br><span class="line">print(<span class="string">'y: \n'</span>, y)</span><br><span class="line"></span><br><span class="line">[out1]:</span><br><span class="line">x: </span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">x1: </span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line">x2: </span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line">x3: </span><br><span class="line"> [<span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">====================</span><br><span class="line">A: </span><br><span class="line"> [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span>]]</span><br><span class="line">A1: </span><br><span class="line"> [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span>]]</span><br><span class="line">A2; </span><br><span class="line"> [[ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span>]]</span><br><span class="line">B1: </span><br><span class="line"> [[ <span class="number">0</span>  <span class="number">1</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span>]]</span><br><span class="line">B2: </span><br><span class="line"> [[ <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [<span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"> [<span class="number">14</span> <span class="number">15</span>]]</span><br><span class="line">====================</span><br><span class="line">x: </span><br><span class="line"> [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]]</span><br><span class="line">y: </span><br><span class="line"> [[ <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">7</span>]</span><br><span class="line"> [<span class="number">11</span>]</span><br><span class="line"> [<span class="number">15</span>]]</span><br></pre></td></tr></table></figure>
-<h3 id="矩阵运算">7.15 矩阵运算</h3>
-<ul>
-<li><strong>矩阵对应元素间运算：</strong>
-<ul>
-<li>A*2, A+2, np.exp(A)等都是对A中所有元素进行操作</li>
-<li>A+B, A*B, A/B: 都是矩阵元素之间对应运算</li>
-</ul></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531175742132-377240276.png" style="zoom:80%"></p>
-<ul>
-<li><strong>矩阵乘法:</strong>
-<ul>
-<li>A.dot(B)</li>
-</ul></li>
-<li><strong>矩阵转置:</strong>
-<ul>
-<li>A.T</li>
-</ul></li>
-<li><strong>矩阵的逆: <span class="math inline">\(A*A^{-1}=E\)</span></strong>
-<ul>
-<li>np.linalg.inv(A) (方阵)</li>
-<li>伪逆矩阵： np.linalg.pinv(x) (非方阵使用)</li>
-</ul></li>
-</ul>
-<h3 id="聚合操作">7.16 聚合操作</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">data = np.random.rand(<span class="number">1000000</span>)</span><br><span class="line">%timeit = sum(data)</span><br><span class="line">%timeit = np.sum(data)  <span class="comment"># 更快</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>np.sum(A, axis=0) : 每一列的和</li>
-<li>np.sum(A, axis=1) : 每一行的和</li>
-<li>np.mean(X) : 均值</li>
-<li>np.median(X) ： 中位数</li>
-<li>np.percentile(X, q=50) : 求 50% 的数</li>
-<li>np.var(X) : 方差</li>
-<li>np.std(X) : 标准差</li>
-</ul>
-<h3 id="索引">7.17 索引</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">np.min(x)</span><br><span class="line">np.argmin(x)    <span class="comment"># 返回 min的值的 索引值</span></span><br><span class="line">np.argmax(x)    <span class="comment"># 最大值索引</span></span><br></pre></td></tr></table></figure>
-<h3 id="排序">7.18 排序</h3>
-<ul>
-<li>np.sort(A, axis=1) ：默认为1，按行排序
-<ul>
-<li>axis=0 : 按列排序</li>
-</ul></li>
-<li><p>np.argsort(x) ： 按照索引排序</p></li>
-<li><p>np.partition(x, 3) : 3前面的数字都比他小，后面的都比他大</p></li>
-</ul>
-<h3 id="fancyindexing">7.19 FancyIndexing</h3>
-<ul>
-<li>X[row, col]
-<ul>
-<li>row, col 为索引组成的向量</li>
-</ul></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">16</span>)</span><br><span class="line">print(x)</span><br><span class="line"></span><br><span class="line">ind = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>]</span><br><span class="line">print(x[ind])</span><br><span class="line"></span><br><span class="line">X = x.reshape(<span class="number">4</span>, <span class="number">-1</span>)</span><br><span class="line">print(X)</span><br><span class="line"></span><br><span class="line">row = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">col = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">print(<span class="string">"对角线元素: "</span>, X[row, col])</span><br><span class="line"></span><br><span class="line">[out1]:</span><br><span class="line">[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span>]</span><br><span class="line">[<span class="number">3</span> <span class="number">5</span> <span class="number">8</span>]</span><br><span class="line">[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span>]]</span><br><span class="line">[ <span class="number">0</span>  <span class="number">5</span> <span class="number">10</span> <span class="number">15</span>]</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>重要: 使用bool值</strong>
-<ul>
-<li>a = [True, False, False, True]</li>
-<li>X[a] : 这种用法很常用</li>
-</ul></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(x &lt; <span class="number">3</span>)</span><br><span class="line">print(x == <span class="number">3</span>)</span><br><span class="line">print(x*<span class="number">2</span> == <span class="number">25</span> - <span class="number">4</span>*x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 例子: 样本中有多少小于3岁的人</span></span><br><span class="line">np.sum(x &lt;= <span class="number">3</span>)</span><br><span class="line">np.count_nonzero(x &lt;= <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否有为0的元素, 有任意一个数为 0 则返回True</span></span><br><span class="line">np.any(x == <span class="number">0</span>)   </span><br><span class="line">np.any(x &lt; <span class="number">0</span>)   <span class="comment"># 有一个 小于0 则返回 True</span></span><br><span class="line">np.all(x &gt; <span class="number">0</span>)   <span class="comment"># 所有元素都 &gt; 0 则返回 True</span></span><br><span class="line"></span><br><span class="line">print(x)</span><br><span class="line">np.sum(~(x==<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">print(X[X[:, <span class="number">3</span>] % <span class="number">3</span> == <span class="number">0</span>, :])</span><br></pre></td></tr></table></figure>
-<h2 id="matplotlib">7.2 matplotlib</h2>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>深度学习代码索引</title>
-    <url>/posts/8245.html</url>
-    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
-<a id="more"></a>
-<h1 id="机器学习">机器学习</h1>
-<h2 id="分类性能度量">分类性能度量</h2>
-<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h1 id="深度学习">深度学习</h1>
-<h1 id="自然语言处理">自然语言处理</h1>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-        <tag>自然语言处理</tag>
-        <tag>pytorch</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>深度学习</title>
     <url>/posts/48513.html</url>
     <content><![CDATA[<ul>
@@ -787,7 +472,7 @@
 <blockquote>
 <ul>
 <li>通过计算 两个向量的夹角余弦值 来评估他们的相似度。余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似。</li>
-<li><img src="/posts/48513/Blog\source_posts\深度学习笔记\余弦相似度.png"></li>
+<li><img src="/posts/48513/深度学习笔记\余弦相似度.png"></li>
 </ul>
 <p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602104514742-1750768267.png"></p>
 </blockquote>
@@ -833,10 +518,10 @@
 <ul>
 <li>前提：特征值服从正态分布</li>
 <li>需要计算特征的 均值X.mean 和 标准差X.std：</li>
-<li><p><img src="/posts/48513/Blog\source_posts\深度学习笔记\标准法.png"></p></li>
+<li><p><img src="/posts/48513/深度学习笔记\标准法.png"></p></li>
 <li>标准差 (Standard Deviation)，又称均方差
 <ul>
-<li>用 <span class="math inline">\(\sigma\)</span> 表示，是方差的算术平方根。<img src="/posts/48513/Blog\source_posts\深度学习笔记\均方差.png"></li>
+<li>用 <span class="math inline">\(\sigma\)</span> 表示，是方差的算术平方根。<img src="/posts/48513/深度学习笔记\均方差.png"></li>
 <li>标准差：反应一个数据集的离散程度。</li>
 <li>例如两组数的集合{0,5,9,1,4}和{5,6,8,9}其平均值都是7，但第二个集合具有较小的标准差。</li>
 </ul></li>
@@ -845,7 +530,7 @@
 <ul>
 <li>区间缩放法利用了 <strong>边界值信息</strong>，将 特征的取值区间 缩放到某个特定范围。假设max和min为希望的调整后范围，则
 <ul>
-<li>$X_{scaled} =  *(max - min) + min $</li>
+<li><span class="math inline">\(X_{scaled} = \frac{(X(axis=0) - X.min(axis=0)) }{(X.max(axis=0) - X.min(axis=0))} *(max - min) + min ​\)</span></li>
 </ul></li>
 <li>由于希望的调整后范围一般为[0, 1]。此时，公式变为：
 <ul>
@@ -983,8 +668,323 @@ x^{&#39;} =
         <category>深度学习</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>深度学习</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>深度学习代码索引</title>
+    <url>/posts/8245.html</url>
+    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
+<a id="more"></a>
+<h1 id="机器学习">机器学习</h1>
+<h2 id="分类性能度量">分类性能度量</h2>
+<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h1 id="深度学习">深度学习</h1>
+<h1 id="自然语言处理">自然语言处理</h1>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>python</tag>
+        <tag>机器学习</tag>
+        <tag>自然语言处理</tag>
+        <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习</title>
+    <url>/posts/29139.html</url>
+    <content><![CDATA[<h1 id="导学">1. 导学</h1>
+<blockquote>
+<ul>
+<li>如何使用算法</li>
+<li>如何评价算法的好坏</li>
+<li>如何解决过拟合和欠拟合</li>
+<li>如何调节算法的参数</li>
+<li>如何验证算法的正确性</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h2 id="要求">1.1 要求</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530144215672-1765480003.png"></p>
+<h2 id="如何使用算法">1.2 如何使用算法</h2>
+<ul>
+<li>如何评价算法的好坏</li>
+<li>如何解决过拟合和欠拟合</li>
+<li>如何调节算法的参数</li>
+<li>如何验证算法的正确性</li>
+</ul>
+<h1 id="机器学习的数据">2. 机器学习的数据</h1>
+<h2 id="样本">2.1 样本</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530150853222-770665335.png" style="zoom:100%"></p>
+<h2 id="特征">2.2 特征</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530152307608-1496852643.png" style="zoom:100%"></p>
+<h2 id="特征空间">2.3 特征空间</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530153351376-1807219682.png" style="zoom:100%"></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530153849062-558615798.png" style="zoom:100%"></p>
+<h1 id="机器学习分类">3. 机器学习分类</h1>
+<h2 id="监督学习">3.1 监督学习</h2>
+<blockquote>
+<p>给机器的训练数据拥有 “标记” 或者 “答案”</p>
+</blockquote>
+<ul>
+<li>k近邻</li>
+<li>线性回归和多项式回归</li>
+<li>逻辑回归</li>
+<li>SVM</li>
+<li>决策树和随机森林</li>
+</ul>
+<h2 id="非监督学习">3.2 非监督学习</h2>
+<blockquote>
+<p>给机器的训练数据没有任何“标记” 或者 “答案”</p>
+<p>对没有“标记”的数据进行分类--聚类分析</p>
+</blockquote>
+<p><strong>意义：</strong></p>
+<ul>
+<li><strong>对数据进行降维处理</strong>
+<ul>
+<li><strong>特征提取： </strong> 信用卡的信用评级 和 人的胖瘦无关？</li>
+<li><strong>特征压缩：</strong> PCA （不损失数据的情况下，将高维数据压缩成低维数据）</li>
+<li><strong>降维处理的意义：方便可视化</strong></li>
+</ul></li>
+<li><strong>异常检测：</strong></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530181603890-284389522.png" style="zoom:90%"></p>
+<h2 id="半监督学习">3.3 半监督学习</h2>
+<blockquote>
+<p>一部分数据有“标记” 或者 “答案“， 另一部分数据没有</p>
+<p>更常见：各种原因产生的标记缺失</p>
+<p>通常都先使用 <strong>无监督学习手段对数据做处理</strong>，之后使用 <strong>监督学习手段做模型的训练和预测</strong></p>
+</blockquote>
+<h2 id="增强学习">3.4 增强学习</h2>
+<blockquote>
+<ul>
+<li>无人驾驶</li>
+<li>机器人</li>
+</ul>
+</blockquote>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530184358774-1028653002.png" style="zoom:80%"></p>
+<h1 id="机器学习的其他分类">4. 机器学习的其他分类</h1>
+<h2 id="在线学习和批量学习">4.1 在线学习和批量学习</h2>
+<ul>
+<li><strong>批量学习 Batch Learning（离线学习, 为主）</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li><p>优点： 简单</p></li>
+<li>问题：如何适应环境变化
+<ul>
+<li>解决方案：定时重新批量学习</li>
+</ul></li>
+<li><p>缺点：每次重新批量学习，运算量巨大;</p></li>
+</ul>
+</blockquote>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530185519551-841258350.png" style="zoom:80%"></p>
+<ul>
+<li><strong>在线学习 Online Learning</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li><p>优点：及时反映新的环境变化</p></li>
+<li>问题：新的数据带来不会的变化
+<ul>
+<li>解决方案：需要加强对数据进行监控</li>
+</ul></li>
+<li><p>其他：也适用于数据量巨大，完全无法批量学习的环境</p></li>
+</ul>
+</blockquote>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530190034224-207594180.png" style="zoom:80%"></p>
+<h2 id="参数学习和非参数学习">4.2 参数学习和非参数学习</h2>
+<ul>
+<li><strong>参数学习 Parametric Learning</strong></li>
+</ul>
+<blockquote>
+<p>一旦学到参数，就不再需要原有的数据集</p>
+</blockquote>
+<ul>
+<li><strong>非参数学习 Nonparametric Learning</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>不对模型进行过多假设</li>
+<li>非参数不等于没参数</li>
+</ul>
+</blockquote>
+<h1 id="监督学习任务">5. 监督学习任务</h1>
+<h2 id="分类任务">5.1 分类任务</h2>
+<ul>
+<li><strong>二分类</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>判断邮件是否为垃圾邮件</li>
+<li>判断发给客户信用卡是否有风险</li>
+<li>判断病患是良性肿瘤；恶性肿瘤</li>
+<li>判断股票涨跌</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>多分类</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>手写数字识别</li>
+<li>图像识别</li>
+<li>判断发给客户信用卡的风险评级</li>
+<li>2048游戏：转换为多分类，是否上移动，下移，左移等</li>
+<li>围棋</li>
+<li>无人车：根据环境信息，设置方向盘，油门、刹车</li>
+<li><strong>多分类的任务可以转换成二分类任务</strong></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>多标签分类</strong></li>
+</ul>
+<blockquote>
+<p>一个图片分到多个类别</p>
+</blockquote>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530155230571-734693011.png" style="zoom:65%"></p>
+<h2 id="回归任务">5.2 回归任务</h2>
+<ul>
+<li><strong>结果是一个连续的数字的值，而非一个类别</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>房屋预测</li>
+<li>市场分析</li>
+<li>学生成绩</li>
+<li>股票价格</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>一般情况下，回归任务可以简化成分类任务</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>无人驾驶</li>
+</ul>
+</blockquote>
+<h2 id="工作流程">5.3 工作流程</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200530160139974-1127480687.png" style="zoom:70%"></p>
+<h1 id="jupyter-notebook">6. jupyter notebook</h1>
+<h2 id="快捷键">6.1 快捷键</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">run cell: ctrl + enter</span><br><span class="line">change cell to md: m</span><br><span class="line">change cell to code: c</span><br><span class="line">delete cell: x</span><br><span class="line">line number: L</span><br></pre></td></tr></table></figure>
+<h2 id="魔法命令">6.2 魔法命令</h2>
+<ul>
+<li><strong>%run：在 jupyter 中加载 .py文件代码</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%run ./magic.py              <span class="comment"># ./为文件路径</span></span><br><span class="line"></span><br><span class="line">[out1]: hello(<span class="string">'python'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> MagicTest.FirstML  <span class="comment"># 导入magictest的模块</span></span><br><span class="line">MagicTest.FirstML.predict(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">[out2]: predict: ?</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> MagicTest <span class="keyword">import</span> FirstML</span><br><span class="line">FirstML.predict(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">[out3]: predict: ?</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>%timeit: 测试代码性能</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%timeit L = [i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>)]</span><br><span class="line"></span><br><span class="line">[out1]: <span class="number">535</span> µs ± <span class="number">11.4</span> µs per loop (mean ± std. dev. of <span class="number">7</span> runs, <span class="number">1000</span> loops each)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%timeit L = [i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line"></span><br><span class="line">[out1]: <span class="number">5.89</span> s ± <span class="number">923</span> ms per loop (mean ± std. dev. of <span class="number">7</span> runs, <span class="number">1</span> loop each)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%%timeit</span><br><span class="line">L = []</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    L.append(n ** <span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">[out]: <span class="number">603</span> µs ± <span class="number">16.8</span> µs per loop (mean ± std. dev. of <span class="number">7</span> runs, <span class="number">1000</span> loops each)</span><br></pre></td></tr></table></figure>
+<h3 id="time-代码计时不用重复">%time: 代码计时(不用重复)</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%time L = [i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>)]</span><br><span class="line"></span><br><span class="line">[out1]: Wall time: <span class="number">1e+03</span> µs</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%%time</span><br><span class="line">L = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    L.append(i**<span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">[out2]: Wall time: <span class="number">2</span> ms</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>其他魔法命令</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%lsmagic</span><br><span class="line"></span><br><span class="line">[out1]: </span><br><span class="line">Available line magics:</span><br><span class="line">%alias  %alias_magic  %autoawait  %autocall  %automagic  %autosave  %bookmark  %cd  %clear  %cls  %colors  %conda  %config  %connect_info  %copy  %ddir  %debug  %dhist  %dirs  %doctest_mode  %echo  %ed  %edit  %env  %gui  %hist  %history  %killbgscripts  %ldir  %less  %load  %load_ext  %loadpy  %logoff  %logon  %logstart  %logstate  %logstop  %ls  %lsmagic  %macro  %magic  %matplotlib  %mkdir  %more  %notebook  %page  %pastebin  %pdb  %pdef  %pdoc  %pfile  %pinfo  %pinfo2  %pip  %popd  %pprint  %precision  %prun  %psearch  %psource  %pushd  %pwd  %pycat  %pylab  %qtconsole  %quickref  %recall  %rehashx  %reload_ext  %ren  %rep  %rerun  %reset  %reset_selective  %rmdir  %run  %save  %sc  %set_env  %store  %sx  %system  %tb  %time  %timeit  %unalias  %unload_ext  %who  %who_ls  %whos  %xdel  %xmode</span><br><span class="line"></span><br><span class="line">Available cell magics:</span><br><span class="line">%%!  %%HTML  %%SVG  %%bash  %%capture  %%cmd  %%debug  %%file  %%html  %%javascript  %%js  %%latex  %%markdown  %%perl  %%prun  %%pypy  %%python  %%python2  %%python3  %%ruby  %%script  %%sh  %%svg  %%sx  %%system  %%time  %%timeit  %%writefile</span><br><span class="line"></span><br><span class="line">Automagic <span class="keyword">is</span> ON, % prefix IS NOT needed <span class="keyword">for</span> line magics.</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">%run?   # 查看文档</span><br></pre></td></tr></table></figure>
+<h1 id="numpy和matplotlib">7. numpy和matplotlib</h1>
+<h2 id="numpy">7.1 Numpy</h2>
+<h3 id="numpy.array">7.11 Numpy.array</h3>
+<ul>
+<li><strong>使用一：</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">L = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">print(L)</span><br><span class="line">L[<span class="number">5</span>] = <span class="string">'Machine Learning'</span></span><br><span class="line">print(L)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> array</span><br><span class="line">arr = array.array(<span class="string">'i'</span>, [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)])  <span class="comment"># 只能定义一种类型</span></span><br><span class="line">print(arr)</span><br><span class="line">arr[<span class="number">5</span>] = <span class="number">100</span></span><br><span class="line">print(arr)</span><br><span class="line"></span><br><span class="line">nparr = np.array([i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)])      <span class="comment"># 只能定义一种类型</span></span><br><span class="line">print(nparr)</span><br><span class="line">print(nparr.dtype)</span><br><span class="line"></span><br><span class="line">nparr = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3.0</span>])   <span class="comment"># float</span></span><br><span class="line">print(nparr.dtype)</span><br><span class="line"></span><br><span class="line">[out1]: </span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="string">'Machine Learning'</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">array(<span class="string">'i'</span>, [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line">array(<span class="string">'i'</span>, [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">100</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line">[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">int32</span><br><span class="line">float64</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>使用二：</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 全为0，默认浮点型</span></span><br><span class="line">print(<span class="string">'=================np.zero==================='</span>)</span><br><span class="line">print(np.zeros(<span class="number">10</span>))</span><br><span class="line">print(np.zeros(<span class="number">10</span>).dtype)                     </span><br><span class="line">print(np.zeros(<span class="number">10</span>, dtype=int)) </span><br><span class="line">print(np.zeros(shape=(<span class="number">3</span>, <span class="number">5</span>), dtype=int))</span><br><span class="line"></span><br><span class="line">print(<span class="string">'=================np.ones==================='</span>)</span><br><span class="line"><span class="comment"># 全为1，默认浮点型</span></span><br><span class="line">print(np.ones(<span class="number">10</span>))          <span class="comment"># 向量</span></span><br><span class="line">print(np.ones( (<span class="number">3</span>, <span class="number">5</span>) ))    <span class="comment"># 矩阵</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'=================np.full================='</span>)</span><br><span class="line"><span class="comment"># 指定值</span></span><br><span class="line">print(np.full(shape=(<span class="number">3</span>, <span class="number">5</span>), fill_value=<span class="number">666</span>))   <span class="comment"># 为指定类型</span></span><br><span class="line">print(np.full(shape=(<span class="number">3</span>, <span class="number">5</span>), fill_value=<span class="number">666.0</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">'=================np.full================='</span>)</span><br><span class="line"><span class="comment"># arange</span></span><br><span class="line">print(np.arange(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0.2</span>))   <span class="comment"># 可以有浮点数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># linspace</span></span><br><span class="line">print(<span class="string">'=================np.linspace==================='</span>)</span><br><span class="line">print(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">10</span>))   <span class="comment"># [0,20]区间，生成10个等差数列</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># random</span></span><br><span class="line">print(<span class="string">'=================np.random==================='</span>)</span><br><span class="line">np.random.seed(<span class="number">100</span>)</span><br><span class="line">print(np.random.randint(<span class="number">0</span>, <span class="number">1</span>, <span class="number">10</span>))   <span class="comment"># [0, 1), 不包含1</span></span><br><span class="line">print(np.random.randint(<span class="number">4</span>, <span class="number">8</span>, size=(<span class="number">3</span>, <span class="number">5</span>)))</span><br><span class="line">print(np.random.randint(<span class="number">4</span>, <span class="number">8</span>, size=<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成10个0-1之间均匀的浮点数</span></span><br><span class="line">print(np.random.random(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 正态分布</span></span><br><span class="line">print(np.random.normal())</span><br><span class="line">print(np.random.normal(<span class="number">10</span>, <span class="number">100</span>))  <span class="comment"># [10, 100)</span></span><br><span class="line">print(np.random.normal(<span class="number">0</span>, <span class="number">1</span>, (<span class="number">3</span>, <span class="number">5</span>)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[out1]:</span><br><span class="line">=================np.zero===================</span><br><span class="line">[<span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]</span><br><span class="line">float64</span><br><span class="line">[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line">[[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]]</span><br><span class="line">=================np.ones===================</span><br><span class="line">[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">[[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]]</span><br><span class="line">=================np.full=================</span><br><span class="line">[[<span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span>]</span><br><span class="line"> [<span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span>]</span><br><span class="line"> [<span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span>]]</span><br><span class="line">[[<span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span>]</span><br><span class="line"> [<span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span>]</span><br><span class="line"> [<span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span> <span class="number">666.</span>]]</span><br><span class="line">=================np.full=================</span><br><span class="line">[<span class="number">0.</span>  <span class="number">0.2</span> <span class="number">0.4</span> <span class="number">0.6</span> <span class="number">0.8</span>]</span><br><span class="line">=================np.linspace===================</span><br><span class="line">[ <span class="number">0.</span>          <span class="number">2.22222222</span>  <span class="number">4.44444444</span>  <span class="number">6.66666667</span>  <span class="number">8.88888889</span> <span class="number">11.11111111</span></span><br><span class="line"> <span class="number">13.33333333</span> <span class="number">15.55555556</span> <span class="number">17.77777778</span> <span class="number">20.</span>        ]</span><br><span class="line">=================np.random===================</span><br><span class="line">[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line">[[<span class="number">4</span> <span class="number">4</span> <span class="number">7</span> <span class="number">7</span> <span class="number">7</span>]</span><br><span class="line"> [<span class="number">7</span> <span class="number">4</span> <span class="number">6</span> <span class="number">6</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">6</span> <span class="number">5</span> <span class="number">6</span> <span class="number">6</span> <span class="number">6</span>]]</span><br><span class="line">[<span class="number">6</span> <span class="number">5</span> <span class="number">4</span> <span class="number">4</span> <span class="number">7</span> <span class="number">4</span> <span class="number">7</span> <span class="number">4</span> <span class="number">6</span> <span class="number">4</span>]</span><br><span class="line">[<span class="number">0.56229626</span> <span class="number">0.00581719</span> <span class="number">0.30742321</span> <span class="number">0.95018431</span> <span class="number">0.12665424</span> <span class="number">0.07898787</span></span><br><span class="line"> <span class="number">0.31135313</span> <span class="number">0.63238359</span> <span class="number">0.69935892</span> <span class="number">0.64196495</span>]</span><br><span class="line"><span class="number">-0.23028508500632336</span></span><br><span class="line"><span class="number">58.09241158682933</span></span><br><span class="line">[[<span class="number">-1.26691058</span>  <span class="number">0.27100509</span>  <span class="number">2.14076322</span>  <span class="number">0.47536904</span>  <span class="number">0.24652489</span>]</span><br><span class="line"> [<span class="number">-1.08417396</span> <span class="number">-2.3815826</span>  <span class="number">-0.4363488</span>  <span class="number">-2.07241186</span> <span class="number">-1.29543984</span>]</span><br><span class="line"> [<span class="number">-0.46402358</span> <span class="number">-0.05702664</span>  <span class="number">0.27592974</span>  <span class="number">1.49451522</span>  <span class="number">0.56682064</span>]]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询相应文档</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">np.random?</span><br><span class="line">help(np.random.normal)</span><br></pre></td></tr></table></figure>
+<h3 id="numpy基本操作">7.12 numpy基本操作</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">10</span>)</span><br><span class="line">print(<span class="string">'x: '</span>, x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换 维度</span></span><br><span class="line">X = np.arange(<span class="number">15</span>).reshape(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">print(<span class="string">'X:'</span>, X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本属性</span></span><br><span class="line">print(<span class="string">'x维度:'</span>, x.ndim)    <span class="comment"># 查看维度属性</span></span><br><span class="line">print(<span class="string">'X维度:'</span>, X.ndim)</span><br><span class="line">print(<span class="string">'X.shape: '</span>, X.shape)</span><br><span class="line">print(<span class="string">'X.size: '</span>, X.size)</span><br><span class="line"></span><br><span class="line"><span class="comment"># numpy.array的数据访问</span></span><br><span class="line">print(<span class="string">'X:'</span>, X)</span><br><span class="line">print(<span class="string">'X[0][0]: (不推荐)'</span>, X[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">print(<span class="string">'X[2, 2]: (推荐) '</span>, X[<span class="number">2</span>, <span class="number">2</span>])</span><br><span class="line">print(<span class="string">'X[:2, :3]: (前2行前3列)'</span>, X[:<span class="number">2</span>, :<span class="number">3</span>])</span><br><span class="line">print(<span class="string">'X[:2][:3]: (预料不符)'</span>, X[:<span class="number">2</span>][:<span class="number">3</span>])</span><br><span class="line">print(<span class="string">'X[:2, ::2]: '</span>, X[:<span class="number">2</span>, ::<span class="number">2</span>])</span><br><span class="line">print(<span class="string">'X[: , 0]: (取一列) '</span>, X[:, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">subX = X[:<span class="number">2</span>, :<span class="number">3</span>]         <span class="comment"># 浅拷贝</span></span><br><span class="line">print(<span class="string">"subX:"</span>, subX)</span><br><span class="line">print(<span class="string">"X: "</span>, X)</span><br><span class="line"></span><br><span class="line">X[<span class="number">0</span>, <span class="number">0</span>] = <span class="number">999</span></span><br><span class="line">print(<span class="string">"subX:"</span>, subX)</span><br><span class="line">print(<span class="string">"X: "</span>, X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 深拷贝</span></span><br><span class="line">subX = X[:<span class="number">2</span>, :<span class="number">3</span>].copy()</span><br><span class="line">X[<span class="number">0</span>, <span class="number">0</span>] = <span class="number">888</span></span><br><span class="line">print(<span class="string">"subX:"</span>, subX)</span><br><span class="line">print(<span class="string">"X: "</span>, X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Reshape</span></span><br><span class="line">print(<span class="string">'x.shape: '</span>, x.shape)</span><br><span class="line">A = x.reshape((<span class="number">2</span>, <span class="number">5</span>))</span><br><span class="line">print(<span class="string">'x.reshape(2, 5): '</span>, A)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只想要十行</span></span><br><span class="line">tenlines = x.reshape(<span class="number">10</span>, <span class="number">-1</span>)    <span class="comment"># 每行元素自动计算</span></span><br><span class="line">print(<span class="string">"转换为10行: "</span>, tenlines)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[out]:</span><br><span class="line">x:  [<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">X: [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>]</span><br><span class="line"> [ <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line"> [<span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]]</span><br><span class="line">x维度: <span class="number">1</span></span><br><span class="line">X维度: <span class="number">2</span></span><br><span class="line">X.shape:  (<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">X.size:  <span class="number">15</span></span><br><span class="line">X: [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>]</span><br><span class="line"> [ <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line"> [<span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]]</span><br><span class="line">X[<span class="number">0</span>][<span class="number">0</span>]: (不推荐) <span class="number">0</span></span><br><span class="line">X[<span class="number">2</span>, <span class="number">2</span>]: (推荐)  <span class="number">12</span></span><br><span class="line">X[:<span class="number">2</span>, :<span class="number">3</span>]: (前<span class="number">2</span>行前<span class="number">3</span>列) [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">5</span> <span class="number">6</span> <span class="number">7</span>]]</span><br><span class="line">X[:<span class="number">2</span>][:<span class="number">3</span>]: (预料不符) [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]]</span><br><span class="line">X[:<span class="number">2</span>, ::<span class="number">2</span>]:  [[<span class="number">0</span> <span class="number">2</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">5</span> <span class="number">7</span> <span class="number">9</span>]]</span><br><span class="line">X[: , <span class="number">0</span>]: (取一列)  [ <span class="number">0</span>  <span class="number">5</span> <span class="number">10</span>]</span><br><span class="line">subX: [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">5</span> <span class="number">6</span> <span class="number">7</span>]]</span><br><span class="line">X:  [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>]</span><br><span class="line"> [ <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line"> [<span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]]</span><br><span class="line">subX: [[<span class="number">999</span>   <span class="number">1</span>   <span class="number">2</span>]</span><br><span class="line"> [  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>]]</span><br><span class="line">X:  [[<span class="number">999</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>]</span><br><span class="line"> [  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span>]</span><br><span class="line"> [ <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>]]</span><br><span class="line">subX: [[<span class="number">999</span>   <span class="number">1</span>   <span class="number">2</span>]</span><br><span class="line"> [  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>]]</span><br><span class="line">X:  [[<span class="number">888</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>]</span><br><span class="line"> [  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span>]</span><br><span class="line"> [ <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>]]</span><br><span class="line">x.shape:  (<span class="number">10</span>,)</span><br><span class="line">x.reshape(<span class="number">2</span>, <span class="number">5</span>):  [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>] [<span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]]</span><br><span class="line">[[<span class="number">0</span>] [<span class="number">1</span>] [<span class="number">2</span>] [<span class="number">3</span>] [<span class="number">4</span>] [<span class="number">5</span>] [<span class="number">6</span>] [<span class="number">7</span>] [<span class="number">8</span>] [<span class="number">9</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="合并操作">7.13 合并操作</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>])</span><br><span class="line">print(<span class="string">'x: '</span>, x)</span><br><span class="line">print(<span class="string">'y: '</span>, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并操作</span></span><br><span class="line">print(<span class="string">"合并x, y: "</span>, np.concatenate([x, y]))</span><br><span class="line"></span><br><span class="line">z = np.array([<span class="number">666</span>, <span class="number">666</span>, <span class="number">666</span>])</span><br><span class="line">print(<span class="string">'合并x, y, z: '</span>, np.concatenate([x, y, z]))</span><br><span class="line"></span><br><span class="line">A = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line">print(<span class="string">'合并两个A: '</span>, np.concatenate([A, A]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 沿着不同维度来合并操作</span></span><br><span class="line"><span class="comment"># axis = 0: 按行来拼接</span></span><br><span class="line"><span class="comment"># axis = 1 按列来拼接</span></span><br><span class="line">print(<span class="string">'axis=0: '</span>, np.concatenate([A, A], axis=<span class="number">0</span>))</span><br><span class="line">print(<span class="string">'axos=1: '</span>, np.concatenate([A, A], axis=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将向量和矩阵合并(按行)，不能使用concatenate</span></span><br><span class="line">print(<span class="string">'A和x合并: '</span>, np.concatenate([A, x.reshape(<span class="number">1</span>, <span class="number">-1</span>)]))</span><br><span class="line">      </span><br><span class="line">print(<span class="string">'使用vstack来拼接A和x: (按行)'</span>, np.vstack([A, x]))</span><br><span class="line"></span><br><span class="line">B = np.full((<span class="number">2</span>, <span class="number">2</span>), <span class="number">100</span>)</span><br><span class="line">print(<span class="string">'使用hstack来拼接A和B: (按列)'</span>, np.hstack([A, B]))</span><br><span class="line"></span><br><span class="line">[out1]:</span><br><span class="line">x:  [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">y:  [<span class="number">3</span> <span class="number">2</span> <span class="number">1</span>]</span><br><span class="line">合并x, y:  [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span>]</span><br><span class="line">合并x, y, z:  [  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">3</span>   <span class="number">2</span>   <span class="number">1</span> <span class="number">666</span> <span class="number">666</span> <span class="number">666</span>]</span><br><span class="line">合并两个A:  [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br><span class="line">axis=<span class="number">0</span>:  [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br><span class="line">axos=<span class="number">1</span>:  [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br><span class="line">A和x合并:  [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]]</span><br><span class="line">使用vstack来拼接A和x: (按行) [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]]</span><br><span class="line">使用hstack来拼接A和B: (按列) [[  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span> <span class="number">100</span> <span class="number">100</span>]</span><br><span class="line"> [  <span class="number">4</span>   <span class="number">5</span>   <span class="number">6</span> <span class="number">100</span> <span class="number">100</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="分割操作">7.14 分割操作</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = np.arange(<span class="number">10</span>)</span><br><span class="line">print(<span class="string">'x: \n'</span>, x)</span><br><span class="line"></span><br><span class="line">x1, x2, x3 = np.split(x, [<span class="number">3</span>, <span class="number">7</span>])</span><br><span class="line">print(<span class="string">'x1: \n'</span>, x1)</span><br><span class="line">print(<span class="string">'x2: \n'</span>, x2)</span><br><span class="line">print(<span class="string">'x3: \n'</span>, x3)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'='</span>*<span class="number">20</span>)</span><br><span class="line">A = np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">print(<span class="string">'A: \n'</span>, A)</span><br><span class="line"></span><br><span class="line">A1, A2 = np.split(A, [<span class="number">2</span>])           <span class="comment"># np.vsplit(A, [2]): 从第二行开始分割 </span></span><br><span class="line">print(<span class="string">'A1: \n'</span>, A1)</span><br><span class="line">print(<span class="string">'A2; \n'</span>, A2)</span><br><span class="line"> </span><br><span class="line">B1, B2 = np.split(A, [<span class="number">2</span>], axis=<span class="number">1</span>)   <span class="comment"># np.hsplit(A, [2]): 从第二列开始分割</span></span><br><span class="line">print(<span class="string">'B1: \n'</span>, B1)</span><br><span class="line">print(<span class="string">'B2: \n'</span>, B2)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'='</span>*<span class="number">20</span>)</span><br><span class="line">data = np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">x, y =  np.hsplit(data, [<span class="number">-1</span>])     <span class="comment"># 分离特征 和 标签值</span></span><br><span class="line">print(<span class="string">'x: \n'</span>, x)</span><br><span class="line">print(<span class="string">'y: \n'</span>, y)</span><br><span class="line"></span><br><span class="line">[out1]:</span><br><span class="line">x: </span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">x1: </span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line">x2: </span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line">x3: </span><br><span class="line"> [<span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">====================</span><br><span class="line">A: </span><br><span class="line"> [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span>]]</span><br><span class="line">A1: </span><br><span class="line"> [[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span>]]</span><br><span class="line">A2; </span><br><span class="line"> [[ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span>]]</span><br><span class="line">B1: </span><br><span class="line"> [[ <span class="number">0</span>  <span class="number">1</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span>]]</span><br><span class="line">B2: </span><br><span class="line"> [[ <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [<span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"> [<span class="number">14</span> <span class="number">15</span>]]</span><br><span class="line">====================</span><br><span class="line">x: </span><br><span class="line"> [[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]]</span><br><span class="line">y: </span><br><span class="line"> [[ <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">7</span>]</span><br><span class="line"> [<span class="number">11</span>]</span><br><span class="line"> [<span class="number">15</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="矩阵运算">7.15 矩阵运算</h3>
+<ul>
+<li><strong>矩阵对应元素间运算：</strong>
+<ul>
+<li>A*2, A+2, np.exp(A)等都是对A中所有元素进行操作</li>
+<li>A+B, A*B, A/B: 都是矩阵元素之间对应运算</li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202005/817161-20200531175742132-377240276.png" style="zoom:80%"></p>
+<ul>
+<li><strong>矩阵乘法:</strong>
+<ul>
+<li>A.dot(B)</li>
+</ul></li>
+<li><strong>矩阵转置:</strong>
+<ul>
+<li>A.T</li>
+</ul></li>
+<li><strong>矩阵的逆: <span class="math inline">\(A*A^{-1}=E\)</span></strong>
+<ul>
+<li>np.linalg.inv(A) (方阵)</li>
+<li>伪逆矩阵： np.linalg.pinv(x) (非方阵使用)</li>
+</ul></li>
+</ul>
+<h3 id="聚合操作">7.16 聚合操作</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">data = np.random.rand(<span class="number">1000000</span>)</span><br><span class="line">%timeit = sum(data)</span><br><span class="line">%timeit = np.sum(data)  <span class="comment"># 更快</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>np.sum(A, axis=0) : 每一列的和</li>
+<li>np.sum(A, axis=1) : 每一行的和</li>
+<li>np.mean(X) : 均值</li>
+<li>np.median(X) ： 中位数</li>
+<li>np.percentile(X, q=50) : 求 50% 的数</li>
+<li>np.var(X) : 方差</li>
+<li>np.std(X) : 标准差</li>
+</ul>
+<h3 id="索引">7.17 索引</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">np.min(x)</span><br><span class="line">np.argmin(x)    <span class="comment"># 返回 min的值的 索引值</span></span><br><span class="line">np.argmax(x)    <span class="comment"># 最大值索引</span></span><br></pre></td></tr></table></figure>
+<h3 id="排序">7.18 排序</h3>
+<ul>
+<li>np.sort(A, axis=1) ：默认为1，按行排序
+<ul>
+<li>axis=0 : 按列排序</li>
+</ul></li>
+<li><p>np.argsort(x) ： 按照索引排序</p></li>
+<li><p>np.partition(x, 3) : 3前面的数字都比他小，后面的都比他大</p></li>
+</ul>
+<h3 id="fancyindexing">7.19 FancyIndexing</h3>
+<ul>
+<li>X[row, col]
+<ul>
+<li>row, col 为索引组成的向量</li>
+</ul></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">16</span>)</span><br><span class="line">print(x)</span><br><span class="line"></span><br><span class="line">ind = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>]</span><br><span class="line">print(x[ind])</span><br><span class="line"></span><br><span class="line">X = x.reshape(<span class="number">4</span>, <span class="number">-1</span>)</span><br><span class="line">print(X)</span><br><span class="line"></span><br><span class="line">row = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">col = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">print(<span class="string">"对角线元素: "</span>, X[row, col])</span><br><span class="line"></span><br><span class="line">[out1]:</span><br><span class="line">[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span>]</span><br><span class="line">[<span class="number">3</span> <span class="number">5</span> <span class="number">8</span>]</span><br><span class="line">[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>]</span><br><span class="line"> [ <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>]</span><br><span class="line"> [ <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span>]]</span><br><span class="line">[ <span class="number">0</span>  <span class="number">5</span> <span class="number">10</span> <span class="number">15</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>重要: 使用bool值</strong>
+<ul>
+<li>a = [True, False, False, True]</li>
+<li>X[a] : 这种用法很常用</li>
+</ul></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(x &lt; <span class="number">3</span>)</span><br><span class="line">print(x == <span class="number">3</span>)</span><br><span class="line">print(x*<span class="number">2</span> == <span class="number">25</span> - <span class="number">4</span>*x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 例子: 样本中有多少小于3岁的人</span></span><br><span class="line">np.sum(x &lt;= <span class="number">3</span>)</span><br><span class="line">np.count_nonzero(x &lt;= <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否有为0的元素, 有任意一个数为 0 则返回True</span></span><br><span class="line">np.any(x == <span class="number">0</span>)   </span><br><span class="line">np.any(x &lt; <span class="number">0</span>)   <span class="comment"># 有一个 小于0 则返回 True</span></span><br><span class="line">np.all(x &gt; <span class="number">0</span>)   <span class="comment"># 所有元素都 &gt; 0 则返回 True</span></span><br><span class="line"></span><br><span class="line">print(x)</span><br><span class="line">np.sum(~(x==<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">print(X[X[:, <span class="number">3</span>] % <span class="number">3</span> == <span class="number">0</span>, :])</span><br></pre></td></tr></table></figure>
+<h2 id="matplotlib">7.2 matplotlib</h2>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
