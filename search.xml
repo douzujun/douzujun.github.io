@@ -313,6 +313,29 @@
       </tags>
   </entry>
   <entry>
+    <title>深度学习代码索引</title>
+    <url>/posts/8245.html</url>
+    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
+<a id="more"></a>
+<h1 id="机器学习">机器学习</h1>
+<h2 id="分类性能度量">分类性能度量</h2>
+<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h1 id="深度学习">深度学习</h1>
+<h1 id="自然语言处理">自然语言处理</h1>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>自然语言处理</tag>
+        <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>深度学习</title>
     <url>/posts/48513.html</url>
     <content><![CDATA[<ul>
@@ -716,7 +739,243 @@
 </ul>
 </blockquote>
 <h2 id="向量空间模型及文本相似度计算">向量空间模型及文本相似度计算</h2>
+<h3 id="文档的向量化表示bow假设和vsm模型"><strong>文档的向量化表示：BOW假设和VSM模型</strong></h3>
+<blockquote>
+<p>为了便于计算文档之间的相似度，需把 <strong>文档转成统一空间的向量</strong></p>
+<ul>
+<li><strong>BOW(bag- of-words model)</strong>：为了计算文档之间的相似度，假设可以忽略文档内的单词顺序和语法、句法等要素，将其仅仅看作是若干个词汇的集合。</li>
+<li><strong>VSM( Vector space model)</strong>：即向量空间模型。其是指在BOW词袋模型假设下，将每个文档表示成同一向量空间的向量。</li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602101344864-1314099615.png"></p>
+<ul>
+<li>举例：</li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602101536283-1030041134.png"></p>
+</blockquote>
+<h3 id="停用词">停用词</h3>
+<blockquote>
+<p>英文名称： Stop words</p>
+<ul>
+<li>停用词通常是非常常见且实际意义有限的词, 如英文中“the&quot;,“a&quot;, &quot;of&quot;,“an”等;中文中“的”、“是”、“而且”等。几乎可能出现在所有场合，因而对某些应用如信息检索、文本分类等区分度不大。</li>
+<li>在信息检索等应用中，这些词在构建向量空间时通常会被过滤掉。因此这些词也被称为停用词。</li>
+<li>Tip：但在某些应用如短语搜索 phrase search中，停用词可能是重要的构成部分，因此要避免进行停用词过滤。</li>
+</ul>
+</blockquote>
+<h3 id="n-gram模型"><strong>N-gram模型</strong></h3>
+<blockquote>
+<ul>
+<li>N-gram：通常是指 一段 文本或语音 中 <u>连续N个项目(item)</u> 的序列。项目(item)可以是单词、字母、碱基对等。</li>
+<li>N=1 称为 uni-gram，N=2 称为 bi-gram，N=3 称为 tri-gram，以此类推。</li>
+<li>举例：对于文本 'And I also like to eat apple'
+<ul>
+<li><strong>Uni-gram：</strong> And, I, also, like, to, eat, apple</li>
+<li><strong>Bi-gram</strong>：And l, I also, also like, like to, to eat, eat apple</li>
+<li><strong>Tri-gram</strong>：And I also, I also like, also like to, like to eat, to eat apple</li>
+</ul></li>
+<li>20世纪80年代，N-gram被广泛地应用在 <u>拼写检查、输入法</u> 等应用中，90年代以后，N-gram得到新的应用，如 <strong>自动分类信息检索</strong> 等。即将 连续的若干词作为VSM中的维度，用于表示文档。</li>
+</ul>
+</blockquote>
+<h3 id="文档之间的欧式距离"><strong>文档之间的欧式距离</strong></h3>
+<blockquote>
+<ul>
+<li>欧氏距离( euclidean metric)是一个通常采用的距离定义，指在n维空间中两个点之间的真实距离。</li>
+<li>公式：<span class="math inline">\(d_{12} = \sqrt{\sum_{k=1}^n (x_{1k} - x_{2k})^2}​\)</span></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602103235050-558217719.png"></p>
+</blockquote>
+<h3 id="文档之间的余弦相似度"><strong>文档之间的余弦相似度</strong></h3>
+<blockquote>
+<ul>
+<li>通过计算 两个向量的夹角余弦值 来评估他们的相似度。余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似。</li>
+<li><img src="/posts/48513/Blog\source_posts\深度学习笔记\余弦相似度.png"></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602104514742-1750768267.png"></p>
+</blockquote>
+<h3 id="ti-idf词条权重计算">Ti-idf词条权重计算</h3>
+<blockquote>
+<ul>
+<li>背景：<strong>特征向量</strong> 里某些高频词在文集内其他文档里面也经常出现。它往往太普遍，对区分文档起的作用不大。</li>
+<li>例如：
+<ul>
+<li>D1: ' Jobs was the chairman of <strong>Apple</strong> Inc.',</li>
+<li>D2: 'I like to use <strong>apple</strong> computer',</li>
+</ul></li>
+<li>这两个文档都是关于苹果电脑的，则词条 apple对分类意义不大。因此 <strong>有必要抑制</strong> 那些 在很多文档中都出现了的词条的权重。</li>
+<li>在 <span class="math inline">\(tf-idf\)</span> 模式下，词条t 在文档d中的权重计算为 <span class="math inline">\(w(t)=tf(t, d) * idf(t)\)</span>。
+<ul>
+<li><span class="math inline">\(tf(t,d)​\)</span>：表示为 词条t 在 文档d 中的出现频率
+<ul>
+<li>通过统计得到</li>
+</ul></li>
+<li><span class="math inline">\(idf(t)\)</span> ：表示与包含词条t的文档数目成反比 (inverse document frequency)
+<ul>
+<li><span class="math inline">\(idf(t) = (log\frac{n_d}{1+df(t)} + 1)​\)</span></li>
+<li><span class="math inline">\(n_d​\)</span> ：表示文档总数，<span class="math inline">\(df(t)​\)</span> ：表示包含该词条 t 的文档数</li>
+<li>(optional) 数据平滑问题：为了防止分母 <span class="math inline">\(df(t)\)</span> 为零：</li>
+<li><span class="math inline">\(idf(t) = (log\frac{1+n_d}{1+df(t)} + 1)​\)</span></li>
+</ul></li>
+</ul></li>
+<li><span class="math inline">\(tf-idf​\)</span> 词条权重计算 举例：</li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602111122592-822522628.png"></p>
+</blockquote>
 <h2 id="特征处理特征缩放选择及降维">特征处理(特征缩放、选择及降维)</h2>
+<h3 id="特征值的缩放">特征值的缩放</h3>
+<p>特征值缩放( Feature scaler)也可以称为 <strong>无量纲处理</strong>。主要是对每个列，即 同一特征维度的数值 进行规范化处理。</p>
+<p>应用背景：</p>
+<ul>
+<li>不同特征(列)可能不属于同一量纲，<strong>即特征的规格不一样</strong>。例如，假设特征向量由两个解释变量构成，第一个变量值范围[0,1],第二个变量值范围[0,100]。</li>
+<li>如果某一特征的方差数量级较大，可能会主导目标函数，导致其他特征的影响被忽略。</li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><p><strong>标准化法</strong></p>
+<ul>
+<li>前提：特征值服从正态分布</li>
+<li>需要计算特征的 均值X.mean 和 标准差X.std：</li>
+<li><p><img src="/posts/48513/Blog\source_posts\深度学习笔记\标准法.png"></p></li>
+<li>标准差 (Standard Deviation)，又称均方差
+<ul>
+<li>用 <span class="math inline">\(\sigma\)</span> 表示，是方差的算术平方根。<img src="/posts/48513/Blog\source_posts\深度学习笔记\均方差.png"></li>
+<li>标准差：反应一个数据集的离散程度。</li>
+<li>例如两组数的集合{0,5,9,1,4}和{5,6,8,9}其平均值都是7，但第二个集合具有较小的标准差。</li>
+</ul></li>
+</ul></li>
+<li><strong>区间缩放法</strong>
+<ul>
+<li>区间缩放法利用了 <strong>边界值信息</strong>，将 特征的取值区间 缩放到某个特定范围。假设max和min为希望的调整后范围，则
+<ul>
+<li>$X_{scaled} =  *(max - min) + min $</li>
+</ul></li>
+<li>由于希望的调整后范围一般为[0, 1]。此时，公式变为：
+<ul>
+<li><span class="math inline">\(X_{scaled} = \frac{(X(axis=0) - X.min(axis=0)) }{(X.max(axis=0) - X.min(axis=0))} ​\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="特征值的归一化">特征值的归一化</h3>
+<p>归一化，也称规范化（Normalizer）</p>
+<ul>
+<li><p>归一化是依照 <u><strong>特征矩阵的 行（即样本）</strong></u>处理数据</p></li>
+<li><ul>
+<li>其目的在于 <strong>样本向量</strong> 在 点乘运算 或 计算相似性时，拥有统一的标准</li>
+<li>也就是说，<u>都转化为“单位向量”</u>。即使每个样本的范式(norm)等于1。</li>
+</ul></li>
+<li><p>规则为 L1 norm 的 归一化 公式如下：</p>
+<ul>
+<li><span class="math inline">\(x^{&#39;} = \frac{x}{\sum_{j=0}^{n-1}|x_j|}​\)</span></li>
+</ul></li>
+<li><p>规则为 L2 norm 的 归一化 公式如下：</p>
+<ul>
+<li><span class="math inline">\(x^{&#39;} = \frac{x}{\sum_{j=0}^{n-1}x_j^2}​\)</span></li>
+</ul></li>
+</ul>
+<h3 id="定量特征的二值化"><strong>定量特征的二值化</strong></h3>
+<p>应用背景：</p>
+<ul>
+<li>对于某些定量特征，需要 将 <strong>定量信息</strong> 转为 <strong>区间划分</strong>。如将考试成绩转为“及格”或“不及格”</li>
+</ul>
+<p>方法：</p>
+<ul>
+<li>设定一个阈值，大于或者等于阈值的赋值为1，小于阈值的赋值为0，公式表达:</li>
+</ul>
+<p><span class="math display">\[
+x^{&#39;} = 
+\begin{cases}
+1, x&gt;=threshold \\
+0, x &lt; threshold
+\end{cases}
+\]</span></p>
+<h3 id="缺失特征值的弥补计算">缺失特征值的弥补计算</h3>
+<p>背景：</p>
+<ul>
+<li>数据获取时，由于某些原因缺少某些数值，需要进行弥补。</li>
+</ul>
+<p>常见的弥补策略：</p>
+<ul>
+<li>利用 同一特征 的 均值 进行弥补。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">举例：counts=[[<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>],</span><br><span class="line">             [<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">             [<span class="number">3</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">             [NaN,<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line">则，NaN可以弥补为同列上其他数据的均值，即(<span class="number">1</span>+<span class="number">2</span>+<span class="number">3</span>)/<span class="number">3</span>=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建多项式特征">创建多项式特征</h3>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602143425053-1431616999.png"></p>
+<h3 id="特征选择">特征选择</h3>
+<ul>
+<li>什么是特征选择？选择对于学习任务（如分类问题）有帮助的若干特征。</li>
+<li>为什么要进行特征选择？
+<ol type="1">
+<li>降维以提升模型的效率</li>
+<li>降低学习任务难度　　</li>
+<li>增加模型的可解释性。</li>
+</ol></li>
+<li>特征选择的角度：
+<ol type="1">
+<li>特征是否发散：对于不发散的特征,样本在其维度上差异性较小</li>
+<li>特征与目标的相关性：应当优先选择与目标相关性高的特征</li>
+</ol></li>
+<li>几种常见的特征选择方法：</li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>方差选择法</strong>
+<ul>
+<li>原理：方差非常小的特征维度，对于样本的区分作用很小，可以剔除。</li>
+</ul></li>
+<li><ul>
+<li>例如，假设数据集为布尔特征，想去掉那些，超过80%情况下为1或者为0的特征。由于布尔特征是 Bernoulli(伯努利)随机变量，其方差可以计算为Var[x]=p<em>(1-p)，因此阈值为0.8</em>(1-0.8)=0.16</li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602145133883-90169868.png"></p>
+<ul>
+<li><strong>皮尔森相关系数法</strong>
+<ul>
+<li>皮尔森相关系数( Pearson correlation coefficient)：显示两个随机变量之间线性关系的强度和方向。</li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602145341213-582027351.png"></p>
+<ul>
+<li><ul>
+<li>计算完毕后，可以将与目标值相关性较小的特征过滤掉。</li>
+<li>Tip: Pearson相关系数，对线性关系比较敏感。如果关系是非线性的，即便两个变量具有一一对应的关系，Pearso相关性也可能会接近0。</li>
+</ul></li>
+<li><p><strong>基于森林的特征选择法</strong></p>
+<ul>
+<li>其原理是某些分类器，自身提供了特征的重要性分值。因此可以直接调用这些分类器，得到特征重要性分值，并排序。</li>
+</ul></li>
+<li><p><strong>递归特征消除法</strong></p>
+<ol type="1">
+<li>首先在初始特征或者权重特征集合上训练。通过学习器返回的coef_属性或者 feature_ importances_属性来获得每个特征的重要程度</li>
+<li>然后最小权重的特征被移除。</li>
+<li>这个过程递归进行，直到希望的特征数目满足为止。</li>
+</ol></li>
+</ul>
+</blockquote>
+<h3 id="特征降维"><strong>特征降维</strong></h3>
+<blockquote>
+<p>降维本质上是从一个维度空间映射到另一个维度空间。</p>
+<p>常见特征降维方法：</p>
+<ul>
+<li><p><strong><u>线性判别分析</u></strong>( (Linear Discriminant analysis，简称LDA)是一种 <strong>监督学习</strong> 的降维技术，即数据集的每个样本有类别输出。</p></li>
+<li><ul>
+<li>LDA的基本思想: “投影后类内方差最小，类间方差最大”。</li>
+<li>即将数据在 <strong>低维度</strong> 上进行投影，
+<ul>
+<li>投影后希望 同类数据的投影点尽可能接近，</li>
+<li>而 不同类数据 的 类别中心 之间的 距离尽可能的大。(右图好)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602150326253-1586772457.png"></p>
+<ul>
+<li><strong><u>主成分分析</u></strong>( principal component analysis)是一种 <strong>无监督的降维方法</strong>。
+<ul>
+<li>采用数学变换，把给定的一组相关特征维度，</li>
+<li>通过 线性换转 成另一组不相关的维度(即 principal components)，</li>
+<li>这些新的维度照 <strong><u>方差</u></strong> 依次递减的顺序排列：形成第一主成分、第二主成分等。</li>
+<li>应用：高维数据在二维平面上进行展示。</li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602150942838-1826314432.png"></p>
+</blockquote>
 <h2 id="实例使用sklearn对文档进行向量化">实例：使用sklearn对文档进行向量化</h2>
 <h2 id="实例使用sklearn进行量纲缩放">实例：使用sklearn进行量纲缩放</h2>
 ]]></content>
@@ -726,29 +985,6 @@
       <tags>
         <tag>python</tag>
         <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>深度学习代码索引</title>
-    <url>/posts/8245.html</url>
-    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
-<a id="more"></a>
-<h1 id="机器学习">机器学习</h1>
-<h2 id="分类性能度量">分类性能度量</h2>
-<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h1 id="深度学习">深度学习</h1>
-<h1 id="自然语言处理">自然语言处理</h1>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-        <tag>自然语言处理</tag>
-        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
