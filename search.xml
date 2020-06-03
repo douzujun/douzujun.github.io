@@ -1,6 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Coursera Deep Learning笔记 逻辑回归典型的训练过程</title>
+    <url>/posts/20321.html</url>
+    <content><![CDATA[<p>Deep Learning 用逻辑回归训练图片的典型步骤.</p>
+<a id="more"></a>
+<p>笔记摘自：<a href="https://xienaoban.github.io/posts/59595.html" target="_blank" rel="noopener" class="uri">https://xienaoban.github.io/posts/59595.html</a></p>
+<h1 id="处理数据">处理数据</h1>
+<h2 id="向量化vectorization">向量化(Vectorization)</h2>
+<p>将每张图片的高和宽和RGB展为向量，最终X的shape为 <code>(height*width*3, m)</code> .</p>
+<h2 id="特征归一化normalization">特征归一化(Normalization)</h2>
+<p>对于一般数据，使用标准化(Standardization)：<span class="math inline">\(X_{scale} = \frac{(X(axis=0) - X.mean(axis=0))}{X.std(axis=0)}\)</span> - <code>z_i = (x_i - mean) / delta</code> , <code>mean</code> 与 <code>delta</code> 代表X的均值和标准差. 最终特征处于[-1, 1]区间.</p>
+<p>对于图片, 可直接使用Min-Max Scaling - 即将每个特征除以255(每个像素分为R, G, B, 范围在0~255)使得值处于[0, 1].</p>
+<h1 id="初始化参数">初始化参数</h1>
+<p>一般将 <code>w</code> 和 <code>b</code> 随机选择.</p>
+<h1 id="梯度下降gradient-descent">梯度下降(Gradient descent)</h1>
+<p>根据 <code>w</code> , <code>b</code> 和训练集，来训练数据.</p>
+<ul>
+<li>需要设定 <u>迭代次数</u> 与 <u>学习率</u> .</li>
+</ul>
+<p>以下为大循环(迭代次数)中内容：</p>
+<h2 id="计算代价函数">计算代价函数</h2>
+<p>对于<span class="math inline">\(x^{(i)} \in X\)</span>， 有 <span class="math display">\[
+z^{(i)} = w^Tx^{(i)} + b
+\]</span></p>
+<p><span class="math display">\[
+a^{(i)} = \hat{y}^{(i)} = sigmod(z^{(i)}) = \sigma(z^{(i)}) = \frac{1}{1 + e^{-z^{(i)}}}
+\]</span></p>
+<p><span class="math display">\[
+损失函数: {L}(a^{(i)}, y^{(i)}) = {L}(\hat{y}^{(i)}, y^{(i)}) = - y^{(i)}  \log(a^{(i)}) - (1-y^{(i)} )  \log(1-a^{(i)})
+\]</span></p>
+<p><span class="math display">\[
+A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)}) 
+  = \sigma(w^TX+b) 
+  = \frac{1}{1+e^{-(w^TX+b)}}
+\]</span></p>
+<p><span class="math display">\[
+代价函数:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)}) 
+  = -\frac{1}{m} \sum^{m}_{i=1} (y^{(i)} log(a^{(i)}) + (1-y^{(i)}) log(1-a^{(i)}))
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 激活函数</span></span><br><span class="line">A = sigmoid(w.T.dot(X) + b)</span><br><span class="line"><span class="comment"># 代价函数</span></span><br><span class="line">cost = -np.sum(Y * np.log(A) + (<span class="number">1</span>-Y) * np.log(<span class="number">1</span> - A)) / m</span><br></pre></td></tr></table></figure>
+<h2 id="计算反向传播的梯度">计算反向传播的梯度</h2>
+<blockquote>
+<p>即：对 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)\)</span> 计算导数，即对<span class="math inline">\({L}(a, y)\)</span> 计算导数，以下求导，均省略上标。</p>
+<p>求：<span class="math inline">\(\dfrac{\partial J}{\partial w}\)</span> 和 $ $ (dw 和 db)</p>
+</blockquote>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial a}
+= \dfrac{\partial L(a, y)}{\partial a}
+= -\frac{y}{a} + \frac{1-y}{1-a}
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{da}{dz}
+= (\frac{1}{1 + e^{-z}})&#39;
+= \dfrac{e^{-z}}{(1+e^{-z})^2}
+= \dfrac{1}{1+e^{-z}} - \dfrac{1}{(1+e^{-z})^2}
+= a-a^2
+= a · (1-a)
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial z}
+= \dfrac{\partial L}{\partial a} \dfrac{da}{dz}
+= (-\dfrac{y}{a} + \dfrac{1-y}{1-a}) · a · (1-a)
+= a - y
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial w}
+= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial w}
+= (a-y) · x
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial b}
+= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial b}
+= a-y
+\]</span></p>
+<p>根据 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)​\)</span> 最终可得： <span class="math display">\[
+\dfrac{\partial J}{\partial w}
+= \dfrac{\partial J}{\partial a} \dfrac{\partial a}{\partial w}
+= \dfrac{1}{m} X(A-Y)^T
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial J}{\partial b} = \dfrac{1}{m} \sum^{m}_{i=1} (a^{(i)} - y^{(i)})
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dw = X.dot((A - Y).T) / m</span><br><span class="line">db = np.sum(A - Y) / m</span><br></pre></td></tr></table></figure>
+<h2 id="更新-w-b">更新 <code>w</code> , <code>b</code></h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">w = w - learning_rate * dw</span><br><span class="line">b = b - learning_rate * db</span><br></pre></td></tr></table></figure>
+<h1 id="预测测试集">预测测试集</h1>
+<ul>
+<li><p>使用训练出来的 <code>w</code> , <code>b</code> , 对测试集使用 <code>y_pred = sigmoid(wx+b)</code> , 计算得预测的概率</p></li>
+<li><p>对其取整, 例如大于0.7则判定为 '是', 否则为'否'.</p></li>
+</ul>
+<h1 id="实例实现一个图像识别算法">实例：实现一个图像识别算法</h1>
+<p><a href="https://www.cnblogs.com/douzujun/p/10267165.html" target="_blank" rel="noopener" class="uri">https://www.cnblogs.com/douzujun/p/10267165.html</a></p>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>Coursera Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/posts/16107.html</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
@@ -348,9 +450,9 @@
         <category>深度学习</category>
       </categories>
       <tags>
+        <tag>深度学习</tag>
         <tag>python</tag>
         <tag>机器学习</tag>
-        <tag>深度学习</tag>
         <tag>自然语言处理</tag>
         <tag>pytorch</tag>
       </tags>
@@ -385,7 +487,7 @@
 <blockquote>
 <p>数据集在数学上通常表示为 $ {(x_1,y_1),(x_2,y_2),...,(x_i,y_i),...,(x_m,y_m)}​$</p>
 <ul>
-<li>其中 <span class="math inline">\(x_i​\)</span> 为样本特征。由于样本（即一行）一般有多个特征，因而 <span class="math inline">\(x_i = \{x_i^1, x_i^2,..., x_i^n\} ​\)</span></li>
+<li>其中 <span class="math inline">\(x_i\)</span> 为样本特征。由于样本（即一行）一般有多个特征，因而 $x_i = {x_i^1, x_i^2,..., x_i^n} $</li>
 <li>而 <span class="math inline">\(y_i\)</span> 表示 <strong>样本i</strong> 的 <strong>类别标签</strong>。</li>
 </ul>
 </blockquote>
@@ -807,7 +909,7 @@
 <blockquote>
 <ul>
 <li>通过计算 两个向量的夹角余弦值 来评估他们的相似度。余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似。</li>
-<li><img src="/posts/48513/深度学习笔记\余弦相似度.png"></li>
+<li><img src="/posts/48513/Blog\source_posts\深度学习笔记\余弦相似度.png" title="fig:" alt="余弦相似度"></li>
 </ul>
 <p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602104514742-1750768267.png"></p>
 </blockquote>
@@ -1006,110 +1108,8 @@ x^{&#39;} =
         <category>深度学习</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Coursera Deep Learning笔记 逻辑回归典型的训练过程</title>
-    <url>/posts/20321.html</url>
-    <content><![CDATA[<p>Deep Learning 用逻辑回归训练图片的典型步骤.</p>
-<a id="more"></a>
-<p>笔记摘自：<a href="https://xienaoban.github.io/posts/59595.html" target="_blank" rel="noopener" class="uri">https://xienaoban.github.io/posts/59595.html</a></p>
-<h1 id="处理数据">处理数据</h1>
-<h2 id="向量化vectorization">向量化(Vectorization)</h2>
-<p>将每张图片的高和宽和RGB展为向量，最终X的shape为 <code>(height*width*3, m)</code> .</p>
-<h2 id="特征归一化normalization">特征归一化(Normalization)</h2>
-<p>对于一般数据，使用标准化(Standardization)：<span class="math inline">\(X_{scale} = \frac{(X(axis=0) - X.mean(axis=0))}{X.std(axis=0)}\)</span> - <code>z_i = (x_i - mean) / delta</code> , <code>mean</code> 与 <code>delta</code> 代表X的均值和标准差. 最终特征处于[-1, 1]区间.</p>
-<p>对于图片, 可直接使用Min-Max Scaling - 即将每个特征除以255(每个像素分为R, G, B, 范围在0~255)使得值处于[0, 1].</p>
-<h1 id="初始化参数">初始化参数</h1>
-<p>一般将 <code>w</code> 和 <code>b</code> 随机选择.</p>
-<h1 id="梯度下降gradient-descent">梯度下降(Gradient descent)</h1>
-<p>根据 <code>w</code> , <code>b</code> 和训练集，来训练数据.</p>
-<ul>
-<li>需要设定 <u>迭代次数</u> 与 <u>学习率</u> .</li>
-</ul>
-<p>以下为大循环(迭代次数)中内容：</p>
-<h2 id="计算代价函数">计算代价函数</h2>
-<p>对于<span class="math inline">\(x^{(i)} \in X\)</span>， 有 <span class="math display">\[
-z^{(i)} = w^Tx^{(i)} + b
-\]</span></p>
-<p><span class="math display">\[
-a^{(i)} = \hat{y}^{(i)} = sigmod(z^{(i)}) = \sigma(z^{(i)}) = \frac{1}{1 + e^{-z^{(i)}}}
-\]</span></p>
-<p><span class="math display">\[
-损失函数: {L}(a^{(i)}, y^{(i)}) = {L}(\hat{y}^{(i)}, y^{(i)}) = - y^{(i)}  \log(a^{(i)}) - (1-y^{(i)} )  \log(1-a^{(i)})
-\]</span></p>
-<p><span class="math display">\[
-A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)}) 
-  = \sigma(w^TX+b) 
-  = \frac{1}{1+e^{-(w^TX+b)}}
-\]</span></p>
-<p><span class="math display">\[
-代价函数:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)}) 
-  = -\frac{1}{m} \sum^{m}_{i=1} (y^{(i)} log(a^{(i)}) + (1-y^{(i)}) log(1-a^{(i)}))
-\]</span></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 激活函数</span></span><br><span class="line">A = sigmoid(w.T.dot(X) + b)</span><br><span class="line"><span class="comment"># 代价函数</span></span><br><span class="line">cost = -np.sum(Y * np.log(A) + (<span class="number">1</span>-Y) * np.log(<span class="number">1</span> - A)) / m</span><br></pre></td></tr></table></figure>
-<h2 id="计算反向传播的梯度">计算反向传播的梯度</h2>
-<blockquote>
-<p>即：对 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)\)</span> 计算导数，即对<span class="math inline">\({L}(a, y)\)</span> 计算导数，以下求导，均省略上标。</p>
-<p>求：<span class="math inline">\(\dfrac{\partial J}{\partial w}\)</span> 和 $ $ (dw 和 db)</p>
-</blockquote>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial a}
-= \dfrac{\partial L(a, y)}{\partial a}
-= -\frac{y}{a} + \frac{1-y}{1-a}
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{da}{dz}
-= (\frac{1}{1 + e^{-z}})&#39;
-= \dfrac{e^{-z}}{(1+e^{-z})^2}
-= \dfrac{1}{1+e^{-z}} - \dfrac{1}{(1+e^{-z})^2}
-= a-a^2
-= a · (1-a)
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial z}
-= \dfrac{\partial L}{\partial a} \dfrac{da}{dz}
-= (-\dfrac{y}{a} + \dfrac{1-y}{1-a}) · a · (1-a)
-= a - y
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial w}
-= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial w}
-= (a-y) · x
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial b}
-= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial b}
-= a-y
-\]</span></p>
-<p>根据 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)​\)</span> 最终可得： <span class="math display">\[
-\dfrac{\partial J}{\partial w}
-= \dfrac{\partial J}{\partial a} \dfrac{\partial a}{\partial w}
-= \dfrac{1}{m} X(A-Y)^T
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial J}{\partial b} = \dfrac{1}{m} \sum^{m}_{i=1} (a^{(i)} - y^{(i)})
-\]</span></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dw = X.dot((A - Y).T) / m</span><br><span class="line">db = np.sum(A - Y) / m</span><br></pre></td></tr></table></figure>
-<h2 id="更新-w-b">更新 <code>w</code> , <code>b</code></h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">w = w - learning_rate * dw</span><br><span class="line">b = b - learning_rate * db</span><br></pre></td></tr></table></figure>
-<h1 id="预测测试集">预测测试集</h1>
-<ul>
-<li><p>使用训练出来的 <code>w</code> , <code>b</code> , 对测试集使用 <code>y_pred = sigmoid(wx+b)</code> , 计算得预测的概率</p></li>
-<li><p>对其取整, 例如大于0.7则判定为 '是', 否则为'否'.</p></li>
-</ul>
-<h1 id="实例实现一个图像识别算法">实例：实现一个图像识别算法</h1>
-<p><a href="https://www.cnblogs.com/douzujun/p/10267165.html" target="_blank" rel="noopener" class="uri">https://www.cnblogs.com/douzujun/p/10267165.html</a></p>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-        <category>Coursera Deep Learning</category>
-      </categories>
-      <tags>
         <tag>python</tag>
-        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
