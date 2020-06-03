@@ -20,18 +20,17 @@
     var CONFIG = {"hostname":"douzujun.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文记录了 Andrew Ng的深度学习课程笔记，以及课后作业">
+  <meta name="description" content="Deep Learning 用逻辑回归训练图片的典型步骤. 笔记摘自：https:&#x2F;&#x2F;xienaoban.github.io&#x2F;posts&#x2F;59595.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DeepLearning by Andrew Ng">
+<meta property="og:title" content="Coursera Deep Learning笔记 逻辑回归典型的训练过程">
 <meta property="og:url" content="https://douzujun.github.io/posts/20321.html">
 <meta property="og:site_name" content="Douzi&#39;s Blog">
-<meta property="og:description" content="本文记录了 Andrew Ng的深度学习课程笔记，以及课后作业">
+<meta property="og:description" content="Deep Learning 用逻辑回归训练图片的典型步骤. 笔记摘自：https:&#x2F;&#x2F;xienaoban.github.io&#x2F;posts&#x2F;59595.html">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-02T10:12:50.000Z">
-<meta property="article:modified_time" content="2020-06-02T10:14:20.507Z">
+<meta property="article:modified_time" content="2020-06-03T03:55:22.538Z">
 <meta property="article:author" content="Douzi">
 <meta property="article:tag" content="深度学习">
-<meta property="article:tag" content="TensorFlow">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 
@@ -48,7 +47,7 @@
   };
 </script>
 
-  <title>DeepLearning by Andrew Ng | Douzi's Blog</title>
+  <title>Coursera Deep Learning笔记 逻辑回归典型的训练过程 | Douzi's Blog</title>
   
 
 
@@ -218,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          DeepLearning by Andrew Ng
+          Coursera Deep Learning笔记 逻辑回归典型的训练过程
         </h1>
 
         <div class="post-meta">
@@ -227,10 +226,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-06-02 18:12:50 / 修改时间：18:14:20" itemprop="dateCreated datePublished" datetime="2020-06-02T18:12:50+08:00">2020-06-02</time>
+              <time title="创建时间：2020-06-02 18:12:50" itemprop="dateCreated datePublished" datetime="2020-06-02T18:12:50+08:00">2020-06-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-03 11:55:22" itemprop="dateModified" datetime="2020-06-03T11:55:22+08:00">2020-06-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -238,6 +243,10 @@
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Coursera-Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Coursera Deep Learning</span></a>
                 </span>
             </span>
 
@@ -254,14 +263,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>29</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -273,8 +282,95 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文记录了 Andrew Ng的深度学习课程笔记，以及课后作业</p>
+        <p>Deep Learning 用逻辑回归训练图片的典型步骤.</p>
+<p>笔记摘自：<a href="https://xienaoban.github.io/posts/59595.html" target="_blank" rel="noopener" class="uri">https://xienaoban.github.io/posts/59595.html</a></p>
 <a id="more"></a>
+<h1 id="处理数据">处理数据</h1>
+<h2 id="向量化vectorization">向量化(Vectorization)</h2>
+<p>将每张图片的高和宽和RGB展为向量，最终X的shape为 <code>(height*width*3, m)</code> .</p>
+<h2 id="特征归一化normalization">特征归一化(Normalization)</h2>
+<p>对于一般数据，使用标准化(Standardization) - <span class="math inline">\(X_{scale} = \frac{(X(axis=0) - X.mean(axis=0))}{X.std(axis=0)}​\)</span> - <code>z_i = (x_i - mean) / delta</code> , <code>mean</code> 与 <code>delta</code> 代表X的均值和标准差. 最终特征处于[-1, 1]区间.</p>
+<p>对于图片, 可直接使用Min-Max Scaling - 即将每个特征除以255(每个像素分为R, G, B, 范围在0~255)使得值处于[0, 1].</p>
+<h1 id="初始化参数">初始化参数</h1>
+<p>一般将 <code>w</code> 和 <code>b</code> 随机选择.</p>
+<h1 id="梯度下降gradient-descent">梯度下降(Gradient descent)</h1>
+<p>根据 <code>w</code> , <code>b</code> 和训练集，来训练数据.</p>
+<ul>
+<li>需要设定 <u>迭代次数</u> 与 <u>学习率</u> .</li>
+</ul>
+<p>以下为大循环(迭代次数)中内容：</p>
+<h2 id="计算代价函数">计算代价函数</h2>
+<p>对于<span class="math inline">\(x^{(i)} \in X\)</span>， 有 <span class="math display">\[
+z^{(i)} = w^Tx^{(i)} + b
+\]</span></p>
+<p><span class="math display">\[
+ a^{(i)} = \hat{y}^{(i)} = sigmod(z^{(i)}) = \sigma(z^{(i)}) = \frac{1}{1 + e^{-z^{(i)}}}
+\]</span></p>
+<p><span class="math display">\[
+损失函数: {L}(a^{(i)}, y^{(i)}) = {L}(\hat{y}^{(i)}, y^{(i)}) = - y^{(i)}  \log(a^{(i)}) - (1-y^{(i)} )  \log(1-a^{(i)})
+\]</span></p>
+<p><span class="math display">\[
+A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)}) 
+  = \sigma(w^TX+b) 
+  = \frac{1}{1+e^{-(w^TX+b)}}
+\]</span></p>
+<p><span class="math display">\[
+代价函数: J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)}) 
+  = -\frac{1}{m} \sum^{m}_{i=1} (y^{(i)} log(\hat{y}^{(i)}) + (1-y^{(i)}) log(1-\hat{y}^{(i)}))
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活函数</span></span><br><span class="line">A = sigmoid(w.T.dot(X) + b)</span><br><span class="line"><span class="comment"># 代价函数</span></span><br><span class="line">cost = -np.sum(Y * np.log(A) + (<span class="number">1</span>-Y) * np.log(<span class="number">1</span> - A)) / m</span><br></pre></td></tr></table></figure>
+<h2 id="计算反向传播的梯度">计算反向传播的梯度</h2>
+<blockquote>
+<p>即：对 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)\)</span> 计算导数，即对<span class="math inline">\({L}(a, y)\)</span> 计算导数，以下求导，均省略上标。</p>
+<p>求：<span class="math inline">\(\dfrac{\partial J}{\partial w}\)</span> 和 $ $ (dw 和 db)</p>
+</blockquote>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial a}
+= \dfrac{\partial L(a, y)}{\partial a}
+= -\frac{y}{a} + \frac{1-y}{1-a}
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{da}{dz}
+= (\frac{1}{1 + e^{-z}})&#39;
+= \dfrac{e^{-z}}{(1+e^{-z})^2}
+= \dfrac{1}{1+e^{-z}} - \dfrac{1}{(1+e^{-z})^2}
+= a-a^2
+= a · (1-a)
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial z}
+= \dfrac{\partial L}{\partial a} \dfrac{da}{dz}
+= (-\dfrac{y}{a} + \dfrac{1-y}{1-a}) · a · (1-a)
+= a - y
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial w}
+= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial w}
+= (a-y) · x
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial b}
+= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial b}
+= a-y
+\]</span></p>
+<p>根据 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)​\)</span> 最终可得： <span class="math display">\[
+\dfrac{\partial J}{\partial w}
+= \dfrac{\partial J}{\partial a} \dfrac{\partial a}{\partial w}
+= \dfrac{1}{m} X(A-Y)^T
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial J}{\partial b} = \dfrac{1}{m} \sum^{m}_{i=1} (a^{(i)} - y^{(i)})
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dw = X.dot((A - Y).T) / m</span><br><span class="line">db = np.sum(A - Y) / m</span><br></pre></td></tr></table></figure>
+<h2 id="更新-w-b">更新 <code>w</code> , <code>b</code></h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">w = w - learning_rate * dw</span><br><span class="line">b = b - learning_rate * db</span><br></pre></td></tr></table></figure>
+<h1 id="预测测试集">预测测试集</h1>
+<ul>
+<li><p>使用训练出来的 <code>w</code> , <code>b</code> , 对测试集使用 <code>y_pred = sigmoid(wx+b)</code> , 计算得预测的概率</p></li>
+<li><p>对其取整, 例如大于0.7则判定为 '是', 否则为'否'.</p></li>
+</ul>
+<h1 id="实例实现一个图像识别算法">实例：实现一个图像识别算法</h1>
+<p><a href="https://www.cnblogs.com/douzujun/p/10267165.html" target="_blank" rel="noopener" class="uri">https://www.cnblogs.com/douzujun/p/10267165.html</a></p>
 
     </div>
 
@@ -290,7 +386,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://douzujun.github.io/posts/20321.html" title="DeepLearning by Andrew Ng">https://douzujun.github.io/posts/20321.html</a>
+    <a href="https://douzujun.github.io/posts/20321.html" title="Coursera Deep Learning笔记 逻辑回归典型的训练过程">https://douzujun.github.io/posts/20321.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
@@ -302,7 +398,6 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
-              <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
               <a href="/tags/python/" rel="tag"># python</a>
           </div>
 
@@ -374,6 +469,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#处理数据"><span class="nav-number">1.</span> <span class="nav-text">处理数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#向量化vectorization"><span class="nav-number">1.1.</span> <span class="nav-text">向量化(Vectorization)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征归一化normalization"><span class="nav-number">1.2.</span> <span class="nav-text">特征归一化(Normalization)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化参数"><span class="nav-number">2.</span> <span class="nav-text">初始化参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降gradient-descent"><span class="nav-number">3.</span> <span class="nav-text">梯度下降(Gradient descent)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算代价函数"><span class="nav-number">3.1.</span> <span class="nav-text">计算代价函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算反向传播的梯度"><span class="nav-number">3.2.</span> <span class="nav-text">计算反向传播的梯度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新-w-b"><span class="nav-number">3.3.</span> <span class="nav-text">更新 w , b</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预测测试集"><span class="nav-number">4.</span> <span class="nav-text">预测测试集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例实现一个图像识别算法"><span class="nav-number">5.</span> <span class="nav-text">实例：实现一个图像识别算法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -396,13 +492,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -452,12 +548,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">67k</span>
+    <span title="站点总字数">69k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:01</span>
+    <span title="站点阅读时长">1:03</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
