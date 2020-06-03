@@ -43,7 +43,7 @@ A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)})
 <h2 id="计算反向传播的梯度">计算反向传播的梯度</h2>
 <blockquote>
 <p>即：对 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)\)</span> 计算导数，即对<span class="math inline">\({L}(a, y)\)</span> 计算导数，以下求导，均省略上标。</p>
-<p>求：<span class="math inline">\(\dfrac{\partial J}{\partial w}\)</span> 和 $ $ (dw 和 db)</p>
+<p>求：<span class="math inline">\(\dfrac{\partial J}{\partial w}\)</span> 和 <span class="math inline">\(\dfrac{\partial J}{\partial b} ​\)</span> (dw 和 db)</p>
 </blockquote>
 <p><span class="math display">\[
 \dfrac{\partial L}{\partial a}
@@ -101,26 +101,6 @@ A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)})
         <tag>深度学习</tag>
         <tag>python</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/posts/16107.html</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>机器学习</title>
@@ -428,6 +408,26 @@ A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)})
         <tag>python</tag>
         <tag>机器学习</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/posts/16107.html</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>深度学习代码索引</title>
@@ -909,7 +909,7 @@ A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)})
 <blockquote>
 <ul>
 <li>通过计算 两个向量的夹角余弦值 来评估他们的相似度。余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似。</li>
-<li><img src="/posts/48513/Blog\source_posts\深度学习笔记\余弦相似度.png" title="fig:" alt="余弦相似度"></li>
+<li><img src="/posts/48513/余弦相似度.png" title="fig:" alt="余弦相似度"></li>
 </ul>
 <p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200602104514742-1750768267.png"></p>
 </blockquote>
@@ -955,10 +955,10 @@ A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)})
 <ul>
 <li>前提：特征值服从正态分布</li>
 <li>需要计算特征的 均值X.mean 和 标准差X.std：</li>
-<li><p><img src="/posts/48513/深度学习笔记\标准法.png"></p></li>
+<li><p><img src="/posts/48513/标准法.png"></p></li>
 <li>标准差 (Standard Deviation)，又称均方差
 <ul>
-<li>用 <span class="math inline">\(\sigma\)</span> 表示，是方差的算术平方根。<img src="/posts/48513/深度学习笔记\均方差.png"></li>
+<li>用 <span class="math inline">\(\sigma\)</span> 表示，是方差的算术平方根。<img src="/posts/48513/均方差.png"></li>
 <li>标准差：反应一个数据集的离散程度。</li>
 <li>例如两组数的集合{0,5,9,1,4}和{5,6,8,9}其平均值都是7，但第二个集合具有较小的标准差。</li>
 </ul></li>
