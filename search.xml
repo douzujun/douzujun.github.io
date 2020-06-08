@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>homework of deepLearning by Andrew Ng</title>
+    <title>Homework of deepLearning by Andrew Ng</title>
     <url>/posts/45669.html</url>
     <content><![CDATA[<p>吴恩达深度学习课程的课堂笔记以及课后作业</p>
 <a id="more"></a>
+<p>代码下载：<a href="https://github.com/douzujun/Deep-Learning-Coursera" target="_blank" rel="noopener" class="uri">https://github.com/douzujun/Deep-Learning-Coursera</a></p>
 <h1 id="课程1---神经网络和深度学习">课程1 - 神经网络和深度学习</h1>
 <table>
 <thead>
@@ -56,11 +57,279 @@
 <td style="text-align: center;"></td>
 <td style="text-align: center;">一步步搭建多层神经网络</td>
 <td style="text-align: center;">编程作业</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://www.cnblogs.com/douzujun/p/10325980.html" target="_blank" rel="noopener">手写神经网络</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">深层神经网络应用 (识别猫)</td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"><a href="https://www.cnblogs.com/douzujun/p/10344361.html" target="_blank" rel="noopener">识别猫</a></td>
+</tr>
+</tbody>
+</table>
+<h1 id="课程2---改善深层神经网络超参数调试正则化以及优化">课程2 - 改善深层神经网络：超参数调试、正则化以及优化</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">周数</th>
+<th style="text-align: center;">名称</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">地址</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">第一周</td>
+<td style="text-align: center;">深度学习的实用层面</td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第二周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第三周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第四周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="课程3---结构化机器学习项目">课程3 - 结构化机器学习项目</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">周数</th>
+<th style="text-align: center;">名称</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">地址</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">第一周</td>
+<td style="text-align: center;">深度学习的实用层面</td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第二周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第三周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第四周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="课程4---卷积神经网络">课程4 - 卷积神经网络</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">周数</th>
+<th style="text-align: center;">名称</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">地址</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">第一周</td>
+<td style="text-align: center;">深度学习的实用层面</td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第二周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第三周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第四周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="课程5---序列模型">课程5 - 序列模型</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">周数</th>
+<th style="text-align: center;">名称</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">地址</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">第一周</td>
+<td style="text-align: center;">深度学习的实用层面</td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第二周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第三周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第四周</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">笔记</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">编程作业</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;">编程作业</td>
 <td style="text-align: center;"></td>
 </tr>
