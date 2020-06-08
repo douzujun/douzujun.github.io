@@ -20,19 +20,24 @@
     var CONFIG = {"hostname":"douzujun.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+  <meta name="description" content="Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://douzujun.github.io/posts/16107.html">
+<meta property="og:title" content="Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化">
+<meta property="og:url" content="https://douzujun.github.io/posts/27134.html">
 <meta property="og:site_name" content="Douzi&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-29T08:03:01.374Z">
-<meta property="article:modified_time" content="2020-05-29T10:01:27.398Z">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/817161/202006/817161-20200608152929057-904903497.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/817161/202006/817161-20200608154754615-1627054430.png">
+<meta property="article:published_time" content="2020-06-08T06:00:30.000Z">
+<meta property="article:modified_time" content="2020-06-08T12:33:05.680Z">
 <meta property="article:author" content="Douzi">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2020.cnblogs.com/blog/817161/202006/817161-20200608152929057-904903497.png">
 
-<link rel="canonical" href="https://douzujun.github.io/posts/16107.html">
+<link rel="canonical" href="https://douzujun.github.io/posts/27134.html">
 
 
 <script id="page-configurations">
@@ -45,7 +50,7 @@
   };
 </script>
 
-  <title>Hello World | Douzi's Blog</title>
+  <title>Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化 | Douzi's Blog</title>
   
 
 
@@ -202,7 +207,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://douzujun.github.io/posts/16107.html">
+    <link itemprop="mainEntityOfPage" href="https://douzujun.github.io/posts/27134.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -215,7 +220,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化
         </h1>
 
         <div class="post-meta">
@@ -226,7 +231,20 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-29 16:03:01 / 修改时间：18:01:27" itemprop="dateCreated datePublished" datetime="2020-05-29T16:03:01+08:00">2020-05-29</time>
+              <time title="创建时间：2020-06-08 14:00:30 / 修改时间：20:33:05" itemprop="dateCreated datePublished" datetime="2020-06-08T14:00:30+08:00">2020-06-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Coursera-Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Coursera Deep Learning</span></a>
+                </span>
             </span>
 
           
@@ -242,14 +260,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>357</span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -261,21 +279,141 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+        <p>Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化</p>
 <a id="more"></a>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>摘抄自：https://xienaoban.github.io/posts/41302.html</p>
+<h1 id="训练集验证集测试集train-dev-test-sets">训练集、验证集、测试集(Train, Dev, Test Sets)</h1>
+<ul>
+<li>当数据量小的时候, 70% 训练, 30% 测试；或 60% 训练、20% 验证、20%测试.
+<ul>
+<li><p>训练集( training set)：用来训练模型，即被用来 学习 得到系统的 参数取值.</p></li>
+<li><p>测试集( testing set)：用于最终报告模型的评价结果，因此在训练阶段测试集中的样本应该是不可见的.</p></li>
+<li><strong>对训练集做进一步划分为 训练集、验证集 validation set.</strong>
+<ul>
+<li>验证集：与测试集类似，也是用于评估模型的性能.</li>
+<li>区别：是 验证集 主要 用于 模型选择 和 调整超参数，因而一般不用于报告最终结果.</li>
+</ul></li>
+</ul></li>
+<li><p>当我们有大于100万条数据时, 测试集验证集各取1万条即可, 足以评估单个分类器.</p></li>
+<li><p><strong>确保验证集 和 测试集的数据来自同一分布.</strong></p></li>
+<li><p>如果不需要无偏估计, 可以不设置测试集；当没设立测试集的时候, 验证集通常被人们称为测试集.</p></li>
+</ul>
+<h1 id="偏差方差bias-variance">偏差、方差(Bias, Variance)</h1>
+<ul>
+<li><p>高偏差(high bias)称为&quot;欠拟合&quot;(underfitting), 训练集误差与验证集误差都高.</p>
+<ul>
+<li>选择一个新的网络，比如含有更多隐藏层或者隐藏单元的网络，或者花费更多时间来训练网络，或者尝试更先进的优化算法【后面深入讲解】</li>
+</ul></li>
+<li><p>高方差(high variance)称为&quot;过拟合&quot;(overfitting), 训练集误差很低，而验证集误差很高.</p>
+<ul>
+<li><p>解决方法是 <strong>正则化</strong></p></li>
+<li><p>准备更多的数据.</p></li>
+</ul></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200608152929057-904903497.png" style="zoom:70%"></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200608154754615-1627054430.png" style="zoom:72%"></p>
+<h1 id="正则化regularization">正则化(Regularization)</h1>
+<blockquote>
+<p>避免过拟合，减少网络误差</p>
+</blockquote>
+<h2 id="逻辑回归中的l1正则化-l2正则化">逻辑回归中的L1正则化, L2正则化</h2>
+<p>对于L1正则化, 为代价函数添加L1范数:</p>
+<p><span class="math display">\[
+J(w, b) = \frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(a^{(i)}, y^{(i)}) + \frac{\lambda}{2m} ||w||_1
+\]</span></p>
+<p>其中： <span class="math display">\[
+||w||_1 = \sum^{n_x}_{j=1} |w_j|
+\]</span></p>
+<ul>
+<li>使用L1正则化, w最终会是稀疏的(w中含很多0), 有利于压缩模型</li>
+<li>但也没有降低太多内存, 所以不能将压缩作为L1正则化的目的。通常我们使用L2正则化.</li>
+</ul>
+<hr>
+<p>对于L2正则化, 为代价函数添加L2范数:</p>
+<p><span class="math display">\[
+J(w, b) = \frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(a^{(i)}, y^{(i)}) + \frac{\lambda}{2m} ||w||_2^2
+\]</span></p>
+<p>其中：</p>
+<p><span class="math display">\[
+||w||^2_2 = \sum^{n_x}_{j=1} w_j^2 = w^Tw
+\]</span> 尽管 <span class="math inline">\(b\)</span> 也是参数, 但我们没有必要添加 <span class="math inline">\(\frac{\lambda}{2m}b^2\)</span> 项， 因为 <span class="math inline">\(w\)</span> 几乎涵盖了所有参数, 而 <span class="math inline">\(b\)</span> 只是众多参数中的一个, 可以忽略不计(当然加上也没问题).</p>
+<h2 id="神经网络中的l2正则化">神经网络中的L2正则化</h2>
+<p>对于神经网络L2正则化，为代价函数添加L2范数： <span class="math display">\[
+J(w, b) = \frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)}) + \frac{\lambda}{2m} \sum_{l=1}^{L}||w||_F^2   \\
+注: W: (n^{[l-1]}, n^{[l]})
+\]</span></p>
+<p>其中，弗罗贝尼乌斯范数(即矩阵L2范数,矩阵中所有元素平方和): <span class="math display">\[
+||w^{[l]}||_F^2 = \sum_{i=1}^{n^{[l-1]}} \sum_{j=1}^{n^{[l]}} (w_{ij}^{[l]})^2
+\]</span> 则在反向传播时, <span class="math display">\[
+\begin{aligned}
+dw^{[l]} &amp; = (\text{from backprop}) + \frac{\lambda}{m}w^{[l]} \\
+w^{[l]} &amp; = w^{[l]} -\alpha dw^{[l]} \\
+\end{aligned}
+\]</span> 正则项说明, 无论 <span class="math inline">\(w^{[l]}\)</span> 是什么, 我们都努力使之更小(趋于0). 则计算得的 <span class="math inline">\(z^{[l]}=w^{[l]}a^{[l−1]}+b^{[l]}\)</span> 此时也更小；</p>
+<p><span class="math inline">\(z^{[l]}\)</span> 更容易(以tanh例) 落在激活函数 <span class="math inline">\(g(z^{[l]})\)</span> 中间那一段接近线性的部分, 以达到简化网络的目的</p>
+<ul>
+<li>注：线性的激活函数使得无论多少层的网络, 效果都和一层一样</li>
+</ul>
+<h2 id="随机失活dropout正则化">随机失活(Dropout)正则化</h2>
+<p>对每一轮的训练, Dropout 遍历网络的每一层, 设置神经网络中每一层每个节点的失活概率</p>
+<p>被随机选中失活的节点临时被消除, 不参与本轮的训练, 于是得到一个更小的网络.</p>
+<hr>
+<p>最常用的为 <strong>反向随机失活(Inverted Dropout)</strong> .</p>
+<blockquote>
+<ul>
+<li><p>该方法在向前传播时, 根据随机失活的概率 (例如0.2)，将每一层(例如 <span class="math inline">\(l\)</span> 层)的 <span class="math inline">\(a^{[l]}\)</span> 矩阵(a=g(z)) 中被选中失活的元素置为0， 则该层的 <span class="math inline">\(a^{[l]}\)</span> 相当于少了 20% 的元素.</p></li>
+<li><p>为了不影响下一层 <span class="math inline">\(z^{[l+1]}\)</span> 的期望值, 我们需要 <span class="math inline">\(a^{[l]}\)</span> /= 0.8 以修正权重.</p></li>
+</ul>
+</blockquote>
+<hr>
+<p>由于训练时的 &quot;<span class="math inline">\(a^{[l]}\)</span> /= 0.8&quot; 修复了权重, 在测试阶段无需使用 Dropout.</p>
+<p>Dropout 不能与梯度检验同时使用，因为 Dropout 在梯度下降上的代价函数J难以计算.</p>
+<h2 id="其他正则化">其他正则化</h2>
+<p>数据扩增:</p>
+<ul>
+<li>比如训练分类猫咪的图片, 将图片左右翻转、旋转一个小角度、稍微变形处理等, 可以人工合成数据.</li>
+</ul>
+<p>Early Stopping:</p>
+<ul>
+<li>运行梯度下降时, 我们可以绘制训练误差, 当验证集误差不降反增的时候, 停止训练.</li>
+<li>缺点：是可能导致代价J值不够小, 却又没解决继续训练可能导致的过拟合问题.</li>
+</ul>
+<h1 id="归一化normalizing">归一化(Normalizing)</h1>
+<p>输入的归一化有两个步骤:</p>
+<pre><code>1. 均值调整为0
+2. 方差归一化</code></pre>
+<p>归一化直观的理解就是使得代价函数更圆, 更容易优化代价函数.</p>
+<h1 id="梯度消失爆炸vanishing-exploding-gradients">梯度消失/爆炸(Vanishing / Exploding Gradients)</h1>
+<p>为了方便理解，假设使用了线性激活函数 g(z)=z , 且</p>
+<p><span class="math display">\[
+W=W^{[L-1]}=...=W^{[2]}=W^{[1]}
+\]</span></p>
+<p>则：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{y} &amp; = W^{[L]}W^{[L-1]}...W^{[2]}W^{[1]}x \\
+&amp; = W^{[L]}W^{L-1}x
+\end{aligned}
+\]</span></p>
+<p>可知若 <span class="math inline">\(W\)</span> 中有元素权重为 1.5 , 则最终得到 <span class="math inline">\({1.5}^{L−1}\)</span> 若层数很深, 计算得 <span class="math inline">\(\hat{y}\)</span> 也很大;</p>
+<p>同理若权重为 0.5 , 进行 L−1 次幂运算后值会很小. 这便是梯度爆炸 与 梯度消失.</p>
+<hr>
+<p><strong>有效的解决方案:</strong></p>
+<ul>
+<li><p>由于 <span class="math inline">\(z=w_1x_1+w_2x_2+...+w_nx_n\)</span> (忽略 <span class="math inline">\(b\)</span>), 为了预防 <span class="math inline">\(z\)</span> 太大或太小, 则 <span class="math inline">\(n\)</span> 越大时, 期望 <span class="math inline">\(w_i\)</span> 越小</p></li>
+<li><p>则在随机(0~1)初始化 <span class="math inline">\(W\)</span> 时, 我们对其乘上一个小于1的倍数, 使之更小.</p>
+<ul>
+<li>对于Tanh， 权重乘上 <span class="math inline">\(\sqrt{\frac{1}{n^{[l-1]}}}\)</span> 或者 <span class="math inline">\(\sqrt{\frac{2}{n^{[l-1]}+n^{[l]}}}\)</span></li>
+<li>对于Relu， 权重乘上 <span class="math inline">\(\sqrt{\frac{2}{n^{[l-1]}}}\)</span></li>
+</ul></li>
+</ul>
+<h1 id="梯度检验">梯度检验</h1>
+<p>在反向传播的时候, 如果怕自己 <span class="math inline">\(d\theta[i] = \frac{\partial J}{\partial \theta_i}\)</span> 等算错, 可以用导数的定义, 计算</p>
+<p><span class="math display">\[
+d\theta_{approx}[i] = \frac{J(\theta_1, \theta_2, ..., \theta_i + \varepsilon, ...) - J(\theta_1, \theta_2, ..., \theta_i - \varepsilon, ...)}{2\varepsilon}
+\]</span></p>
+<p>然后根据两者误差估计自己是否算错. 该方法仅用来调试,</p>
+<p>且不能同 Dropout 同时使用.</p>
 
     </div>
 
@@ -291,7 +429,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://douzujun.github.io/posts/16107.html" title="Hello World">https://douzujun.github.io/posts/16107.html</a>
+    <a href="https://douzujun.github.io/posts/27134.html" title="Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化">https://douzujun.github.io/posts/27134.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
@@ -301,16 +439,23 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
 
         
 
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/posts/22087.html" rel="next" title="Suda-practise">
-      Suda-practise <i class="fa fa-chevron-right"></i>
+    <a href="/posts/45669.html" rel="prev" title="Homework of deepLearning by Andrew Ng">
+      <i class="fa fa-chevron-left"></i> Homework of deepLearning by Andrew Ng
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/56835.html" rel="next" title="Coursera Deep Learning笔记 一步步实现神经网络">
+      Coursera Deep Learning笔记 一步步实现神经网络 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -370,7 +515,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#训练集验证集测试集train-dev-test-sets"><span class="nav-number">1.</span> <span class="nav-text">训练集、验证集、测试集(Train, Dev, Test Sets)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#偏差方差bias-variance"><span class="nav-number">2.</span> <span class="nav-text">偏差、方差(Bias, Variance)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化regularization"><span class="nav-number">3.</span> <span class="nav-text">正则化(Regularization)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑回归中的l1正则化-l2正则化"><span class="nav-number">3.1.</span> <span class="nav-text">逻辑回归中的L1正则化, L2正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络中的l2正则化"><span class="nav-number">3.2.</span> <span class="nav-text">神经网络中的L2正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机失活dropout正则化"><span class="nav-number">3.3.</span> <span class="nav-text">随机失活(Dropout)正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他正则化"><span class="nav-number">3.4.</span> <span class="nav-text">其他正则化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#归一化normalizing"><span class="nav-number">4.</span> <span class="nav-text">归一化(Normalizing)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度消失爆炸vanishing-exploding-gradients"><span class="nav-number">5.</span> <span class="nav-text">梯度消失&#x2F;爆炸(Vanishing &#x2F; Exploding Gradients)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度检验"><span class="nav-number">6.</span> <span class="nav-text">梯度检验</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
