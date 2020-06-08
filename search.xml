@@ -10,8 +10,8 @@
 <ul>
 <li>当数据量小的时候, 70% 训练, 30% 测试；或 60% 训练、20% 验证、20%测试.
 <ul>
-<li><p>训练集( training set)：用来训练模型，即被用来 学习 得到系统的 参数取值.</p></li>
-<li><p>测试集( testing set)：用于最终报告模型的评价结果，因此在训练阶段测试集中的样本应该是不可见的.</p></li>
+<li>训练集( training set)：用来训练模型，即被用来 学习 得到系统的 参数取值.</li>
+<li>测试集( testing set)：用于最终报告模型的评价结果，因此在训练阶段测试集中的样本应该是不可见的.</li>
 <li><strong>对训练集做进一步划分为 训练集、验证集 validation set.</strong>
 <ul>
 <li>验证集：与测试集类似，也是用于评估模型的性能.</li>
@@ -19,23 +19,22 @@
 </ul></li>
 </ul></li>
 <li><p>当我们有大于100万条数据时, 测试集验证集各取1万条即可, 足以评估单个分类器.</p></li>
-<li><p><strong>确保验证集 和 测试集的数据来自同一分布.</strong></p></li>
+<li><strong>确保验证集 和 测试集的数据来自同一分布.</strong></li>
 <li><p>如果不需要无偏估计, 可以不设置测试集；当没设立测试集的时候, 验证集通常被人们称为测试集.</p></li>
 </ul>
 <h1 id="偏差方差bias-variance">偏差、方差(Bias, Variance)</h1>
 <ul>
-<li><p>高偏差(high bias)称为&quot;欠拟合&quot;(underfitting), 训练集误差与验证集误差都高.</p>
+<li>高偏差(high bias)称为&quot;欠拟合&quot;(underfitting), 训练集误差与验证集误差都高.
 <ul>
 <li>选择一个新的网络，比如含有更多隐藏层或者隐藏单元的网络，或者花费更多时间来训练网络，或者尝试更先进的优化算法【后面深入讲解】</li>
 </ul></li>
-<li><p>高方差(high variance)称为&quot;过拟合&quot;(overfitting), 训练集误差很低，而验证集误差很高.</p>
+<li>高方差(high variance)称为&quot;过拟合&quot;(overfitting), 训练集误差很低，而验证集误差很高.
 <ul>
-<li><p>解决方法是 <strong>正则化</strong></p></li>
-<li><p>准备更多的数据.</p></li>
+<li>解决方法是 <strong>正则化</strong></li>
+<li>准备更多的数据.</li>
 </ul></li>
 </ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200608152929057-904903497.png" style="zoom:70%"></p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200608154754615-1627054430.png" style="zoom:72%"></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200608152929057-904903497.png" style="zoom:70%"> <img src="https://img2020.cnblogs.com/blog/817161/202006/817161-20200608154754615-1627054430.png" style="zoom:72%"></p>
 <h1 id="正则化regularization">正则化(Regularization)</h1>
 <blockquote>
 <p>避免过拟合，减少网络误差</p>
@@ -52,36 +51,54 @@ J(w, b) = \frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(a^{(i)}, y^{(i)}) + \frac{\lamb
 <li>使用L1正则化, w最终会是稀疏的(w中含很多0), 有利于压缩模型</li>
 <li>但也没有降低太多内存, 所以不能将压缩作为L1正则化的目的。通常我们使用L2正则化.</li>
 </ul>
-<hr>
-<p>对于L2正则化, 为代价函数添加L2范数:</p>
-<p><span class="math display">\[
+<table style="width:10%;">
+<colgroup>
+<col style="width: 9%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>对于L2正则化, 为代价函数添加L2范数:</td>
+</tr>
+<tr class="even">
+<td><span class="math display">\[
 J(w, b) = \frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(a^{(i)}, y^{(i)}) + \frac{\lambda}{2m} ||w||_2^2
-\]</span></p>
-<p>其中：</p>
-<p><span class="math display">\[
+\]</span></td>
+</tr>
+<tr class="odd">
+<td>其中： <span class="math display">\[
 ||w||^2_2 = \sum^{n_x}_{j=1} w_j^2 = w^Tw
-\]</span> 尽管 <span class="math inline">\(b\)</span> 也是参数, 但我们没有必要添加 <span class="math inline">\(\frac{\lambda}{2m}b^2\)</span> 项， 因为 <span class="math inline">\(w\)</span> 几乎涵盖了所有参数, 而 <span class="math inline">\(b\)</span> 只是众多参数中的一个, 可以忽略不计(当然加上也没问题).</p>
-<h2 id="神经网络中的l2正则化">神经网络中的L2正则化</h2>
-<p>对于神经网络L2正则化，为代价函数添加L2范数： <span class="math display">\[
+\]</span> 尽管 <span class="math inline">\(b\)</span> 也是参数, 但我们没有必要添加 <span class="math inline">\(\frac{\lambda}{2m}b^2\)</span> 项， 因为 <span class="math inline">\(w\)</span> 几乎涵盖了所有参数, 而 <span class="math inline">\(b\)</span> 只是众多参数中的一个, 可以忽略不计(当然加上也没问题).</td>
+</tr>
+<tr class="even">
+<td>## 神经网络中的L2正则化</td>
+</tr>
+<tr class="odd">
+<td>对于神经网络L2正则化，为代价函数添加L2范数： <span class="math display">\[
 J(w, b) = \frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)}) + \frac{\lambda}{2m} \sum_{l=1}^{L}||w||_F^2   \\
 注: W: (n^{[l-1]}, n^{[l]})
-\]</span></p>
-<p>其中，弗罗贝尼乌斯范数(即矩阵L2范数,矩阵中所有元素平方和): <span class="math display">\[
+\]</span></td>
+</tr>
+<tr class="even">
+<td>其中，弗罗贝尼乌斯范数(即矩阵L2范数,矩阵中所有元素平方和): <span class="math display">\[
 ||w^{[l]}||_F^2 = \sum_{i=1}^{n^{[l-1]}} \sum_{j=1}^{n^{[l]}} (w_{ij}^{[l]})^2
 \]</span> 则在反向传播时, <span class="math display">\[
 \begin{aligned}
 dw^{[l]} &amp; = (\text{from backprop}) + \frac{\lambda}{m}w^{[l]} \\
 w^{[l]} &amp; = w^{[l]} -\alpha dw^{[l]} \\
 \end{aligned}
-\]</span> 正则项说明, 无论 <span class="math inline">\(w^{[l]}\)</span> 是什么, 我们都努力使之更小(趋于0). 则计算得的 <span class="math inline">\(z^{[l]}=w^{[l]}a^{[l−1]}+b^{[l]}\)</span> 此时也更小；</p>
-<p><span class="math inline">\(z^{[l]}\)</span> 更容易(以tanh例) 落在激活函数 <span class="math inline">\(g(z^{[l]})\)</span> 中间那一段接近线性的部分, 以达到简化网络的目的</p>
-<ul>
-<li>注：线性的激活函数使得无论多少层的网络, 效果都和一层一样</li>
-</ul>
-<h2 id="随机失活dropout正则化">随机失活(Dropout)正则化</h2>
-<p>对每一轮的训练, Dropout 遍历网络的每一层, 设置神经网络中每一层每个节点的失活概率</p>
-<p>被随机选中失活的节点临时被消除, 不参与本轮的训练, 于是得到一个更小的网络.</p>
-<hr>
+\]</span> 正则项说明, 无论 <span class="math inline">\(w^{[l]}\)</span> 是什么, 我们都努力使之更小(趋于0). 则计算得的 <span class="math inline">\(z^{[l]}=w^{[l]}a^{[l−1]}+b^{[l]}\)</span> 此时也更小；</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(z^{[l]}\)</span> 更容易(以tanh例) 落在激活函数 <span class="math inline">\(g(z^{[l]})\)</span> 中间那一段接近线性的部分, 以达到简化网络的目的 - 注：线性的激活函数使得无论多少层的网络, 效果都和一层一样</td>
+</tr>
+<tr class="even">
+<td>## 随机失活(Dropout)正则化</td>
+</tr>
+<tr class="odd">
+<td>- 对每一轮的训练, Dropout 遍历网络的每一层, 设置神经网络中每一层每个节点的失活概率 - 被随机选中失活的节点临时被消除, 不参与本轮的训练, 于是得到一个更小的网络.</td>
+</tr>
+</tbody>
+</table>
 <p>最常用的为 <strong>反向随机失活(Inverted Dropout)</strong> .</p>
 <blockquote>
 <ul>
@@ -89,55 +106,66 @@ w^{[l]} &amp; = w^{[l]} -\alpha dw^{[l]} \\
 <li><p>为了不影响下一层 <span class="math inline">\(z^{[l+1]}\)</span> 的期望值, 我们需要 <span class="math inline">\(a^{[l]}\)</span> /= 0.8 以修正权重.</p></li>
 </ul>
 </blockquote>
-<hr>
-<p>由于训练时的 &quot;<span class="math inline">\(a^{[l]}\)</span> /= 0.8&quot; 修复了权重, 在测试阶段无需使用 Dropout.</p>
-<p>Dropout 不能与梯度检验同时使用，因为 Dropout 在梯度下降上的代价函数J难以计算.</p>
-<h2 id="其他正则化">其他正则化</h2>
-<p>数据扩增:</p>
-<ul>
-<li>比如训练分类猫咪的图片, 将图片左右翻转、旋转一个小角度、稍微变形处理等, 可以人工合成数据.</li>
-</ul>
-<p>Early Stopping:</p>
-<ul>
-<li>运行梯度下降时, 我们可以绘制训练误差, 当验证集误差不降反增的时候, 停止训练.</li>
-<li>缺点：是可能导致代价J值不够小, 却又没解决继续训练可能导致的过拟合问题.</li>
-</ul>
-<h1 id="归一化normalizing">归一化(Normalizing)</h1>
-<p>输入的归一化有两个步骤:</p>
-<pre><code>1. 均值调整为0
-2. 方差归一化</code></pre>
-<p>归一化直观的理解就是使得代价函数更圆, 更容易优化代价函数.</p>
-<h1 id="梯度消失爆炸vanishing-exploding-gradients">梯度消失/爆炸(Vanishing / Exploding Gradients)</h1>
-<p>为了方便理解，假设使用了线性激活函数 g(z)=z , 且</p>
-<p><span class="math display">\[
+<table style="width:10%;">
+<colgroup>
+<col style="width: 9%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>由于训练时的 &quot;<span class="math inline">\(a^{[l]}\)</span> /= 0.8&quot; 修复了权重, 在测试阶段无需使用 Dropout. Dropout 不能与梯度检验同时使用，因为 Dropout 在梯度下降上的代价函数J难以计算.</td>
+</tr>
+<tr class="even">
+<td>## 其他正则化</td>
+</tr>
+<tr class="odd">
+<td>数据扩增: - 比如训练分类猫咪的图片, 将图片左右翻转、旋转一个小角度、稍微变形处理等, 可以人工合成数据.</td>
+</tr>
+<tr class="even">
+<td>Early Stopping: - 运行梯度下降时, 我们可以绘制训练误差, 当验证集误差不降反增的时候, 停止训练. - 缺点：是可能导致代价J值不够小, 却又没解决继续训练可能导致的过拟合问题.</td>
+</tr>
+<tr class="odd">
+<td># 归一化(Normalizing)</td>
+</tr>
+<tr class="even">
+<td>输入的归一化有两个步骤:</td>
+</tr>
+<tr class="odd">
+<td>1. 均值调整为0 2. 方差归一化</td>
+</tr>
+<tr class="even">
+<td>归一化直观的理解就是使得代价函数更圆, 更容易优化代价函数.</td>
+</tr>
+<tr class="odd">
+<td># 梯度消失/爆炸(Vanishing / Exploding Gradients)</td>
+</tr>
+<tr class="even">
+<td>为了方便理解，假设使用了线性激活函数 g(z)=z , 且</td>
+</tr>
+<tr class="odd">
+<td><span class="math display">\[
 W=W^{[L-1]}=...=W^{[2]}=W^{[1]}
-\]</span></p>
-<p>则：</p>
-<p><span class="math display">\[
+\]</span></td>
+</tr>
+<tr class="even">
+<td>则： <span class="math display">\[
 \begin{aligned}
 \hat{y} &amp; = W^{[L]}W^{[L-1]}...W^{[2]}W^{[1]}x \\
 &amp; = W^{[L]}W^{L-1}x
 \end{aligned}
-\]</span></p>
-<p>可知若 <span class="math inline">\(W\)</span> 中有元素权重为 1.5 , 则最终得到 <span class="math inline">\({1.5}^{L−1}\)</span> 若层数很深, 计算得 <span class="math inline">\(\hat{y}\)</span> 也很大;</p>
-<p>同理若权重为 0.5 , 进行 L−1 次幂运算后值会很小. 这便是梯度爆炸 与 梯度消失.</p>
-<hr>
-<p><strong>有效的解决方案:</strong></p>
-<ul>
-<li><p>由于 <span class="math inline">\(z=w_1x_1+w_2x_2+...+w_nx_n\)</span> (忽略 <span class="math inline">\(b\)</span>), 为了预防 <span class="math inline">\(z\)</span> 太大或太小, 则 <span class="math inline">\(n\)</span> 越大时, 期望 <span class="math inline">\(w_i\)</span> 越小</p></li>
-<li><p>则在随机(0~1)初始化 <span class="math inline">\(W\)</span> 时, 我们对其乘上一个小于1的倍数, 使之更小.</p>
-<ul>
-<li>对于Tanh， 权重乘上 <span class="math inline">\(\sqrt{\frac{1}{n^{[l-1]}}}\)</span> 或者 <span class="math inline">\(\sqrt{\frac{2}{n^{[l-1]}+n^{[l]}}}\)</span></li>
-<li>对于Relu， 权重乘上 <span class="math inline">\(\sqrt{\frac{2}{n^{[l-1]}}}\)</span></li>
-</ul></li>
-</ul>
+\]</span></td>
+</tr>
+<tr class="odd">
+<td>可知若 <span class="math inline">\(W\)</span> 中有元素权重为 1.5 , 则最终得到 <span class="math inline">\({1.5}^{L−1}\)</span> 若层数很深, 计算得 <span class="math inline">\(\hat{y}\)</span> 也很大; 同理若权重为 0.5 , 进行 L−1 次幂运算后值会很小. 这便是梯度爆炸 与 梯度消失.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>有效的解决方案:</strong> - 由于 <span class="math inline">\(z=w_1x_1+w_2x_2+...+w_nx_n\)</span> (忽略 <span class="math inline">\(b\)</span>), 为了预防 <span class="math inline">\(z\)</span> 太大或太小, 则 <span class="math inline">\(n\)</span> 越大时, 期望 <span class="math inline">\(w_i\)</span> 越小 - 则在随机(0~1)初始化 <span class="math inline">\(W\)</span> 时, 我们对其乘上一个小于1的倍数, 使之更小. - 对于Tanh， 权重乘上 <span class="math inline">\(\sqrt{\frac{1}{n^{[l-1]}}}\)</span> 或者 <span class="math inline">\(\sqrt{\frac{2}{n^{[l-1]}+n^{[l]}}}\)</span> - 对于Relu， 权重乘上 <span class="math inline">\(\sqrt{\frac{2}{n^{[l-1]}}}\)</span></p>
 <h1 id="梯度检验">梯度检验</h1>
 <p>在反向传播的时候, 如果怕自己 <span class="math inline">\(d\theta[i] = \frac{\partial J}{\partial \theta_i}\)</span> 等算错, 可以用导数的定义, 计算</p>
 <p><span class="math display">\[
 d\theta_{approx}[i] = \frac{J(\theta_1, \theta_2, ..., \theta_i + \varepsilon, ...) - J(\theta_1, \theta_2, ..., \theta_i - \varepsilon, ...)}{2\varepsilon}
 \]</span></p>
-<p>然后根据两者误差估计自己是否算错. 该方法仅用来调试,</p>
-<p>且不能同 Dropout 同时使用.</p>
+<p>然后根据两者误差估计自己是否算错. 该方法仅用来调试, 且不能同 Dropout 同时使用.</p>
 ]]></content>
       <categories>
         <category>深度学习</category>
@@ -266,8 +294,11 @@ cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)})
     <content><![CDATA[<p>一步步实现神经网络，并实现一个识别猫的应用</p>
 <a id="more"></a>
 <ul>
-<li><p>公式推导 https://www.cnblogs.com/douzujun/p/13046923.html https://xienaoban.github.io/posts/12524.html</p></li>
-<li>代码拆分实现
+<li>公式推导</li>
+</ul>
+<p>https://www.cnblogs.com/douzujun/p/13046923.html https://xienaoban.github.io/posts/12524.html</p>
+<ul>
+<li><a href="https://www.cnblogs.com/douzujun/p/10325980.html" target="_blank" rel="noopener">代码拆分实现</a>
 <ol type="1">
 <li>Initialize parameters / Define hyperparameters</li>
 <li>Loop for num_iterations:
@@ -279,12 +310,7 @@ cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)})
 </ol></li>
 <li>Use trained parameters to predict labels</li>
 </ol></li>
-</ul>
-<blockquote>
-<p>https://www.cnblogs.com/douzujun/p/10325980.html</p>
-</blockquote>
-<ul>
-<li>实例：用手写神经网络实现识别猫 https://www.cnblogs.com/douzujun/p/10344361.html</li>
+<li><a href="https://www.cnblogs.com/douzujun/p/10344361.html" target="_blank" rel="noopener">实例：用手写神经网络实现识别猫</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -295,26 +321,6 @@ cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)})
         <tag>深度学习</tag>
         <tag>python</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/posts/16107.html</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>Homework of deepLearning by Andrew Ng</title>
@@ -661,6 +667,26 @@ cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)})
         <tag>python</tag>
         <tag>TensorFlow</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/posts/16107.html</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>机器学习</title>
