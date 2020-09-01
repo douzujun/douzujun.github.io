@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Coursera Deep Learning笔记 逻辑回归典型的训练过程</title>
+    <url>/posts/20321.html</url>
+    <content><![CDATA[<p>Deep Learning 用逻辑回归训练图片的典型步骤.</p>
+<a id="more"></a>
+<p>笔记摘自：<a href="https://xienaoban.github.io/posts/59595.html" target="_blank" rel="noopener" class="uri">https://xienaoban.github.io/posts/59595.html</a></p>
+<h1 id="处理数据">处理数据</h1>
+<h2 id="向量化vectorization">向量化(Vectorization)</h2>
+<p>将每张图片的高和宽和RGB展为向量，最终X的shape为 <code>(height*width*3, m)</code> .</p>
+<h2 id="特征归一化normalization">特征归一化(Normalization)</h2>
+<blockquote>
+<p>对于一般数据，使用标准化(Standardization)：<span class="math inline">\(X_{scale} = \frac{(X(axis=0) - X.mean(axis=0))}{X.std(axis=0)}\)</span></p>
+</blockquote>
+<ul>
+<li><code>z_i = (x_i - mean) / delta</code> , <code>mean</code> 与 <code>delta</code> 代表X的均值和标准差. 最终特征处于[-1, 1]区间.</li>
+</ul>
+<blockquote>
+<p>对于图片, 可直接使用Min-Max Scaling</p>
+</blockquote>
+<ul>
+<li>即将每个特征除以255(每个像素分为R, G, B, 范围在0~255)使得值处于[0, 1].</li>
+</ul>
+<h1 id="初始化参数">初始化参数</h1>
+<p>一般将 <code>w</code> 和 <code>b</code> 随机选择.</p>
+<h1 id="梯度下降gradient-descent">梯度下降(Gradient descent)</h1>
+<p>根据 <code>w</code> , <code>b</code> 和训练集，来训练数据.</p>
+<ul>
+<li>需要设定 <u>迭代次数</u> 与 <u>学习率</u> .</li>
+</ul>
+<p>以下为大循环(迭代次数)中内容：</p>
+<h2 id="计算代价函数">计算代价函数</h2>
+<p>对于<span class="math inline">\(x^{(i)} \in X\)</span>， 有 <span class="math display">\[
+z^{(i)} = w^Tx^{(i)} + b
+\]</span></p>
+<p><span class="math display">\[
+a^{(i)} = \hat{y}^{(i)} = sigmod(z^{(i)}) = \sigma(z^{(i)}) = \frac{1}{1 + e^{-z^{(i)}}}
+\]</span></p>
+<p><span class="math display">\[
+loss: {L}(a^{(i)}, y^{(i)}) = {L}(\hat{y}^{(i)}, y^{(i)}) = - y^{(i)}  \log(a^{(i)}) - (1-y^{(i)} )  \log(1-a^{(i)})
+\]</span></p>
+<p><span class="math display">\[
+A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)}) 
+  = \sigma(w^TX+b) 
+  = \frac{1}{1+e^{-(w^TX+b)}}
+\]</span></p>
+<p><span class="math display">\[
+cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)}) 
+  = -\frac{1}{m} \sum^{m}_{i=1} (y^{(i)} log(a^{(i)}) + (1-y^{(i)}) log(1-a^{(i)}))
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 激活函数</span></span><br><span class="line">A = sigmoid(w.T.dot(X) + b)</span><br><span class="line"><span class="comment"># 代价函数</span></span><br><span class="line">cost = -np.sum(Y * np.log(A) + (<span class="number">1</span>-Y) * np.log(<span class="number">1</span> - A)) / m</span><br></pre></td></tr></table></figure>
+<h2 id="计算反向传播的梯度">计算反向传播的梯度</h2>
+<blockquote>
+<p>即：对 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)\)</span> 计算导数，即对<span class="math inline">\({L}(a, y)\)</span> 计算导数，以下求导，均省略上标。</p>
+<p>求：<span class="math inline">\(\dfrac{\partial J}{\partial w}\)</span> 和 <span class="math inline">\(\dfrac{\partial J}{\partial b} ​\)</span> (dw 和 db)</p>
+</blockquote>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial a}
+= \dfrac{\partial L(a, y)}{\partial a}
+= -\frac{y}{a} + \frac{1-y}{1-a}
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{da}{dz}
+= (\frac{1}{1 + e^{-z}})&#39;
+= \dfrac{e^{-z}}{(1+e^{-z})^2}
+= \dfrac{1}{1+e^{-z}} - \dfrac{1}{(1+e^{-z})^2}
+= a-a^2
+= a · (1-a)
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial z}
+= \dfrac{\partial L}{\partial a} \dfrac{da}{dz}
+= (-\dfrac{y}{a} + \dfrac{1-y}{1-a}) · a · (1-a)
+= a - y
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial w}
+= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial w}
+= (a-y) · x
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial b}
+= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial b}
+= a-y
+\]</span></p>
+<p>根据 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)​\)</span> 最终可得： <span class="math display">\[
+\dfrac{\partial J}{\partial w}
+= \dfrac{\partial J}{\partial a} \dfrac{\partial a}{\partial w}
+= \dfrac{1}{m} X(A-Y)^T
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial J}{\partial b} = \dfrac{1}{m} \sum^{m}_{i=1} (a^{(i)} - y^{(i)})
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dw = X.dot((A - Y).T) / m</span><br><span class="line">db = np.sum(A - Y) / m</span><br></pre></td></tr></table></figure>
+<h2 id="更新-w-b">更新 <code>w</code> , <code>b</code></h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">w = w - learning_rate * dw</span><br><span class="line">b = b - learning_rate * db</span><br></pre></td></tr></table></figure>
+<h1 id="预测测试集">预测测试集</h1>
+<ul>
+<li><p>使用训练出来的 <code>w</code> , <code>b</code> , 对测试集使用 <code>y_pred = sigmoid(wx+b)</code> , 计算得预测的概率</p></li>
+<li><p>对其取整, 例如大于0.7则判定为 '是', 否则为'否'.</p></li>
+</ul>
+<h1 id="实例实现一个图像识别算法">实例：实现一个图像识别算法</h1>
+<p><a href="https://www.cnblogs.com/douzujun/p/10267165.html" target="_blank" rel="noopener" class="uri">https://www.cnblogs.com/douzujun/p/10267165.html</a></p>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>Coursera Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化</title>
     <url>/posts/27134.html</url>
     <content><![CDATA[<p>Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化</p>
@@ -134,118 +246,6 @@ W=W^{[L-1]}=...=W^{[2]}=W^{[1]}
 d\theta_{approx}[i] = \frac{J(\theta_1, \theta_2, ..., \theta_i + \varepsilon, ...) - J(\theta_1, \theta_2, ..., \theta_i - \varepsilon, ...)}{2\varepsilon}
 \]</span></p>
 <p>然后根据两者误差估计自己是否算错. 该方法仅用来调试, 且不能同 Dropout 同时使用.</p>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-        <category>Coursera Deep Learning</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Coursera Deep Learning笔记 逻辑回归典型的训练过程</title>
-    <url>/posts/20321.html</url>
-    <content><![CDATA[<p>Deep Learning 用逻辑回归训练图片的典型步骤.</p>
-<a id="more"></a>
-<p>笔记摘自：<a href="https://xienaoban.github.io/posts/59595.html" target="_blank" rel="noopener" class="uri">https://xienaoban.github.io/posts/59595.html</a></p>
-<h1 id="处理数据">处理数据</h1>
-<h2 id="向量化vectorization">向量化(Vectorization)</h2>
-<p>将每张图片的高和宽和RGB展为向量，最终X的shape为 <code>(height*width*3, m)</code> .</p>
-<h2 id="特征归一化normalization">特征归一化(Normalization)</h2>
-<blockquote>
-<p>对于一般数据，使用标准化(Standardization)：<span class="math inline">\(X_{scale} = \frac{(X(axis=0) - X.mean(axis=0))}{X.std(axis=0)}\)</span></p>
-</blockquote>
-<ul>
-<li><code>z_i = (x_i - mean) / delta</code> , <code>mean</code> 与 <code>delta</code> 代表X的均值和标准差. 最终特征处于[-1, 1]区间.</li>
-</ul>
-<blockquote>
-<p>对于图片, 可直接使用Min-Max Scaling</p>
-</blockquote>
-<ul>
-<li>即将每个特征除以255(每个像素分为R, G, B, 范围在0~255)使得值处于[0, 1].</li>
-</ul>
-<h1 id="初始化参数">初始化参数</h1>
-<p>一般将 <code>w</code> 和 <code>b</code> 随机选择.</p>
-<h1 id="梯度下降gradient-descent">梯度下降(Gradient descent)</h1>
-<p>根据 <code>w</code> , <code>b</code> 和训练集，来训练数据.</p>
-<ul>
-<li>需要设定 <u>迭代次数</u> 与 <u>学习率</u> .</li>
-</ul>
-<p>以下为大循环(迭代次数)中内容：</p>
-<h2 id="计算代价函数">计算代价函数</h2>
-<p>对于<span class="math inline">\(x^{(i)} \in X\)</span>， 有 <span class="math display">\[
-z^{(i)} = w^Tx^{(i)} + b
-\]</span></p>
-<p><span class="math display">\[
-a^{(i)} = \hat{y}^{(i)} = sigmod(z^{(i)}) = \sigma(z^{(i)}) = \frac{1}{1 + e^{-z^{(i)}}}
-\]</span></p>
-<p><span class="math display">\[
-loss: {L}(a^{(i)}, y^{(i)}) = {L}(\hat{y}^{(i)}, y^{(i)}) = - y^{(i)}  \log(a^{(i)}) - (1-y^{(i)} )  \log(1-a^{(i)})
-\]</span></p>
-<p><span class="math display">\[
-A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)}) 
-  = \sigma(w^TX+b) 
-  = \frac{1}{1+e^{-(w^TX+b)}}
-\]</span></p>
-<p><span class="math display">\[
-cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)}) 
-  = -\frac{1}{m} \sum^{m}_{i=1} (y^{(i)} log(a^{(i)}) + (1-y^{(i)}) log(1-a^{(i)}))
-\]</span></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 激活函数</span></span><br><span class="line">A = sigmoid(w.T.dot(X) + b)</span><br><span class="line"><span class="comment"># 代价函数</span></span><br><span class="line">cost = -np.sum(Y * np.log(A) + (<span class="number">1</span>-Y) * np.log(<span class="number">1</span> - A)) / m</span><br></pre></td></tr></table></figure>
-<h2 id="计算反向传播的梯度">计算反向传播的梯度</h2>
-<blockquote>
-<p>即：对 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)\)</span> 计算导数，即对<span class="math inline">\({L}(a, y)\)</span> 计算导数，以下求导，均省略上标。</p>
-<p>求：<span class="math inline">\(\dfrac{\partial J}{\partial w}\)</span> 和 <span class="math inline">\(\dfrac{\partial J}{\partial b} ​\)</span> (dw 和 db)</p>
-</blockquote>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial a}
-= \dfrac{\partial L(a, y)}{\partial a}
-= -\frac{y}{a} + \frac{1-y}{1-a}
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{da}{dz}
-= (\frac{1}{1 + e^{-z}})&#39;
-= \dfrac{e^{-z}}{(1+e^{-z})^2}
-= \dfrac{1}{1+e^{-z}} - \dfrac{1}{(1+e^{-z})^2}
-= a-a^2
-= a · (1-a)
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial z}
-= \dfrac{\partial L}{\partial a} \dfrac{da}{dz}
-= (-\dfrac{y}{a} + \dfrac{1-y}{1-a}) · a · (1-a)
-= a - y
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial w}
-= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial w}
-= (a-y) · x
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial b}
-= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial b}
-= a-y
-\]</span></p>
-<p>根据 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)​\)</span> 最终可得： <span class="math display">\[
-\dfrac{\partial J}{\partial w}
-= \dfrac{\partial J}{\partial a} \dfrac{\partial a}{\partial w}
-= \dfrac{1}{m} X(A-Y)^T
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial J}{\partial b} = \dfrac{1}{m} \sum^{m}_{i=1} (a^{(i)} - y^{(i)})
-\]</span></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dw = X.dot((A - Y).T) / m</span><br><span class="line">db = np.sum(A - Y) / m</span><br></pre></td></tr></table></figure>
-<h2 id="更新-w-b">更新 <code>w</code> , <code>b</code></h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">w = w - learning_rate * dw</span><br><span class="line">b = b - learning_rate * db</span><br></pre></td></tr></table></figure>
-<h1 id="预测测试集">预测测试集</h1>
-<ul>
-<li><p>使用训练出来的 <code>w</code> , <code>b</code> , 对测试集使用 <code>y_pred = sigmoid(wx+b)</code> , 计算得预测的概率</p></li>
-<li><p>对其取整, 例如大于0.7则判定为 '是', 否则为'否'.</p></li>
-</ul>
-<h1 id="实例实现一个图像识别算法">实例：实现一个图像识别算法</h1>
-<p><a href="https://www.cnblogs.com/douzujun/p/10267165.html" target="_blank" rel="noopener" class="uri">https://www.cnblogs.com/douzujun/p/10267165.html</a></p>
 ]]></content>
       <categories>
         <category>深度学习</category>
@@ -853,37 +853,37 @@ cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)})
       </tags>
   </entry>
   <entry>
-    <title>Coursera Deep Learning笔记 一步步实现神经网络</title>
-    <url>/posts/56835.html</url>
-    <content><![CDATA[<p>一步步实现神经网络，并实现一个识别猫的应用</p>
+    <title>深度学习代码索引</title>
+    <url>/posts/8245.html</url>
+    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
 <a id="more"></a>
-<ul>
-<li>公式推导</li>
-</ul>
-<p>https://www.cnblogs.com/douzujun/p/13046923.html https://xienaoban.github.io/posts/12524.html</p>
-<ul>
-<li><a href="https://www.cnblogs.com/douzujun/p/10325980.html" target="_blank" rel="noopener">代码拆分实现</a>
-<ol type="1">
-<li>Initialize parameters / Define hyperparameters</li>
-<li>Loop for num_iterations:
-<ol type="a">
-<li>Forward propagation</li>
-<li>Compute cost function</li>
-<li>Backward propagation</li>
-<li>Update parameters (using parameters, and grads from backprop)</li>
-</ol></li>
-<li>Use trained parameters to predict labels</li>
-</ol></li>
-<li><a href="https://www.cnblogs.com/douzujun/p/10344361.html" target="_blank" rel="noopener">实例：用手写神经网络实现识别猫</a></li>
-</ul>
+<h1 id="机器学习">机器学习</h1>
+<h2 id="分类性能度量">分类性能度量</h2>
+<h3 id="精准率和召回率">精准率和召回率</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 混淆矩阵</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line">confusion_matrix(y_test, y_log_predict)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 精确率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_score</span><br><span class="line">precision_score(y_test, y_log_predict)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> recall_score</span><br><span class="line">recall_score(y_test, y_log_predict)</span><br></pre></td></tr></table></figure>
+<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="特征处理">特征处理</h2>
+<h3 id="量纲缩放标准化缩放法和区间缩放法">量纲缩放(标准化缩放法和区间缩放法)</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">演示内容：量纲的特征缩放</span></span><br><span class="line"><span class="string">（两种方法：标准化缩放法和区间缩放法。每种方法举了两个例子：简单二维矩阵和iris数据集）</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment">#方法1：标准化缩放法 例1：对简单示例二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing   </span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np  </span><br><span class="line"><span class="comment">#采用numpy的array表示，因为要用到其mean等函数，而list没有这些函数</span></span><br><span class="line">X = np.array([[<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">100</span>, <span class="number">1</span>], </span><br><span class="line">        [<span class="number">1</span>, <span class="number">1</span>]])  </span><br><span class="line"><span class="comment"># calculate mean  </span></span><br><span class="line">X_mean = X.mean(axis=<span class="number">0</span>)  </span><br><span class="line"><span class="comment"># calculate variance   </span></span><br><span class="line">X_std = X.std(axis=<span class="number">0</span>)  </span><br><span class="line"><span class="comment">#print (X_std)</span></span><br><span class="line"><span class="comment"># standardize X  </span></span><br><span class="line">X1 = (X-X_mean)/X_std</span><br><span class="line"><span class="keyword">print</span> (X1)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">""</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># we can also use function preprocessing.scale to standardize X  </span></span><br><span class="line">X_scale = preprocessing.scale(X)  </span><br><span class="line"><span class="keyword">print</span> (X_scale)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法1： 标准化缩放法 例2：对iris数据二维矩阵的列数据进行。这次采用一个集成的方法StandardScaler</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X_scale = preprocessing.scale(iris.data)  </span><br><span class="line"><span class="keyword">print</span> (X_scale)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法2： 区间缩放法 例3：对简单示例二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"> </span><br><span class="line">data = [[<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">100</span>, <span class="number">1</span>], </span><br><span class="line">        [<span class="number">1</span>, <span class="number">1</span>]]</span><br><span class="line"> </span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">print(scaler.fit(data))</span><br><span class="line">print(scaler.transform(data))</span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法2： 区间缩放法 例4：对iris数据二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"> </span><br><span class="line">data = iris.data</span><br><span class="line"> </span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">print(scaler.fit(data))</span><br><span class="line">print(scaler.transform(data))</span><br></pre></td></tr></table></figure>
+<h3 id="特征向量化">特征向量化</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#特征向量化</span></span><br><span class="line"><span class="comment">#法一：布尔权重</span></span><br><span class="line"><span class="comment">#输入单词列表和句子列表</span></span><br><span class="line"><span class="comment">#返回特征向量</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">boolCountVectorizer</span><span class="params">(wordlst,senlst)</span>:</span></span><br><span class="line">    wordCount = len(wordlst)                 <span class="comment"># 总单词数，向量共wordCount列</span></span><br><span class="line">    senCount = len(senlst)                  <span class="comment"># 总句子数，向量共senCount行</span></span><br><span class="line">    mat = np.zeros((senCount,wordCount), dtype=int)</span><br><span class="line">    word_index=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(wordlst)):            <span class="comment">#提前记录每个单词在wordlst中的序号</span></span><br><span class="line">        word_index[str(wordlst[i])] = i</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(senCount):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(senlst[i])):</span><br><span class="line">            <span class="keyword">if</span> senlst[i][j] <span class="keyword">in</span> wordlst:</span><br><span class="line">                idx = word_index[str(senlst[i][j])]</span><br><span class="line">                mat[i][idx] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> mat</span><br><span class="line"></span><br><span class="line"><span class="comment"># mat=boolCountVectorizer(wordlst, senlst)      </span></span><br><span class="line"><span class="comment"># print('mat.shape=',mat.shape)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#法二：tf-idf权重</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tfidfCountVectorizer</span><span class="params">(wordlst, senlst)</span>:</span></span><br><span class="line">    </span><br><span class="line">    wordCount=len(wordlst)</span><br><span class="line">    senCount=len(senlst)</span><br><span class="line">    weight = np.zeros((senCount,wordCount), dtype=float)</span><br><span class="line">    </span><br><span class="line">    n3 = senCount            <span class="comment">#n3表示句子总数</span></span><br><span class="line">    <span class="keyword">for</span> j,word <span class="keyword">in</span> enumerate(wordlst):</span><br><span class="line">        n4 = <span class="number">0</span>               <span class="comment">#n4表示包含该word的句子数</span></span><br><span class="line">        <span class="keyword">for</span> eve <span class="keyword">in</span> senlst:</span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> eve:</span><br><span class="line">                n4 += <span class="number">1</span></span><br><span class="line">        idf = math.log(((n3+<span class="number">1</span>)/(n4+<span class="number">1</span>))+<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(senCount):</span><br><span class="line">            n1 = senlst[i].count(word)</span><br><span class="line">            n2 = len(senlst[i])</span><br><span class="line">            tf = n1/n2            <span class="comment">#tf表示word在句子senlst[i]中的出现频率</span></span><br><span class="line"></span><br><span class="line">            weight[i][j]=tf*idf   <span class="comment">#weight[i][j]表示第j个词在i个句子中的tf-idf权重</span></span><br><span class="line">    <span class="keyword">return</span> weight</span><br><span class="line"> </span><br><span class="line"><span class="comment"># mat=tfidfCountVectorizer(wordlst,senlst)</span></span><br><span class="line"><span class="comment"># print(mat)</span></span><br><span class="line"><span class="comment"># print(mat.shape)</span></span><br><span class="line"><span class="comment"># print(np.sum(mat!=0.0))</span></span><br></pre></td></tr></table></figure>
+<h3 id="特征选择">特征选择</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#特征选择</span></span><br><span class="line"><span class="comment">#法一：方差选择法  </span></span><br><span class="line"><span class="comment">#输入特征向量mat，参数p，单词列表wordlst</span></span><br><span class="line"><span class="comment">#返回特征选择后的向量mat，特征单词wordlst</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">featureSupport1</span><span class="params">(mat, p, wordlst)</span>:</span>  </span><br><span class="line">    wordlst = np.array(wordlst)</span><br><span class="line">    </span><br><span class="line">    var = p * (<span class="number">1</span> - p)</span><br><span class="line">    lst = np.var(mat, axis=<span class="number">0</span>)               <span class="comment"># 计算每列的方差</span></span><br><span class="line">    mu = lst &gt;= var                    <span class="comment"># mu得到一个bool矩阵</span></span><br><span class="line">    <span class="keyword">return</span> mat[:,mu],wordlst[mu]</span><br><span class="line"></span><br><span class="line"><span class="comment">#法二：皮尔森相关系数法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">featureSupport2</span><span class="params">(mat,threshold,wordlst,y_train)</span>:</span></span><br><span class="line">    wordlst=np.array(wordlst)</span><br><span class="line">    y_train=np.array(y_train)</span><br><span class="line">    </span><br><span class="line">    lst=[pearsonr(mat[:,i],y_train.T)[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(mat.shape[<span class="number">1</span>])]</span><br><span class="line">    mu=np.abs(np.array(lst))&gt;=threshold</span><br><span class="line">    <span class="keyword">return</span> mat[:,mu],wordlst[mu]</span><br></pre></td></tr></table></figure>
+<h1 id="深度学习">深度学习</h1>
+<h1 id="自然语言处理">自然语言处理</h1>
+<h2 id="分词">分词</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#过滤掉标点</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_tokens</span><span class="params">(text)</span>:</span></span><br><span class="line">    lowers = text.lower()</span><br><span class="line">    remove_punctuation_map = dict((ord(char), <span class="literal">None</span>) <span class="keyword">for</span> char <span class="keyword">in</span> string.punctuation)</span><br><span class="line">    no_punctuation = lowers.translate(remove_punctuation_map)</span><br><span class="line">    tokens = nltk.word_tokenize(no_punctuation)</span><br><span class="line">    <span class="keyword">return</span> tokens</span><br><span class="line"></span><br><span class="line"><span class="comment">#单词词形还原</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stem_tokens</span><span class="params">(tokens, stemmer)</span>:</span></span><br><span class="line">    stemmed = []</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> tokens:</span><br><span class="line">        stemmed.append(stemmer.stem(item))</span><br><span class="line">    <span class="keyword">return</span> stemmed</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>深度学习</category>
-        <category>Coursera Deep Learning</category>
       </categories>
       <tags>
         <tag>深度学习</tag>
         <tag>python</tag>
+        <tag>机器学习</tag>
+        <tag>自然语言处理</tag>
+        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -1542,37 +1542,37 @@ x^{&#39;} =
       </tags>
   </entry>
   <entry>
-    <title>深度学习代码索引</title>
-    <url>/posts/8245.html</url>
-    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
+    <title>Coursera Deep Learning笔记 一步步实现神经网络</title>
+    <url>/posts/56835.html</url>
+    <content><![CDATA[<p>一步步实现神经网络，并实现一个识别猫的应用</p>
 <a id="more"></a>
-<h1 id="机器学习">机器学习</h1>
-<h2 id="分类性能度量">分类性能度量</h2>
-<h3 id="精准率和召回率">精准率和召回率</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 混淆矩阵</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line">confusion_matrix(y_test, y_log_predict)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 精确率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_score</span><br><span class="line">precision_score(y_test, y_log_predict)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> recall_score</span><br><span class="line">recall_score(y_test, y_log_predict)</span><br></pre></td></tr></table></figure>
-<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h2 id="特征处理">特征处理</h2>
-<h3 id="量纲缩放标准化缩放法和区间缩放法">量纲缩放(标准化缩放法和区间缩放法)</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">演示内容：量纲的特征缩放</span></span><br><span class="line"><span class="string">（两种方法：标准化缩放法和区间缩放法。每种方法举了两个例子：简单二维矩阵和iris数据集）</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment">#方法1：标准化缩放法 例1：对简单示例二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing   </span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np  </span><br><span class="line"><span class="comment">#采用numpy的array表示，因为要用到其mean等函数，而list没有这些函数</span></span><br><span class="line">X = np.array([[<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">100</span>, <span class="number">1</span>], </span><br><span class="line">        [<span class="number">1</span>, <span class="number">1</span>]])  </span><br><span class="line"><span class="comment"># calculate mean  </span></span><br><span class="line">X_mean = X.mean(axis=<span class="number">0</span>)  </span><br><span class="line"><span class="comment"># calculate variance   </span></span><br><span class="line">X_std = X.std(axis=<span class="number">0</span>)  </span><br><span class="line"><span class="comment">#print (X_std)</span></span><br><span class="line"><span class="comment"># standardize X  </span></span><br><span class="line">X1 = (X-X_mean)/X_std</span><br><span class="line"><span class="keyword">print</span> (X1)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">""</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># we can also use function preprocessing.scale to standardize X  </span></span><br><span class="line">X_scale = preprocessing.scale(X)  </span><br><span class="line"><span class="keyword">print</span> (X_scale)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法1： 标准化缩放法 例2：对iris数据二维矩阵的列数据进行。这次采用一个集成的方法StandardScaler</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X_scale = preprocessing.scale(iris.data)  </span><br><span class="line"><span class="keyword">print</span> (X_scale)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法2： 区间缩放法 例3：对简单示例二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"> </span><br><span class="line">data = [[<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">100</span>, <span class="number">1</span>], </span><br><span class="line">        [<span class="number">1</span>, <span class="number">1</span>]]</span><br><span class="line"> </span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">print(scaler.fit(data))</span><br><span class="line">print(scaler.transform(data))</span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法2： 区间缩放法 例4：对iris数据二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"> </span><br><span class="line">data = iris.data</span><br><span class="line"> </span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">print(scaler.fit(data))</span><br><span class="line">print(scaler.transform(data))</span><br></pre></td></tr></table></figure>
-<h3 id="特征向量化">特征向量化</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#特征向量化</span></span><br><span class="line"><span class="comment">#法一：布尔权重</span></span><br><span class="line"><span class="comment">#输入单词列表和句子列表</span></span><br><span class="line"><span class="comment">#返回特征向量</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">boolCountVectorizer</span><span class="params">(wordlst,senlst)</span>:</span></span><br><span class="line">    wordCount = len(wordlst)                 <span class="comment"># 总单词数，向量共wordCount列</span></span><br><span class="line">    senCount = len(senlst)                  <span class="comment"># 总句子数，向量共senCount行</span></span><br><span class="line">    mat = np.zeros((senCount,wordCount), dtype=int)</span><br><span class="line">    word_index=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(wordlst)):            <span class="comment">#提前记录每个单词在wordlst中的序号</span></span><br><span class="line">        word_index[str(wordlst[i])] = i</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(senCount):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(senlst[i])):</span><br><span class="line">            <span class="keyword">if</span> senlst[i][j] <span class="keyword">in</span> wordlst:</span><br><span class="line">                idx = word_index[str(senlst[i][j])]</span><br><span class="line">                mat[i][idx] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> mat</span><br><span class="line"></span><br><span class="line"><span class="comment"># mat=boolCountVectorizer(wordlst, senlst)      </span></span><br><span class="line"><span class="comment"># print('mat.shape=',mat.shape)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#法二：tf-idf权重</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tfidfCountVectorizer</span><span class="params">(wordlst, senlst)</span>:</span></span><br><span class="line">    </span><br><span class="line">    wordCount=len(wordlst)</span><br><span class="line">    senCount=len(senlst)</span><br><span class="line">    weight = np.zeros((senCount,wordCount), dtype=float)</span><br><span class="line">    </span><br><span class="line">    n3 = senCount            <span class="comment">#n3表示句子总数</span></span><br><span class="line">    <span class="keyword">for</span> j,word <span class="keyword">in</span> enumerate(wordlst):</span><br><span class="line">        n4 = <span class="number">0</span>               <span class="comment">#n4表示包含该word的句子数</span></span><br><span class="line">        <span class="keyword">for</span> eve <span class="keyword">in</span> senlst:</span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> eve:</span><br><span class="line">                n4 += <span class="number">1</span></span><br><span class="line">        idf = math.log(((n3+<span class="number">1</span>)/(n4+<span class="number">1</span>))+<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(senCount):</span><br><span class="line">            n1 = senlst[i].count(word)</span><br><span class="line">            n2 = len(senlst[i])</span><br><span class="line">            tf = n1/n2            <span class="comment">#tf表示word在句子senlst[i]中的出现频率</span></span><br><span class="line"></span><br><span class="line">            weight[i][j]=tf*idf   <span class="comment">#weight[i][j]表示第j个词在i个句子中的tf-idf权重</span></span><br><span class="line">    <span class="keyword">return</span> weight</span><br><span class="line"> </span><br><span class="line"><span class="comment"># mat=tfidfCountVectorizer(wordlst,senlst)</span></span><br><span class="line"><span class="comment"># print(mat)</span></span><br><span class="line"><span class="comment"># print(mat.shape)</span></span><br><span class="line"><span class="comment"># print(np.sum(mat!=0.0))</span></span><br></pre></td></tr></table></figure>
-<h3 id="特征选择">特征选择</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#特征选择</span></span><br><span class="line"><span class="comment">#法一：方差选择法  </span></span><br><span class="line"><span class="comment">#输入特征向量mat，参数p，单词列表wordlst</span></span><br><span class="line"><span class="comment">#返回特征选择后的向量mat，特征单词wordlst</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">featureSupport1</span><span class="params">(mat, p, wordlst)</span>:</span>  </span><br><span class="line">    wordlst = np.array(wordlst)</span><br><span class="line">    </span><br><span class="line">    var = p * (<span class="number">1</span> - p)</span><br><span class="line">    lst = np.var(mat, axis=<span class="number">0</span>)               <span class="comment"># 计算每列的方差</span></span><br><span class="line">    mu = lst &gt;= var                    <span class="comment"># mu得到一个bool矩阵</span></span><br><span class="line">    <span class="keyword">return</span> mat[:,mu],wordlst[mu]</span><br><span class="line"></span><br><span class="line"><span class="comment">#法二：皮尔森相关系数法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">featureSupport2</span><span class="params">(mat,threshold,wordlst,y_train)</span>:</span></span><br><span class="line">    wordlst=np.array(wordlst)</span><br><span class="line">    y_train=np.array(y_train)</span><br><span class="line">    </span><br><span class="line">    lst=[pearsonr(mat[:,i],y_train.T)[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(mat.shape[<span class="number">1</span>])]</span><br><span class="line">    mu=np.abs(np.array(lst))&gt;=threshold</span><br><span class="line">    <span class="keyword">return</span> mat[:,mu],wordlst[mu]</span><br></pre></td></tr></table></figure>
-<h1 id="深度学习">深度学习</h1>
-<h1 id="自然语言处理">自然语言处理</h1>
-<h2 id="分词">分词</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#过滤掉标点</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_tokens</span><span class="params">(text)</span>:</span></span><br><span class="line">    lowers = text.lower()</span><br><span class="line">    remove_punctuation_map = dict((ord(char), <span class="literal">None</span>) <span class="keyword">for</span> char <span class="keyword">in</span> string.punctuation)</span><br><span class="line">    no_punctuation = lowers.translate(remove_punctuation_map)</span><br><span class="line">    tokens = nltk.word_tokenize(no_punctuation)</span><br><span class="line">    <span class="keyword">return</span> tokens</span><br><span class="line"></span><br><span class="line"><span class="comment">#单词词形还原</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stem_tokens</span><span class="params">(tokens, stemmer)</span>:</span></span><br><span class="line">    stemmed = []</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> tokens:</span><br><span class="line">        stemmed.append(stemmer.stem(item))</span><br><span class="line">    <span class="keyword">return</span> stemmed</span><br></pre></td></tr></table></figure>
+<ul>
+<li>公式推导</li>
+</ul>
+<p>https://www.cnblogs.com/douzujun/p/13046923.html https://xienaoban.github.io/posts/12524.html</p>
+<ul>
+<li><a href="https://www.cnblogs.com/douzujun/p/10325980.html" target="_blank" rel="noopener">代码拆分实现</a>
+<ol type="1">
+<li>Initialize parameters / Define hyperparameters</li>
+<li>Loop for num_iterations:
+<ol type="a">
+<li>Forward propagation</li>
+<li>Compute cost function</li>
+<li>Backward propagation</li>
+<li>Update parameters (using parameters, and grads from backprop)</li>
+</ol></li>
+<li>Use trained parameters to predict labels</li>
+</ol></li>
+<li><a href="https://www.cnblogs.com/douzujun/p/10344361.html" target="_blank" rel="noopener">实例：用手写神经网络实现识别猫</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>深度学习</category>
+        <category>Coursera Deep Learning</category>
       </categories>
       <tags>
         <tag>深度学习</tag>
         <tag>python</tag>
-        <tag>机器学习</tag>
-        <tag>自然语言处理</tag>
-        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
