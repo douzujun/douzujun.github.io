@@ -145,40 +145,6 @@ d\theta_{approx}[i] = \frac{J(\theta_1, \theta_2, ..., \theta_i + \varepsilon, .
       </tags>
   </entry>
   <entry>
-    <title>Coursera Deep Learning笔记 一步步实现神经网络</title>
-    <url>/posts/56835.html</url>
-    <content><![CDATA[<p>一步步实现神经网络，并实现一个识别猫的应用</p>
-<a id="more"></a>
-<ul>
-<li>公式推导</li>
-</ul>
-<p>https://www.cnblogs.com/douzujun/p/13046923.html https://xienaoban.github.io/posts/12524.html</p>
-<ul>
-<li><a href="https://www.cnblogs.com/douzujun/p/10325980.html" target="_blank" rel="noopener">代码拆分实现</a>
-<ol type="1">
-<li>Initialize parameters / Define hyperparameters</li>
-<li>Loop for num_iterations:
-<ol type="a">
-<li>Forward propagation</li>
-<li>Compute cost function</li>
-<li>Backward propagation</li>
-<li>Update parameters (using parameters, and grads from backprop)</li>
-</ol></li>
-<li>Use trained parameters to predict labels</li>
-</ol></li>
-<li><a href="https://www.cnblogs.com/douzujun/p/10344361.html" target="_blank" rel="noopener">实例：用手写神经网络实现识别猫</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-        <category>Coursera Deep Learning</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Coursera Deep Learning笔记 逻辑回归典型的训练过程</title>
     <url>/posts/20321.html</url>
     <content><![CDATA[<p>Deep Learning 用逻辑回归训练图片的典型步骤.</p>
@@ -280,6 +246,40 @@ cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)})
 </ul>
 <h1 id="实例实现一个图像识别算法">实例：实现一个图像识别算法</h1>
 <p><a href="https://www.cnblogs.com/douzujun/p/10267165.html" target="_blank" rel="noopener" class="uri">https://www.cnblogs.com/douzujun/p/10267165.html</a></p>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>Coursera Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Coursera Deep Learning笔记 一步步实现神经网络</title>
+    <url>/posts/56835.html</url>
+    <content><![CDATA[<p>一步步实现神经网络，并实现一个识别猫的应用</p>
+<a id="more"></a>
+<ul>
+<li>公式推导</li>
+</ul>
+<p>https://www.cnblogs.com/douzujun/p/13046923.html https://xienaoban.github.io/posts/12524.html</p>
+<ul>
+<li><a href="https://www.cnblogs.com/douzujun/p/10325980.html" target="_blank" rel="noopener">代码拆分实现</a>
+<ol type="1">
+<li>Initialize parameters / Define hyperparameters</li>
+<li>Loop for num_iterations:
+<ol type="a">
+<li>Forward propagation</li>
+<li>Compute cost function</li>
+<li>Backward propagation</li>
+<li>Update parameters (using parameters, and grads from backprop)</li>
+</ol></li>
+<li>Use trained parameters to predict labels</li>
+</ol></li>
+<li><a href="https://www.cnblogs.com/douzujun/p/10344361.html" target="_blank" rel="noopener">实例：用手写神经网络实现识别猫</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>深度学习</category>
