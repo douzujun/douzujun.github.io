@@ -222,7 +222,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-09-06 16:38:18 / 修改时间：16:42:36" itemprop="dateCreated datePublished" datetime="2020-09-06T16:38:18+08:00">2020-09-06</time>
+              <time title="创建时间：2020-09-06 16:38:18 / 修改时间：16:47:58" itemprop="dateCreated datePublished" datetime="2020-09-06T16:38:18+08:00">2020-09-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,14 +240,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.6k</span>
+              <span>6.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -259,262 +259,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="https://github.com/douzujun/NLP-Chatbot" target="_blank" rel="noopener">全部代码</a></p>
-<p><a href="https://share.weiyun.com/5Yb4vI4" target="_blank" rel="noopener">已训练模型</a></p>
-<h1 id="聊天机器人综合介绍">聊天机器人综合介绍</h1>
-<h2 id="知识点">知识点</h2>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905124836635-1199875296.png" style="width:700px; height:350px"></p>
-<h2 id="聊天机器人分类">聊天机器人分类</h2>
-<h3 id="从领域划分">从领域划分</h3>
-<ul>
-<li><strong>固定领域(技术支持)</strong></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905134715066-1087044690.png"></p>
-<ul>
-<li><strong>固定领域(天气查询)</strong></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905134758662-1224375932.png"></p>
-<ul>
-<li><strong>开放领域(娱乐助手)</strong></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905135001425-1336563454.png"></p>
-<table style="width:10%;">
-<colgroup>
-<col style="width: 9%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>### 从模式划分</td>
-</tr>
-<tr class="even">
-<td>- <strong>检索模式</strong></td>
-</tr>
-<tr class="odd">
-<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905135327297-925747080.png"></td>
-</tr>
-<tr class="even">
-<td><strong>应用：</strong></td>
-</tr>
-<tr class="odd">
-<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905135948301-1643619355.png"></td>
-</tr>
-<tr class="even">
-<td><strong>简单原理：</strong></td>
-</tr>
-<tr class="odd">
-<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140000014-249564534.png"></td>
-</tr>
-<tr class="even">
-<td>- <strong>生成模式</strong></td>
-</tr>
-<tr class="odd">
-<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140138852-1972472290.png"></td>
-</tr>
-<tr class="even">
-<td><strong>应用：</strong></td>
-</tr>
-<tr class="odd">
-<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140246497-2085902764.png"></td>
-</tr>
-<tr class="even">
-<td><strong>简单原理：</strong></td>
-</tr>
-<tr class="odd">
-<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140356477-645311375.png"></td>
-</tr>
-</tbody>
-</table>
-<h3 id="从功能划分">从功能划分</h3>
-<ul>
-<li><p><strong>问答型聊天机器人</strong></p></li>
-<li><p><strong>任务型聊天机器人</strong></p></li>
-<li><p><strong>闲聊型聊天机器人</strong></p></li>
-</ul>
-<h2 id="如何构建最简单的聊天机器人">如何构建最简单的聊天机器人</h2>
-<h3 id="基于规则的简单聊天机器人">基于规则的简单聊天机器人</h3>
-<ul>
-<li><strong>应用</strong></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140930843-1041521373.png"></p>
-<ul>
-<li><strong>原理</strong></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905141702540-1961806889.png"></p>
-<ul>
-<li><strong>实现方法及环境</strong></li>
-</ul>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3<span class="number">.7</span></span><br><span class="line">notebook</span><br><span class="line">nltk</span><br><span class="line">pytorch <span class="number">1.4</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>rule-base机器人</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk <span class="keyword">import</span> word_tokenize</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打招呼</span></span><br><span class="line">greetings = [<span class="string">'hola'</span>, <span class="string">'hello'</span>, <span class="string">'hi'</span>, <span class="string">'Hi'</span>, <span class="string">'hey!'</span>,<span class="string">'hey'</span>]</span><br><span class="line"><span class="comment"># 回复打招呼</span></span><br><span class="line">random_greeting = random.choice(greetings)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对于“假期”的话题关键词</span></span><br><span class="line">question = [<span class="string">'break'</span>,<span class="string">'holiday'</span>,<span class="string">'vacation'</span>,<span class="string">'weekend'</span>]</span><br><span class="line"><span class="comment"># 回复假期话题</span></span><br><span class="line">responses = [<span class="string">'It was nice! I went to Paris'</span>,<span class="string">"Sadly, I just stayed at home"</span>]</span><br><span class="line"><span class="comment"># 随机选一个回</span></span><br><span class="line">random_response = random.choice(responses)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 机器人跑起来</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    userInput = input(<span class="string">'&gt;&gt;&gt;'</span>)</span><br><span class="line">    <span class="comment"># 清理一下输入，看看都有哪些词</span></span><br><span class="line">    cleaned_input = word_tokenize(userInput)</span><br><span class="line">    <span class="comment"># 这里，比较一下关键词，确定他属于哪个问题</span></span><br><span class="line">    <span class="comment"># isdisjoint: 是否无交集</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> set(cleaned_input).isdisjoint(greetings):</span><br><span class="line">        print(random_greeting)</span><br><span class="line">    <span class="keyword">elif</span> <span class="keyword">not</span> set(cleaned_input).isdisjoint(question):</span><br><span class="line">        print(random_response)</span><br><span class="line">    <span class="keyword">elif</span> userInput == <span class="string">'bye'</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'I did not understand what you said'</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905155945270-1562696658.png"></p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905160344715-1977510721.png"></p>
-<p>我们可以用各种数据库，建立起一套体系，然后通过搜索的方式，来查找答案。</p>
-<p>比如，最简单的就是Python自己的graph数据结构来搭建一个“地图”。</p>
-<p>依据这个地图，我们可以清楚的找寻从一个地方到另一个地方的路径，</p>
-<p>然后作为回答，反馈给用户。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立一个基于目标行业的database</span></span><br><span class="line"><span class="comment"># 比如 这里我们用python自带的graph</span></span><br><span class="line">graph = &#123;<span class="string">'上海'</span>: [<span class="string">'苏州'</span>, <span class="string">'常州'</span>],</span><br><span class="line">         <span class="string">'苏州'</span>: [<span class="string">'常州'</span>, <span class="string">'镇江'</span>],</span><br><span class="line">         <span class="string">'常州'</span>: [<span class="string">'镇江'</span>],</span><br><span class="line">         <span class="string">'镇江'</span>: [<span class="string">'常州'</span>],</span><br><span class="line">         <span class="string">'盐城'</span>: [<span class="string">'南通'</span>],</span><br><span class="line">         <span class="string">'南通'</span>: [<span class="string">'常州'</span>]&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 明确如何找到从A到B的路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_path</span><span class="params">(start, end, path=[])</span>:</span></span><br><span class="line">    path = path + [start]</span><br><span class="line">    <span class="keyword">if</span> start == end:</span><br><span class="line">        <span class="keyword">return</span> path</span><br><span class="line">    <span class="keyword">if</span> start <span class="keyword">not</span> <span class="keyword">in</span> graph:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> graph[start]:</span><br><span class="line">        <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> path:</span><br><span class="line">            newpath = find_path(node, end, path)</span><br><span class="line">            <span class="keyword">if</span> newpath: </span><br><span class="line">                <span class="keyword">return</span> newpath</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">print(find_path(<span class="string">'上海'</span>, <span class="string">"镇江"</span>))</span><br><span class="line"><span class="comment"># ['上海', '苏州', '常州', '镇江']</span></span><br></pre></td></tr></table></figure>
-<h1 id="nlp基础">NLP基础</h1>
-<ul>
-<li><font size="4px"><strong>NLP领域</strong></font></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905170054672-1508205467.png" style="width:400px;height=500px"><br></p>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905170234936-535970560.png" style="width:350px;height=450px"></p>
-<ul>
-<li><font size="4px"><strong>NLP研究难点</strong></font></li>
-</ul>
-<blockquote>
-<ul>
-<li><p>单词边界界定</p></li>
-<li><p>词义的消歧</p></li>
-<li><p>不规范的输入</p></li>
-<li><p>句法的模糊性</p></li>
-<li><p>语言行为与计划</p></li>
-</ul>
-</blockquote>
-<ul>
-<li><font color="red" size="4px"><strong>词处理</strong></font></li>
-</ul>
-<blockquote>
-<ul>
-<li><p>分词</p></li>
-<li><font color="red">词性标注(Part-of-speech tagging)</font>
-<ul>
-<li>把分好的词一个一个分类(如, 动词, 形容词，名词)</li>
-</ul></li>
-<li>实体识别
-<ul>
-<li>名词识别</li>
-</ul></li>
-<li>词义消歧
-<ul>
-<li>联系上下文</li>
-</ul></li>
-</ul>
-</blockquote>
-<ul>
-<li><font color="red" size="4px"><strong>语句处理</strong></font></li>
-</ul>
-<blockquote>
-<ul>
-<li><font color="red">句法分析(Syntactic Analysis)</font>
-<ul>
-<li>“我去北京天安门”: 主谓分开</li>
-</ul></li>
-<li><font color="red">语义分析(Senmantic Analysis)</font>
-<ul>
-<li>句子的理解</li>
-</ul></li>
-<li><p><font color="red">机器翻译</font></p></li>
-<li><p><strong>语音合成</strong></p></li>
-</ul>
-</blockquote>
-<ul>
-<li><font size="4px"><strong>篇章处理</strong></font></li>
-</ul>
-<blockquote>
-<ul>
-<li>自动文摘
-<ul>
-<li>机器读文章，写出摘要</li>
-</ul></li>
-</ul>
-</blockquote>
-<ul>
-<li><font size="4px"><strong>统计语言模型</strong></font></li>
-</ul>
-<blockquote>
-<ul>
-<li><p><a href="https://www.cnblogs.com/douzujun/p/13021227.html#_label1_1" target="_blank" rel="noopener">N-gram统计模型</a></p></li>
-<li><p>马尔科夫模型</p></li>
-<li><p>隐马尔科夫模型</p></li>
-</ul>
-</blockquote>
-<h2 id="分词">分词</h2>
-<ul>
-<li><p>把句子变成词</p></li>
-<li><p><strong>分词难点</strong></p></li>
-</ul>
-<blockquote>
-<ul>
-<li><strong>分词标准</strong></li>
-</ul>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905181351884-416050950.png"></p>
-<ul>
-<li><strong>切分歧义(分词造成的语义分歧)</strong>
-<ul>
-<li>分词细粒度不同： <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905181645629-1821701734.png"></li>
-<li>真正存在歧义的句子： <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905181737439-1973410367.png"></li>
-<li>交集型的歧义 <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905182226165-2078007290.png"></li>
-</ul></li>
-<li><strong>新词</strong>
-<ul>
-<li>给力，花呗，贸易战等等</li>
-</ul></li>
-</ul>
-</blockquote>
-<ul>
-<li><strong>分词的算法</strong></li>
-</ul>
-<blockquote>
-<ul>
-<li>基于词典的分词算法
-<ul>
-<li>正向最大匹配法</li>
-<li>逆向最大匹配法</li>
-<li>双向匹配分词<br>
-</li>
-<li>全切分路径选择</li>
-</ul></li>
-<li>基于统计的分词算法
-<ul>
-<li>HMM，隐马尔科夫模型</li>
-<li>CRF，条件随机场</li>
-<li>深度学习</li>
-</ul></li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut(<span class="string">'我来到北京清华大学'</span>, cut_all=<span class="literal">True</span>)</span><br><span class="line">print(<span class="string">'Full Mode: '</span> + <span class="string">'/ '</span>.join(seg_list))      <span class="comment"># 全模式</span></span><br><span class="line"><span class="comment"># Full Mode: 我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学</span></span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut(<span class="string">'我来到北京清华大学'</span>, cut_all=<span class="literal">False</span>)</span><br><span class="line">print(<span class="string">'Default Mode: '</span> + <span class="string">'/ '</span>.join(seg_list))   <span class="comment"># 精确模式</span></span><br><span class="line"><span class="comment"># Default Mode: 我/ 来到/ 北京/ 清华大学</span></span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut(<span class="string">'他来到了网易杭研大厦'</span>)    <span class="comment"># 默认是精确模式</span></span><br><span class="line">print(<span class="string">'/ '</span>.join(seg_list))</span><br><span class="line"><span class="comment"># 他/ 来到/ 了/ 网易/ 杭研/ 大厦</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索引擎模式</span></span><br><span class="line">seg_list = jieba.cut_for_search(<span class="string">'小明硕士毕业于中国科学院计算所，后在日本京都大学深造'</span>)</span><br><span class="line">print(<span class="string">'/ '</span>.join(seg_list))</span><br><span class="line"><span class="comment"># 小明/ 硕士/ 毕业/ 于/ 中国/ 科学/ 学院/ 科学院/ 中国科学院/ 计算/ 计算所/ ，/ 后/ 在/ 日本/ 京都/ 大学/ 日本京都大学/ 深造</span></span><br></pre></td></tr></table></figure>
-<h2 id="tf-idf">TF-IDF</h2>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905231815959-778744901.png"> <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905234801950-355607453.png"> <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905234935857-777057823.png"></p>
-<ul>
-<li><p><strong>TF-IDF的作用</strong></p>
-<ul>
-<li>提取文本向量的特征</li>
-</ul></li>
-<li><p><strong>TF-IDF算法代码示例</strong></p></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np   <span class="comment"># 数值计算、矩阵运算、向量运算</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd  <span class="comment"># 数值分析、科学计算</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 定义数据和预处理</span></span><br><span class="line"><span class="comment"># 定义文档</span></span><br><span class="line">docA = <span class="string">'The cat sat on my bed'</span></span><br><span class="line">docB = <span class="string">'The dog sat on my knees'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切割文档</span></span><br><span class="line">bowA = docA.split(<span class="string">' '</span>)</span><br><span class="line">bowB = docB.split(<span class="string">' '</span>)</span><br><span class="line"><span class="comment"># bowA # ['The', 'cat', 'sat', 'on', 'my', 'bed']</span></span><br><span class="line"><span class="comment"># bowB # ['The', 'dog', 'sat', 'on', 'my', 'knees']</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建词库</span></span><br><span class="line">wordSet = set(bowA).union(set(bowB))</span><br><span class="line"><span class="comment"># wordSet # &#123;'The', 'bed', 'cat', 'dog', 'knees', 'my', 'on', 'sat'&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 进行词数统计</span></span><br><span class="line"><span class="comment"># 用字典来保存词出现的次数</span></span><br><span class="line">wordDictA = dict.fromkeys(wordSet, <span class="number">0</span>)</span><br><span class="line">wordDictB = dict.fromkeys(wordSet, <span class="number">0</span>)</span><br><span class="line">wordDictA</span><br><span class="line">wordDictB</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历文档，统计词数</span></span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> bowA:</span><br><span class="line">    wordDictA[word] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> bowB:</span><br><span class="line">    wordDictB[word] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">pd.DataFrame([wordDictA, wordDictB])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 计算词频 TF</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeTF</span><span class="params">(wordDict, bow)</span>:</span></span><br><span class="line">    <span class="comment"># 用一个字典对象保存 TF，把所有对应于 bow 文档里的 TF都计算出来</span></span><br><span class="line">    tfDict = &#123;&#125;</span><br><span class="line">    nbowCount = len(bow)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> word, count <span class="keyword">in</span> wordDict.items():</span><br><span class="line">        tfDict[word] = count / nbowCount</span><br><span class="line">    <span class="keyword">return</span> tfDict</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">tfA = computeTF(wordDictA, bowA)</span><br><span class="line">tfB = computeTF(wordDictB, bowB)</span><br><span class="line">print(tfA)</span><br><span class="line">print(tfB)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 计算逆文档频率 IDF</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeIDF</span><span class="params">(wordDictList)</span>:</span></span><br><span class="line">    <span class="comment"># 用一个字典对象保存 IDF，每个词作为 key，初始值为 0</span></span><br><span class="line">    idfDict = dict.fromkeys(wordDictList[<span class="number">0</span>], <span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 总文档数量</span></span><br><span class="line">    N = len(wordDictList)</span><br><span class="line">    <span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> wordDict <span class="keyword">in</span> wordDictList:</span><br><span class="line">        <span class="comment"># 遍历字典中的每个词汇，统计 Ni</span></span><br><span class="line">        <span class="keyword">for</span> word, count <span class="keyword">in</span> wordDict.items():</span><br><span class="line">            <span class="keyword">if</span> count &gt; <span class="number">0</span> :</span><br><span class="line">                <span class="comment"># 先把 Ni 增加 1，存入到 idfDict 中</span></span><br><span class="line">                idfDict[word] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 已经得到所有词汇 i 对应的 Ni，现在根据公式把它替换成 idf 值</span></span><br><span class="line">    <span class="keyword">for</span> word, Ni <span class="keyword">in</span> idfDict.items():</span><br><span class="line">        idfDict[word] = math.log10((N + <span class="number">1</span>)/(Ni + <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> idfDict</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">idfs = computeIDF([wordDictA, wordDictB])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 计算 TF-IDF</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeTFIDF</span><span class="params">(tf, idfs)</span>:</span></span><br><span class="line">    tfidf = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> word, tfval <span class="keyword">in</span> tf.items():</span><br><span class="line">        tfidf[word] = tfval * idfs[word]</span><br><span class="line">    <span class="keyword">return</span> tfidf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">tfidfA = computeTFIDF(tfA, idfs)</span><br><span class="line">tfidfB = computeTFIDF(tfB, idfs)</span><br><span class="line"></span><br><span class="line">pd.DataFrame([tfidfA, tfidfB])</span><br><span class="line"></span><br><span class="line"><span class="comment">#       knees	   cat	        sat	The	on	dog	        bed	        my</span></span><br><span class="line"><span class="comment"># 0	0.000000   0.029349	0.0	0.0	0.0	0.000000	0.029349	0.0</span></span><br><span class="line"><span class="comment"># 1	0.029349   0.000000	0.0	0.0	0.0	0.029349	0.000000	0.0</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>scikit-learn计算TF-IDF</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfTransformer</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</span><br><span class="line"></span><br><span class="line">corpus = [<span class="string">'I come to China to travel'</span>,</span><br><span class="line">          <span class="string">'This is a car polupar in China'</span>,</span><br><span class="line">          <span class="string">'I love tea and Apple'</span>,</span><br><span class="line">          <span class="string">'The work is to write some papers in science'</span>]</span><br><span class="line"></span><br><span class="line">vectorizer = CountVectorizer()</span><br><span class="line"></span><br><span class="line">transformer = TfidfTransformer()</span><br><span class="line">tfidf = transformer.fit_transform(vectorizer.fit_transform(corpus))</span><br><span class="line">print(tfidf)</span><br></pre></td></tr></table></figure>
-<details>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">0</span>, <span class="number">16</span>) <span class="number">0.4424621378947393</span></span><br><span class="line">(<span class="number">0</span>, <span class="number">15</span>) <span class="number">0.697684463383976</span></span><br><span class="line">(<span class="number">0</span>, <span class="number">4</span>)  <span class="number">0.4424621378947393</span></span><br><span class="line">(<span class="number">0</span>, <span class="number">3</span>)  <span class="number">0.348842231691988</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">14</span>) <span class="number">0.45338639737285463</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">9</span>)  <span class="number">0.45338639737285463</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">6</span>)  <span class="number">0.3574550433419527</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">5</span>)  <span class="number">0.3574550433419527</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">3</span>)  <span class="number">0.3574550433419527</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>)  <span class="number">0.45338639737285463</span></span><br><span class="line">(<span class="number">2</span>, <span class="number">12</span>) <span class="number">0.5</span></span><br><span class="line">(<span class="number">2</span>, <span class="number">7</span>)  <span class="number">0.5</span></span><br><span class="line">(<span class="number">2</span>, <span class="number">1</span>)  <span class="number">0.5</span></span><br><span class="line">(<span class="number">2</span>, <span class="number">0</span>)  <span class="number">0.5</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">18</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">17</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">15</span>) <span class="number">0.2811316284405006</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">13</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">11</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">10</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">8</span>)  <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">6</span>)  <span class="number">0.2811316284405006</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">5</span>)  <span class="number">0.2811316284405006</span></span><br></pre></td></tr></table></figure>
-</details>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"> </span><br><span class="line">tfidf = TfidfVectorizer()</span><br><span class="line"> </span><br><span class="line">corpus=[<span class="string">"我 来到 北京 清华大学"</span>,          <span class="comment"># 第一类文本切词后的结果，词之间以空格隔开</span></span><br><span class="line">        <span class="string">"他 来到 了 网易 杭研 大厦"</span>,      <span class="comment"># 第二类文本的切词结果</span></span><br><span class="line">        <span class="string">"小明 硕士 毕业 与 中国 科学院"</span>,  <span class="comment"># 第三类文本的切词结果</span></span><br><span class="line">        <span class="string">"我 爱 北京 天安门"</span>]              <span class="comment"># 第四类文本的切词结果</span></span><br><span class="line"> </span><br><span class="line">result = tfidf.fit_transform(corpus).toarray()</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计关键词</span></span><br><span class="line">word = tfidf.get_feature_names()</span><br><span class="line">print(word)</span><br><span class="line"><span class="comment"># 统计关键词出现次数，几句话对比几次</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> tfidf.vocabulary_.items():</span><br><span class="line">    print(k,v)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 对比第i类文本的词语tf-idf权重</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(result)):</span><br><span class="line">    print(<span class="string">'----------------------'</span>,i,<span class="string">'--------------------'</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(word)):</span><br><span class="line">        print(word[j],result[i][j])</span><br></pre></td></tr></table></figure>
-<details>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">0.</span>         <span class="number">0.52640543</span> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.52640543</span></span><br><span class="line">  <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.66767854</span> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>        ]</span><br><span class="line"> [<span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.52547275</span> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.41428875</span></span><br><span class="line">  <span class="number">0.52547275</span> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.52547275</span>]</span><br><span class="line"> [<span class="number">0.4472136</span>  <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.4472136</span>  <span class="number">0.</span></span><br><span class="line">  <span class="number">0.</span>         <span class="number">0.4472136</span>  <span class="number">0.</span>         <span class="number">0.4472136</span>  <span class="number">0.4472136</span>  <span class="number">0.</span>        ]</span><br><span class="line"> [<span class="number">0.</span>         <span class="number">0.6191303</span>  <span class="number">0.</span>         <span class="number">0.78528828</span> <span class="number">0.</span>         <span class="number">0.</span></span><br><span class="line">  <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>        ]]</span><br><span class="line">[<span class="string">'中国'</span>, <span class="string">'北京'</span>, <span class="string">'大厦'</span>, <span class="string">'天安门'</span>, <span class="string">'小明'</span>, <span class="string">'来到'</span>, <span class="string">'杭研'</span>, <span class="string">'毕业'</span>, <span class="string">'清华大学'</span>, <span class="string">'硕士'</span>, <span class="string">'科学院'</span>, <span class="string">'网易'</span>]</span><br><span class="line">来到 <span class="number">5</span></span><br><span class="line">北京 <span class="number">1</span></span><br><span class="line">清华大学 <span class="number">8</span></span><br><span class="line">网易 <span class="number">11</span></span><br><span class="line">杭研 <span class="number">6</span></span><br><span class="line">大厦 <span class="number">2</span></span><br><span class="line">小明 <span class="number">4</span></span><br><span class="line">硕士 <span class="number">9</span></span><br><span class="line">毕业 <span class="number">7</span></span><br><span class="line">中国 <span class="number">0</span></span><br><span class="line">科学院 <span class="number">10</span></span><br><span class="line">天安门 <span class="number">3</span></span><br><span class="line">---------------------- <span class="number">0</span> --------------------</span><br><span class="line">中国 <span class="number">0.0</span></span><br><span class="line">北京 <span class="number">0.5264054336099155</span></span><br><span class="line">大厦 <span class="number">0.0</span></span><br><span class="line">天安门 <span class="number">0.0</span></span><br><span class="line">小明 <span class="number">0.0</span></span><br><span class="line">来到 <span class="number">0.5264054336099155</span></span><br><span class="line">杭研 <span class="number">0.0</span></span><br><span class="line">毕业 <span class="number">0.0</span></span><br><span class="line">清华大学 <span class="number">0.6676785446095399</span></span><br><span class="line">硕士 <span class="number">0.0</span></span><br><span class="line">科学院 <span class="number">0.0</span></span><br><span class="line">网易 <span class="number">0.0</span></span><br><span class="line">---------------------- <span class="number">1</span> --------------------</span><br><span class="line">中国 <span class="number">0.0</span></span><br><span class="line">北京 <span class="number">0.0</span></span><br><span class="line">大厦 <span class="number">0.5254727492640658</span></span><br><span class="line">天安门 <span class="number">0.0</span></span><br><span class="line">小明 <span class="number">0.0</span></span><br><span class="line">来到 <span class="number">0.41428875116588965</span></span><br><span class="line">杭研 <span class="number">0.5254727492640658</span></span><br><span class="line">毕业 <span class="number">0.0</span></span><br><span class="line">清华大学 <span class="number">0.0</span></span><br><span class="line">硕士 <span class="number">0.0</span></span><br><span class="line">科学院 <span class="number">0.0</span></span><br><span class="line">网易 <span class="number">0.5254727492640658</span></span><br><span class="line">---------------------- <span class="number">2</span> --------------------</span><br><span class="line">中国 <span class="number">0.4472135954999579</span></span><br><span class="line">北京 <span class="number">0.0</span></span><br><span class="line">大厦 <span class="number">0.0</span></span><br><span class="line">天安门 <span class="number">0.0</span></span><br><span class="line">小明 <span class="number">0.4472135954999579</span></span><br><span class="line">来到 <span class="number">0.0</span></span><br><span class="line">杭研 <span class="number">0.0</span></span><br><span class="line">毕业 <span class="number">0.4472135954999579</span></span><br><span class="line">清华大学 <span class="number">0.0</span></span><br><span class="line">硕士 <span class="number">0.4472135954999579</span></span><br><span class="line">科学院 <span class="number">0.4472135954999579</span></span><br><span class="line">网易 <span class="number">0.0</span></span><br><span class="line">---------------------- <span class="number">3</span> --------------------</span><br><span class="line">中国 <span class="number">0.0</span></span><br><span class="line">北京 <span class="number">0.6191302964899972</span></span><br><span class="line">大厦 <span class="number">0.0</span></span><br><span class="line">天安门 <span class="number">0.7852882757103967</span></span><br><span class="line">小明 <span class="number">0.0</span></span><br><span class="line">来到 <span class="number">0.0</span></span><br><span class="line">杭研 <span class="number">0.0</span></span><br><span class="line">毕业 <span class="number">0.0</span></span><br><span class="line">清华大学 <span class="number">0.0</span></span><br><span class="line">硕士 <span class="number">0.0</span></span><br><span class="line">科学院 <span class="number">0.0</span></span><br><span class="line">网易 <span class="number">0.0</span></span><br></pre></td></tr></table></figure>
-</details>
-<ul>
-<li><strong>NLTK计算TF-IDF</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.text <span class="keyword">import</span> TextCollection</span><br><span class="line"></span><br><span class="line">corpus = [<span class="string">'I come to China to travel'</span>,</span><br><span class="line">          <span class="string">'This is a car polupar in China'</span>,</span><br><span class="line">          <span class="string">'I love tea and Apple'</span>,</span><br><span class="line">          <span class="string">'The work is to write some papers in science'</span>]</span><br><span class="line"></span><br><span class="line">corpus = TextCollection(corpus)</span><br><span class="line"><span class="comment"># 直接就能算出TF-IDF</span></span><br><span class="line">print(corpus.tf_idf(<span class="string">'China'</span>, <span class="string">'I come to China to travel'</span>))</span><br><span class="line"><span class="comment"># 0.027725887222397813</span></span><br></pre></td></tr></table></figure>
-<h2 id="nltk">NLTK</h2>
-<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905175021602-2048815200.png" style="width:330px;height:200px"></p>
-<ul>
-<li><strong>示例</strong></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line">sentence = <span class="string">"""At eight o'clock on Thursday morning</span></span><br><span class="line"><span class="string">Arthur didn't feel very good.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">tokens = nltk.word_tokenize(sentence)</span><br><span class="line">print(tokens)</span><br><span class="line"><span class="comment"># ['At', 'eight', "o'clock", 'on', 'Thursday', 'morning', 'Arthur', 'did', "n't", 'feel', 'very', 'good', '.']</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 词性标注</span></span><br><span class="line">targed = nltk.pos_tag(tokens)</span><br><span class="line">print(targed[<span class="number">0</span>:<span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># [('At', 'IN'), ('eight', 'CD'), ("o'clock", 'NN'), ('on', 'IN'), ('Thursday', 'NNP'), ('morning', 'NN')]</span></span><br></pre></td></tr></table></figure>
-<h2 id="预料及词性标注">预料及词性标注</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 中文词性标注, jieba</span></span><br><span class="line"><span class="keyword">import</span> jieba.posseg <span class="keyword">as</span> pseg</span><br><span class="line"></span><br><span class="line">words = pseg.cut(<span class="string">'我爱北京天安门'</span>)</span><br><span class="line"><span class="keyword">for</span> word, flag <span class="keyword">in</span> words:</span><br><span class="line">    print(word, flag)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 我 r</span></span><br><span class="line"><span class="comment"># 爱 v</span></span><br><span class="line"><span class="comment"># 北京 ns</span></span><br><span class="line"><span class="comment"># 天安门 ns</span></span><br></pre></td></tr></table></figure>
-<h1 id="检索类聊天机器人客服">检索类聊天机器人(客服)</h1>
-<h1 id="生成类聊天机器人娱乐">生成类聊天机器人(娱乐)</h1>
-<h1 id="pytorch基础">pytorch基础</h1>
-<h1 id="机器人发展方向与seqgan实战">机器人发展方向与seqGAN实战</h1>
-<h1 id="基于pytorch聊天机器人代码实战">基于pytorch聊天机器人代码实战</h1>
-
+          <p>基于python 从零实现NLP聊天机器人</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/53738.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1512,12 +1265,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">83k</span>
+    <span title="站点总字数">82k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:16</span>
+    <span title="站点阅读时长">1:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
