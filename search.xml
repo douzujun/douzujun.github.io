@@ -1,6 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Coursera Deep Learning笔记 逻辑回归典型的训练过程</title>
+    <url>/posts/20321.html</url>
+    <content><![CDATA[<p>Deep Learning 用逻辑回归训练图片的典型步骤.</p>
+<a id="more"></a>
+<p>笔记摘自：<a href="https://xienaoban.github.io/posts/59595.html" target="_blank" rel="noopener" class="uri">https://xienaoban.github.io/posts/59595.html</a></p>
+<h1 id="处理数据">处理数据</h1>
+<h2 id="向量化vectorization">向量化(Vectorization)</h2>
+<p>将每张图片的高和宽和RGB展为向量，最终X的shape为 <code>(height*width*3, m)</code> .</p>
+<h2 id="特征归一化normalization">特征归一化(Normalization)</h2>
+<blockquote>
+<p>对于一般数据，使用标准化(Standardization)：<span class="math inline">\(X_{scale} = \frac{(X(axis=0) - X.mean(axis=0))}{X.std(axis=0)}\)</span></p>
+</blockquote>
+<ul>
+<li><code>z_i = (x_i - mean) / delta</code> , <code>mean</code> 与 <code>delta</code> 代表X的均值和标准差. 最终特征处于[-1, 1]区间.</li>
+</ul>
+<blockquote>
+<p>对于图片, 可直接使用Min-Max Scaling</p>
+</blockquote>
+<ul>
+<li>即将每个特征除以255(每个像素分为R, G, B, 范围在0~255)使得值处于[0, 1].</li>
+</ul>
+<h1 id="初始化参数">初始化参数</h1>
+<p>一般将 <code>w</code> 和 <code>b</code> 随机选择.</p>
+<h1 id="梯度下降gradient-descent">梯度下降(Gradient descent)</h1>
+<p>根据 <code>w</code> , <code>b</code> 和训练集，来训练数据.</p>
+<ul>
+<li>需要设定 <u>迭代次数</u> 与 <u>学习率</u> .</li>
+</ul>
+<p>以下为大循环(迭代次数)中内容：</p>
+<h2 id="计算代价函数">计算代价函数</h2>
+<p>对于<span class="math inline">\(x^{(i)} \in X\)</span>， 有 <span class="math display">\[
+z^{(i)} = w^Tx^{(i)} + b
+\]</span></p>
+<p><span class="math display">\[
+a^{(i)} = \hat{y}^{(i)} = sigmod(z^{(i)}) = \sigma(z^{(i)}) = \frac{1}{1 + e^{-z^{(i)}}}
+\]</span></p>
+<p><span class="math display">\[
+loss: {L}(a^{(i)}, y^{(i)}) = {L}(\hat{y}^{(i)}, y^{(i)}) = - y^{(i)}  \log(a^{(i)}) - (1-y^{(i)} )  \log(1-a^{(i)})
+\]</span></p>
+<p><span class="math display">\[
+A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)}) 
+  = \sigma(w^TX+b) 
+  = \frac{1}{1+e^{-(w^TX+b)}}
+\]</span></p>
+<p><span class="math display">\[
+cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)}) 
+  = -\frac{1}{m} \sum^{m}_{i=1} (y^{(i)} log(a^{(i)}) + (1-y^{(i)}) log(1-a^{(i)}))
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 激活函数</span></span><br><span class="line">A = sigmoid(w.T.dot(X) + b)</span><br><span class="line"><span class="comment"># 代价函数</span></span><br><span class="line">cost = -np.sum(Y * np.log(A) + (<span class="number">1</span>-Y) * np.log(<span class="number">1</span> - A)) / m</span><br></pre></td></tr></table></figure>
+<h2 id="计算反向传播的梯度">计算反向传播的梯度</h2>
+<blockquote>
+<p>即：对 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)\)</span> 计算导数，即对<span class="math inline">\({L}(a, y)\)</span> 计算导数，以下求导，均省略上标。</p>
+<p>求：<span class="math inline">\(\dfrac{\partial J}{\partial w}\)</span> 和 <span class="math inline">\(\dfrac{\partial J}{\partial b} ​\)</span> (dw 和 db)</p>
+</blockquote>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial a}
+= \dfrac{\partial L(a, y)}{\partial a}
+= -\frac{y}{a} + \frac{1-y}{1-a}
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{da}{dz}
+= (\frac{1}{1 + e^{-z}})&#39;
+= \dfrac{e^{-z}}{(1+e^{-z})^2}
+= \dfrac{1}{1+e^{-z}} - \dfrac{1}{(1+e^{-z})^2}
+= a-a^2
+= a · (1-a)
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial z}
+= \dfrac{\partial L}{\partial a} \dfrac{da}{dz}
+= (-\dfrac{y}{a} + \dfrac{1-y}{1-a}) · a · (1-a)
+= a - y
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial w}
+= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial w}
+= (a-y) · x
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial L}{\partial b}
+= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial b}
+= a-y
+\]</span></p>
+<p>根据 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)​\)</span> 最终可得： <span class="math display">\[
+\dfrac{\partial J}{\partial w}
+= \dfrac{\partial J}{\partial a} \dfrac{\partial a}{\partial w}
+= \dfrac{1}{m} X(A-Y)^T
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{\partial J}{\partial b} = \dfrac{1}{m} \sum^{m}_{i=1} (a^{(i)} - y^{(i)})
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dw = X.dot((A - Y).T) / m</span><br><span class="line">db = np.sum(A - Y) / m</span><br></pre></td></tr></table></figure>
+<h2 id="更新-w-b">更新 <code>w</code> , <code>b</code></h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">w = w - learning_rate * dw</span><br><span class="line">b = b - learning_rate * db</span><br></pre></td></tr></table></figure>
+<h1 id="预测测试集">预测测试集</h1>
+<ul>
+<li><p>使用训练出来的 <code>w</code> , <code>b</code> , 对测试集使用 <code>y_pred = sigmoid(wx+b)</code> , 计算得预测的概率</p></li>
+<li><p>对其取整, 例如大于0.7则判定为 '是', 否则为'否'.</p></li>
+</ul>
+<h1 id="实例实现一个图像识别算法">实例：实现一个图像识别算法</h1>
+<p><a href="https://www.cnblogs.com/douzujun/p/10267165.html" target="_blank" rel="noopener" class="uri">https://www.cnblogs.com/douzujun/p/10267165.html</a></p>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>Coursera Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Coursera Deep Learning笔记 一步步实现神经网络</title>
+    <url>/posts/56835.html</url>
+    <content><![CDATA[<p>一步步实现神经网络，并实现一个识别猫的应用</p>
+<a id="more"></a>
+<ul>
+<li>公式推导</li>
+</ul>
+<p>https://www.cnblogs.com/douzujun/p/13046923.html https://xienaoban.github.io/posts/12524.html</p>
+<ul>
+<li><a href="https://www.cnblogs.com/douzujun/p/10325980.html" target="_blank" rel="noopener">代码拆分实现</a>
+<ol type="1">
+<li>Initialize parameters / Define hyperparameters</li>
+<li>Loop for num_iterations:
+<ol type="a">
+<li>Forward propagation</li>
+<li>Compute cost function</li>
+<li>Backward propagation</li>
+<li>Update parameters (using parameters, and grads from backprop)</li>
+</ol></li>
+<li>Use trained parameters to predict labels</li>
+</ol></li>
+<li><a href="https://www.cnblogs.com/douzujun/p/10344361.html" target="_blank" rel="noopener">实例：用手写神经网络实现识别猫</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>Coursera Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化</title>
     <url>/posts/27134.html</url>
     <content><![CDATA[<p>Coursera Deep Learning笔记 改善深层神经网络：超参数调试、正则化以及优化</p>
@@ -134,40 +280,6 @@ W=W^{[L-1]}=...=W^{[2]}=W^{[1]}
 d\theta_{approx}[i] = \frac{J(\theta_1, \theta_2, ..., \theta_i + \varepsilon, ...) - J(\theta_1, \theta_2, ..., \theta_i - \varepsilon, ...)}{2\varepsilon}
 \]</span></p>
 <p>然后根据两者误差估计自己是否算错. 该方法仅用来调试, 且不能同 Dropout 同时使用.</p>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-        <category>Coursera Deep Learning</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Coursera Deep Learning笔记 一步步实现神经网络</title>
-    <url>/posts/56835.html</url>
-    <content><![CDATA[<p>一步步实现神经网络，并实现一个识别猫的应用</p>
-<a id="more"></a>
-<ul>
-<li>公式推导</li>
-</ul>
-<p>https://www.cnblogs.com/douzujun/p/13046923.html https://xienaoban.github.io/posts/12524.html</p>
-<ul>
-<li><a href="https://www.cnblogs.com/douzujun/p/10325980.html" target="_blank" rel="noopener">代码拆分实现</a>
-<ol type="1">
-<li>Initialize parameters / Define hyperparameters</li>
-<li>Loop for num_iterations:
-<ol type="a">
-<li>Forward propagation</li>
-<li>Compute cost function</li>
-<li>Backward propagation</li>
-<li>Update parameters (using parameters, and grads from backprop)</li>
-</ol></li>
-<li>Use trained parameters to predict labels</li>
-</ol></li>
-<li><a href="https://www.cnblogs.com/douzujun/p/10344361.html" target="_blank" rel="noopener">实例：用手写神经网络实现识别猫</a></li>
-</ul>
 ]]></content>
       <categories>
         <category>深度学习</category>
@@ -448,115 +560,271 @@ d\theta_{approx}[i] = \frac{J(\theta_1, \theta_2, ..., \theta_i + \varepsilon, .
       </tags>
   </entry>
   <entry>
-    <title>Coursera Deep Learning笔记 逻辑回归典型的训练过程</title>
-    <url>/posts/20321.html</url>
-    <content><![CDATA[<p>Deep Learning 用逻辑回归训练图片的典型步骤.</p>
-<a id="more"></a>
-<p>笔记摘自：<a href="https://xienaoban.github.io/posts/59595.html" target="_blank" rel="noopener" class="uri">https://xienaoban.github.io/posts/59595.html</a></p>
-<h1 id="处理数据">处理数据</h1>
-<h2 id="向量化vectorization">向量化(Vectorization)</h2>
-<p>将每张图片的高和宽和RGB展为向量，最终X的shape为 <code>(height*width*3, m)</code> .</p>
-<h2 id="特征归一化normalization">特征归一化(Normalization)</h2>
-<blockquote>
-<p>对于一般数据，使用标准化(Standardization)：<span class="math inline">\(X_{scale} = \frac{(X(axis=0) - X.mean(axis=0))}{X.std(axis=0)}\)</span></p>
-</blockquote>
+    <title>Pytorch-从零开发NLP聊天机器人</title>
+    <url>/posts/53738.html</url>
+    <content><![CDATA[<p><a href="https://github.com/douzujun/NLP-Chatbot" target="_blank" rel="noopener">全部代码</a></p>
+<p><a href="https://share.weiyun.com/5Yb4vI4" target="_blank" rel="noopener">已训练模型</a></p>
+<h1 id="聊天机器人综合介绍">聊天机器人综合介绍</h1>
+<h2 id="知识点">知识点</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905124836635-1199875296.png" style="width:700px; height:350px"></p>
+<h2 id="聊天机器人分类">聊天机器人分类</h2>
+<h3 id="从领域划分">从领域划分</h3>
 <ul>
-<li><code>z_i = (x_i - mean) / delta</code> , <code>mean</code> 与 <code>delta</code> 代表X的均值和标准差. 最终特征处于[-1, 1]区间.</li>
+<li><strong>固定领域(技术支持)</strong></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905134715066-1087044690.png"></p>
+<ul>
+<li><strong>固定领域(天气查询)</strong></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905134758662-1224375932.png"></p>
+<ul>
+<li><strong>开放领域(娱乐助手)</strong></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905135001425-1336563454.png"></p>
+<table style="width:10%;">
+<colgroup>
+<col style="width: 9%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>### 从模式划分</td>
+</tr>
+<tr class="even">
+<td>- <strong>检索模式</strong></td>
+</tr>
+<tr class="odd">
+<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905135327297-925747080.png"></td>
+</tr>
+<tr class="even">
+<td><strong>应用：</strong></td>
+</tr>
+<tr class="odd">
+<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905135948301-1643619355.png"></td>
+</tr>
+<tr class="even">
+<td><strong>简单原理：</strong></td>
+</tr>
+<tr class="odd">
+<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140000014-249564534.png"></td>
+</tr>
+<tr class="even">
+<td>- <strong>生成模式</strong></td>
+</tr>
+<tr class="odd">
+<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140138852-1972472290.png"></td>
+</tr>
+<tr class="even">
+<td><strong>应用：</strong></td>
+</tr>
+<tr class="odd">
+<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140246497-2085902764.png"></td>
+</tr>
+<tr class="even">
+<td><strong>简单原理：</strong></td>
+</tr>
+<tr class="odd">
+<td><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140356477-645311375.png"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="从功能划分">从功能划分</h3>
+<ul>
+<li><p><strong>问答型聊天机器人</strong></p></li>
+<li><p><strong>任务型聊天机器人</strong></p></li>
+<li><p><strong>闲聊型聊天机器人</strong></p></li>
+</ul>
+<h2 id="如何构建最简单的聊天机器人">如何构建最简单的聊天机器人</h2>
+<h3 id="基于规则的简单聊天机器人">基于规则的简单聊天机器人</h3>
+<ul>
+<li><strong>应用</strong></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905140930843-1041521373.png"></p>
+<ul>
+<li><strong>原理</strong></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905141702540-1961806889.png"></p>
+<ul>
+<li><strong>实现方法及环境</strong></li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">python3<span class="number">.7</span></span><br><span class="line">notebook</span><br><span class="line">nltk</span><br><span class="line">pytorch <span class="number">1.4</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>rule-base机器人</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk <span class="keyword">import</span> word_tokenize</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打招呼</span></span><br><span class="line">greetings = [<span class="string">'hola'</span>, <span class="string">'hello'</span>, <span class="string">'hi'</span>, <span class="string">'Hi'</span>, <span class="string">'hey!'</span>,<span class="string">'hey'</span>]</span><br><span class="line"><span class="comment"># 回复打招呼</span></span><br><span class="line">random_greeting = random.choice(greetings)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对于“假期”的话题关键词</span></span><br><span class="line">question = [<span class="string">'break'</span>,<span class="string">'holiday'</span>,<span class="string">'vacation'</span>,<span class="string">'weekend'</span>]</span><br><span class="line"><span class="comment"># 回复假期话题</span></span><br><span class="line">responses = [<span class="string">'It was nice! I went to Paris'</span>,<span class="string">"Sadly, I just stayed at home"</span>]</span><br><span class="line"><span class="comment"># 随机选一个回</span></span><br><span class="line">random_response = random.choice(responses)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 机器人跑起来</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    userInput = input(<span class="string">'&gt;&gt;&gt;'</span>)</span><br><span class="line">    <span class="comment"># 清理一下输入，看看都有哪些词</span></span><br><span class="line">    cleaned_input = word_tokenize(userInput)</span><br><span class="line">    <span class="comment"># 这里，比较一下关键词，确定他属于哪个问题</span></span><br><span class="line">    <span class="comment"># isdisjoint: 是否无交集</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> set(cleaned_input).isdisjoint(greetings):</span><br><span class="line">        print(random_greeting)</span><br><span class="line">    <span class="keyword">elif</span> <span class="keyword">not</span> set(cleaned_input).isdisjoint(question):</span><br><span class="line">        print(random_response)</span><br><span class="line">    <span class="keyword">elif</span> userInput == <span class="string">'bye'</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'I did not understand what you said'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905155945270-1562696658.png"></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905160344715-1977510721.png"></p>
+<p>我们可以用各种数据库，建立起一套体系，然后通过搜索的方式，来查找答案。</p>
+<p>比如，最简单的就是Python自己的graph数据结构来搭建一个“地图”。</p>
+<p>依据这个地图，我们可以清楚的找寻从一个地方到另一个地方的路径，</p>
+<p>然后作为回答，反馈给用户。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 建立一个基于目标行业的database</span></span><br><span class="line"><span class="comment"># 比如 这里我们用python自带的graph</span></span><br><span class="line">graph = &#123;<span class="string">'上海'</span>: [<span class="string">'苏州'</span>, <span class="string">'常州'</span>],</span><br><span class="line">         <span class="string">'苏州'</span>: [<span class="string">'常州'</span>, <span class="string">'镇江'</span>],</span><br><span class="line">         <span class="string">'常州'</span>: [<span class="string">'镇江'</span>],</span><br><span class="line">         <span class="string">'镇江'</span>: [<span class="string">'常州'</span>],</span><br><span class="line">         <span class="string">'盐城'</span>: [<span class="string">'南通'</span>],</span><br><span class="line">         <span class="string">'南通'</span>: [<span class="string">'常州'</span>]&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 明确如何找到从A到B的路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_path</span><span class="params">(start, end, path=[])</span>:</span></span><br><span class="line">    path = path + [start]</span><br><span class="line">    <span class="keyword">if</span> start == end:</span><br><span class="line">        <span class="keyword">return</span> path</span><br><span class="line">    <span class="keyword">if</span> start <span class="keyword">not</span> <span class="keyword">in</span> graph:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> graph[start]:</span><br><span class="line">        <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> path:</span><br><span class="line">            newpath = find_path(node, end, path)</span><br><span class="line">            <span class="keyword">if</span> newpath: </span><br><span class="line">                <span class="keyword">return</span> newpath</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">print(find_path(<span class="string">'上海'</span>, <span class="string">"镇江"</span>))</span><br><span class="line"><span class="comment"># ['上海', '苏州', '常州', '镇江']</span></span><br></pre></td></tr></table></figure>
+<h1 id="nlp基础">NLP基础</h1>
+<ul>
+<li><font size="4px"><strong>NLP领域</strong></font></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905170054672-1508205467.png" style="width:400px;height=500px"><br></p>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905170234936-535970560.png" style="width:350px;height=450px"></p>
+<ul>
+<li><font size="4px"><strong>NLP研究难点</strong></font></li>
 </ul>
 <blockquote>
-<p>对于图片, 可直接使用Min-Max Scaling</p>
+<ul>
+<li><p>单词边界界定</p></li>
+<li><p>词义的消歧</p></li>
+<li><p>不规范的输入</p></li>
+<li><p>句法的模糊性</p></li>
+<li><p>语言行为与计划</p></li>
+</ul>
 </blockquote>
 <ul>
-<li>即将每个特征除以255(每个像素分为R, G, B, 范围在0~255)使得值处于[0, 1].</li>
+<li><font color="red" size="4px"><strong>词处理</strong></font></li>
 </ul>
-<h1 id="初始化参数">初始化参数</h1>
-<p>一般将 <code>w</code> 和 <code>b</code> 随机选择.</p>
-<h1 id="梯度下降gradient-descent">梯度下降(Gradient descent)</h1>
-<p>根据 <code>w</code> , <code>b</code> 和训练集，来训练数据.</p>
-<ul>
-<li>需要设定 <u>迭代次数</u> 与 <u>学习率</u> .</li>
-</ul>
-<p>以下为大循环(迭代次数)中内容：</p>
-<h2 id="计算代价函数">计算代价函数</h2>
-<p>对于<span class="math inline">\(x^{(i)} \in X\)</span>， 有 <span class="math display">\[
-z^{(i)} = w^Tx^{(i)} + b
-\]</span></p>
-<p><span class="math display">\[
-a^{(i)} = \hat{y}^{(i)} = sigmod(z^{(i)}) = \sigma(z^{(i)}) = \frac{1}{1 + e^{-z^{(i)}}}
-\]</span></p>
-<p><span class="math display">\[
-loss: {L}(a^{(i)}, y^{(i)}) = {L}(\hat{y}^{(i)}, y^{(i)}) = - y^{(i)}  \log(a^{(i)}) - (1-y^{(i)} )  \log(1-a^{(i)})
-\]</span></p>
-<p><span class="math display">\[
-A = (a^{(1)}, a^{(2)}, ... , a^{(m-1)}, a^{(m)}) 
-  = \sigma(w^TX+b) 
-  = \frac{1}{1+e^{-(w^TX+b)}}
-\]</span></p>
-<p><span class="math display">\[
-cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)}) 
-  = -\frac{1}{m} \sum^{m}_{i=1} (y^{(i)} log(a^{(i)}) + (1-y^{(i)}) log(1-a^{(i)}))
-\]</span></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 激活函数</span></span><br><span class="line">A = sigmoid(w.T.dot(X) + b)</span><br><span class="line"><span class="comment"># 代价函数</span></span><br><span class="line">cost = -np.sum(Y * np.log(A) + (<span class="number">1</span>-Y) * np.log(<span class="number">1</span> - A)) / m</span><br></pre></td></tr></table></figure>
-<h2 id="计算反向传播的梯度">计算反向传播的梯度</h2>
 <blockquote>
-<p>即：对 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)\)</span> 计算导数，即对<span class="math inline">\({L}(a, y)\)</span> 计算导数，以下求导，均省略上标。</p>
-<p>求：<span class="math inline">\(\dfrac{\partial J}{\partial w}\)</span> 和 <span class="math inline">\(\dfrac{\partial J}{\partial b} ​\)</span> (dw 和 db)</p>
-</blockquote>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial a}
-= \dfrac{\partial L(a, y)}{\partial a}
-= -\frac{y}{a} + \frac{1-y}{1-a}
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{da}{dz}
-= (\frac{1}{1 + e^{-z}})&#39;
-= \dfrac{e^{-z}}{(1+e^{-z})^2}
-= \dfrac{1}{1+e^{-z}} - \dfrac{1}{(1+e^{-z})^2}
-= a-a^2
-= a · (1-a)
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial z}
-= \dfrac{\partial L}{\partial a} \dfrac{da}{dz}
-= (-\dfrac{y}{a} + \dfrac{1-y}{1-a}) · a · (1-a)
-= a - y
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial w}
-= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial w}
-= (a-y) · x
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial L}{\partial b}
-= \dfrac{\partial L}{\partial z} \dfrac{\partial z}{\partial b}
-= a-y
-\]</span></p>
-<p>根据 <span class="math inline">\(J = -\dfrac{1}{m} \sum L(a, y)​\)</span> 最终可得： <span class="math display">\[
-\dfrac{\partial J}{\partial w}
-= \dfrac{\partial J}{\partial a} \dfrac{\partial a}{\partial w}
-= \dfrac{1}{m} X(A-Y)^T
-\]</span></p>
-<p><span class="math display">\[
-\dfrac{\partial J}{\partial b} = \dfrac{1}{m} \sum^{m}_{i=1} (a^{(i)} - y^{(i)})
-\]</span></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dw = X.dot((A - Y).T) / m</span><br><span class="line">db = np.sum(A - Y) / m</span><br></pre></td></tr></table></figure>
-<h2 id="更新-w-b">更新 <code>w</code> , <code>b</code></h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">w = w - learning_rate * dw</span><br><span class="line">b = b - learning_rate * db</span><br></pre></td></tr></table></figure>
-<h1 id="预测测试集">预测测试集</h1>
 <ul>
-<li><p>使用训练出来的 <code>w</code> , <code>b</code> , 对测试集使用 <code>y_pred = sigmoid(wx+b)</code> , 计算得预测的概率</p></li>
-<li><p>对其取整, 例如大于0.7则判定为 '是', 否则为'否'.</p></li>
+<li><p>分词</p></li>
+<li><font color="red">词性标注(Part-of-speech tagging)</font>
+<ul>
+<li>把分好的词一个一个分类(如, 动词, 形容词，名词)</li>
+</ul></li>
+<li>实体识别
+<ul>
+<li>名词识别</li>
+</ul></li>
+<li>词义消歧
+<ul>
+<li>联系上下文</li>
+</ul></li>
 </ul>
-<h1 id="实例实现一个图像识别算法">实例：实现一个图像识别算法</h1>
-<p><a href="https://www.cnblogs.com/douzujun/p/10267165.html" target="_blank" rel="noopener" class="uri">https://www.cnblogs.com/douzujun/p/10267165.html</a></p>
+</blockquote>
+<ul>
+<li><font color="red" size="4px"><strong>语句处理</strong></font></li>
+</ul>
+<blockquote>
+<ul>
+<li><font color="red">句法分析(Syntactic Analysis)</font>
+<ul>
+<li>“我去北京天安门”: 主谓分开</li>
+</ul></li>
+<li><font color="red">语义分析(Senmantic Analysis)</font>
+<ul>
+<li>句子的理解</li>
+</ul></li>
+<li><p><font color="red">机器翻译</font></p></li>
+<li><p><strong>语音合成</strong></p></li>
+</ul>
+</blockquote>
+<ul>
+<li><font size="4px"><strong>篇章处理</strong></font></li>
+</ul>
+<blockquote>
+<ul>
+<li>自动文摘
+<ul>
+<li>机器读文章，写出摘要</li>
+</ul></li>
+</ul>
+</blockquote>
+<ul>
+<li><font size="4px"><strong>统计语言模型</strong></font></li>
+</ul>
+<blockquote>
+<ul>
+<li><p><a href="https://www.cnblogs.com/douzujun/p/13021227.html#_label1_1" target="_blank" rel="noopener">N-gram统计模型</a></p></li>
+<li><p>马尔科夫模型</p></li>
+<li><p>隐马尔科夫模型</p></li>
+</ul>
+</blockquote>
+<h2 id="分词">分词</h2>
+<ul>
+<li><p>把句子变成词</p></li>
+<li><p><strong>分词难点</strong></p></li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>分词标准</strong></li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905181351884-416050950.png"></p>
+<ul>
+<li><strong>切分歧义(分词造成的语义分歧)</strong>
+<ul>
+<li>分词细粒度不同： <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905181645629-1821701734.png"></li>
+<li>真正存在歧义的句子： <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905181737439-1973410367.png"></li>
+<li>交集型的歧义 <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905182226165-2078007290.png"></li>
+</ul></li>
+<li><strong>新词</strong>
+<ul>
+<li>给力，花呗，贸易战等等</li>
+</ul></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>分词的算法</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>基于词典的分词算法
+<ul>
+<li>正向最大匹配法</li>
+<li>逆向最大匹配法</li>
+<li>双向匹配分词<br>
+</li>
+<li>全切分路径选择</li>
+</ul></li>
+<li>基于统计的分词算法
+<ul>
+<li>HMM，隐马尔科夫模型</li>
+<li>CRF，条件随机场</li>
+<li>深度学习</li>
+</ul></li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut(<span class="string">'我来到北京清华大学'</span>, cut_all=<span class="literal">True</span>)</span><br><span class="line">print(<span class="string">'Full Mode: '</span> + <span class="string">'/ '</span>.join(seg_list))      <span class="comment"># 全模式</span></span><br><span class="line"><span class="comment"># Full Mode: 我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学</span></span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut(<span class="string">'我来到北京清华大学'</span>, cut_all=<span class="literal">False</span>)</span><br><span class="line">print(<span class="string">'Default Mode: '</span> + <span class="string">'/ '</span>.join(seg_list))   <span class="comment"># 精确模式</span></span><br><span class="line"><span class="comment"># Default Mode: 我/ 来到/ 北京/ 清华大学</span></span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut(<span class="string">'他来到了网易杭研大厦'</span>)    <span class="comment"># 默认是精确模式</span></span><br><span class="line">print(<span class="string">'/ '</span>.join(seg_list))</span><br><span class="line"><span class="comment"># 他/ 来到/ 了/ 网易/ 杭研/ 大厦</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索引擎模式</span></span><br><span class="line">seg_list = jieba.cut_for_search(<span class="string">'小明硕士毕业于中国科学院计算所，后在日本京都大学深造'</span>)</span><br><span class="line">print(<span class="string">'/ '</span>.join(seg_list))</span><br><span class="line"><span class="comment"># 小明/ 硕士/ 毕业/ 于/ 中国/ 科学/ 学院/ 科学院/ 中国科学院/ 计算/ 计算所/ ，/ 后/ 在/ 日本/ 京都/ 大学/ 日本京都大学/ 深造</span></span><br></pre></td></tr></table></figure>
+<h2 id="tf-idf">TF-IDF</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905231815959-778744901.png"> <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905234801950-355607453.png"> <img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905234935857-777057823.png"></p>
+<ul>
+<li><p><strong>TF-IDF的作用</strong></p>
+<ul>
+<li>提取文本向量的特征</li>
+</ul></li>
+<li><p><strong>TF-IDF算法代码示例</strong></p></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np   <span class="comment"># 数值计算、矩阵运算、向量运算</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd  <span class="comment"># 数值分析、科学计算</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 定义数据和预处理</span></span><br><span class="line"><span class="comment"># 定义文档</span></span><br><span class="line">docA = <span class="string">'The cat sat on my bed'</span></span><br><span class="line">docB = <span class="string">'The dog sat on my knees'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切割文档</span></span><br><span class="line">bowA = docA.split(<span class="string">' '</span>)</span><br><span class="line">bowB = docB.split(<span class="string">' '</span>)</span><br><span class="line"><span class="comment"># bowA # ['The', 'cat', 'sat', 'on', 'my', 'bed']</span></span><br><span class="line"><span class="comment"># bowB # ['The', 'dog', 'sat', 'on', 'my', 'knees']</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建词库</span></span><br><span class="line">wordSet = set(bowA).union(set(bowB))</span><br><span class="line"><span class="comment"># wordSet # &#123;'The', 'bed', 'cat', 'dog', 'knees', 'my', 'on', 'sat'&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 进行词数统计</span></span><br><span class="line"><span class="comment"># 用字典来保存词出现的次数</span></span><br><span class="line">wordDictA = dict.fromkeys(wordSet, <span class="number">0</span>)</span><br><span class="line">wordDictB = dict.fromkeys(wordSet, <span class="number">0</span>)</span><br><span class="line">wordDictA</span><br><span class="line">wordDictB</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历文档，统计词数</span></span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> bowA:</span><br><span class="line">    wordDictA[word] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> bowB:</span><br><span class="line">    wordDictB[word] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">pd.DataFrame([wordDictA, wordDictB])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 计算词频 TF</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeTF</span><span class="params">(wordDict, bow)</span>:</span></span><br><span class="line">    <span class="comment"># 用一个字典对象保存 TF，把所有对应于 bow 文档里的 TF都计算出来</span></span><br><span class="line">    tfDict = &#123;&#125;</span><br><span class="line">    nbowCount = len(bow)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> word, count <span class="keyword">in</span> wordDict.items():</span><br><span class="line">        tfDict[word] = count / nbowCount</span><br><span class="line">    <span class="keyword">return</span> tfDict</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">tfA = computeTF(wordDictA, bowA)</span><br><span class="line">tfB = computeTF(wordDictB, bowB)</span><br><span class="line">print(tfA)</span><br><span class="line">print(tfB)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 计算逆文档频率 IDF</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeIDF</span><span class="params">(wordDictList)</span>:</span></span><br><span class="line">    <span class="comment"># 用一个字典对象保存 IDF，每个词作为 key，初始值为 0</span></span><br><span class="line">    idfDict = dict.fromkeys(wordDictList[<span class="number">0</span>], <span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 总文档数量</span></span><br><span class="line">    N = len(wordDictList)</span><br><span class="line">    <span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> wordDict <span class="keyword">in</span> wordDictList:</span><br><span class="line">        <span class="comment"># 遍历字典中的每个词汇，统计 Ni</span></span><br><span class="line">        <span class="keyword">for</span> word, count <span class="keyword">in</span> wordDict.items():</span><br><span class="line">            <span class="keyword">if</span> count &gt; <span class="number">0</span> :</span><br><span class="line">                <span class="comment"># 先把 Ni 增加 1，存入到 idfDict 中</span></span><br><span class="line">                idfDict[word] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 已经得到所有词汇 i 对应的 Ni，现在根据公式把它替换成 idf 值</span></span><br><span class="line">    <span class="keyword">for</span> word, Ni <span class="keyword">in</span> idfDict.items():</span><br><span class="line">        idfDict[word] = math.log10((N + <span class="number">1</span>)/(Ni + <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> idfDict</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">idfs = computeIDF([wordDictA, wordDictB])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 计算 TF-IDF</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeTFIDF</span><span class="params">(tf, idfs)</span>:</span></span><br><span class="line">    tfidf = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> word, tfval <span class="keyword">in</span> tf.items():</span><br><span class="line">        tfidf[word] = tfval * idfs[word]</span><br><span class="line">    <span class="keyword">return</span> tfidf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">tfidfA = computeTFIDF(tfA, idfs)</span><br><span class="line">tfidfB = computeTFIDF(tfB, idfs)</span><br><span class="line"></span><br><span class="line">pd.DataFrame([tfidfA, tfidfB])</span><br><span class="line"></span><br><span class="line"><span class="comment">#       knees	   cat	        sat	The	on	dog	        bed	        my</span></span><br><span class="line"><span class="comment"># 0	0.000000   0.029349	0.0	0.0	0.0	0.000000	0.029349	0.0</span></span><br><span class="line"><span class="comment"># 1	0.029349   0.000000	0.0	0.0	0.0	0.029349	0.000000	0.0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>scikit-learn计算TF-IDF</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfTransformer</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</span><br><span class="line"></span><br><span class="line">corpus = [<span class="string">'I come to China to travel'</span>,</span><br><span class="line">          <span class="string">'This is a car polupar in China'</span>,</span><br><span class="line">          <span class="string">'I love tea and Apple'</span>,</span><br><span class="line">          <span class="string">'The work is to write some papers in science'</span>]</span><br><span class="line"></span><br><span class="line">vectorizer = CountVectorizer()</span><br><span class="line"></span><br><span class="line">transformer = TfidfTransformer()</span><br><span class="line">tfidf = transformer.fit_transform(vectorizer.fit_transform(corpus))</span><br><span class="line">print(tfidf)</span><br></pre></td></tr></table></figure>
+<details>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">(<span class="number">0</span>, <span class="number">16</span>) <span class="number">0.4424621378947393</span></span><br><span class="line">(<span class="number">0</span>, <span class="number">15</span>) <span class="number">0.697684463383976</span></span><br><span class="line">(<span class="number">0</span>, <span class="number">4</span>)  <span class="number">0.4424621378947393</span></span><br><span class="line">(<span class="number">0</span>, <span class="number">3</span>)  <span class="number">0.348842231691988</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">14</span>) <span class="number">0.45338639737285463</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">9</span>)  <span class="number">0.45338639737285463</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">6</span>)  <span class="number">0.3574550433419527</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">5</span>)  <span class="number">0.3574550433419527</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">3</span>)  <span class="number">0.3574550433419527</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>)  <span class="number">0.45338639737285463</span></span><br><span class="line">(<span class="number">2</span>, <span class="number">12</span>) <span class="number">0.5</span></span><br><span class="line">(<span class="number">2</span>, <span class="number">7</span>)  <span class="number">0.5</span></span><br><span class="line">(<span class="number">2</span>, <span class="number">1</span>)  <span class="number">0.5</span></span><br><span class="line">(<span class="number">2</span>, <span class="number">0</span>)  <span class="number">0.5</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">18</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">17</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">15</span>) <span class="number">0.2811316284405006</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">13</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">11</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">10</span>) <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">8</span>)  <span class="number">0.3565798233381452</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">6</span>)  <span class="number">0.2811316284405006</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">5</span>)  <span class="number">0.2811316284405006</span></span><br></pre></td></tr></table></figure>
+</details>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"> </span><br><span class="line">tfidf = TfidfVectorizer()</span><br><span class="line"> </span><br><span class="line">corpus=[<span class="string">"我 来到 北京 清华大学"</span>,          <span class="comment"># 第一类文本切词后的结果，词之间以空格隔开</span></span><br><span class="line">        <span class="string">"他 来到 了 网易 杭研 大厦"</span>,      <span class="comment"># 第二类文本的切词结果</span></span><br><span class="line">        <span class="string">"小明 硕士 毕业 与 中国 科学院"</span>,  <span class="comment"># 第三类文本的切词结果</span></span><br><span class="line">        <span class="string">"我 爱 北京 天安门"</span>]              <span class="comment"># 第四类文本的切词结果</span></span><br><span class="line"> </span><br><span class="line">result = tfidf.fit_transform(corpus).toarray()</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计关键词</span></span><br><span class="line">word = tfidf.get_feature_names()</span><br><span class="line">print(word)</span><br><span class="line"><span class="comment"># 统计关键词出现次数，几句话对比几次</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> tfidf.vocabulary_.items():</span><br><span class="line">    print(k,v)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 对比第i类文本的词语tf-idf权重</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(result)):</span><br><span class="line">    print(<span class="string">'----------------------'</span>,i,<span class="string">'--------------------'</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(word)):</span><br><span class="line">        print(word[j],result[i][j])</span><br></pre></td></tr></table></figure>
+<details>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">[[<span class="number">0.</span>         <span class="number">0.52640543</span> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.52640543</span></span><br><span class="line">  <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.66767854</span> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>        ]</span><br><span class="line"> [<span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.52547275</span> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.41428875</span></span><br><span class="line">  <span class="number">0.52547275</span> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.52547275</span>]</span><br><span class="line"> [<span class="number">0.4472136</span>  <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.4472136</span>  <span class="number">0.</span></span><br><span class="line">  <span class="number">0.</span>         <span class="number">0.4472136</span>  <span class="number">0.</span>         <span class="number">0.4472136</span>  <span class="number">0.4472136</span>  <span class="number">0.</span>        ]</span><br><span class="line"> [<span class="number">0.</span>         <span class="number">0.6191303</span>  <span class="number">0.</span>         <span class="number">0.78528828</span> <span class="number">0.</span>         <span class="number">0.</span></span><br><span class="line">  <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>        ]]</span><br><span class="line">[<span class="string">'中国'</span>, <span class="string">'北京'</span>, <span class="string">'大厦'</span>, <span class="string">'天安门'</span>, <span class="string">'小明'</span>, <span class="string">'来到'</span>, <span class="string">'杭研'</span>, <span class="string">'毕业'</span>, <span class="string">'清华大学'</span>, <span class="string">'硕士'</span>, <span class="string">'科学院'</span>, <span class="string">'网易'</span>]</span><br><span class="line">来到 <span class="number">5</span></span><br><span class="line">北京 <span class="number">1</span></span><br><span class="line">清华大学 <span class="number">8</span></span><br><span class="line">网易 <span class="number">11</span></span><br><span class="line">杭研 <span class="number">6</span></span><br><span class="line">大厦 <span class="number">2</span></span><br><span class="line">小明 <span class="number">4</span></span><br><span class="line">硕士 <span class="number">9</span></span><br><span class="line">毕业 <span class="number">7</span></span><br><span class="line">中国 <span class="number">0</span></span><br><span class="line">科学院 <span class="number">10</span></span><br><span class="line">天安门 <span class="number">3</span></span><br><span class="line">---------------------- <span class="number">0</span> --------------------</span><br><span class="line">中国 <span class="number">0.0</span></span><br><span class="line">北京 <span class="number">0.5264054336099155</span></span><br><span class="line">大厦 <span class="number">0.0</span></span><br><span class="line">天安门 <span class="number">0.0</span></span><br><span class="line">小明 <span class="number">0.0</span></span><br><span class="line">来到 <span class="number">0.5264054336099155</span></span><br><span class="line">杭研 <span class="number">0.0</span></span><br><span class="line">毕业 <span class="number">0.0</span></span><br><span class="line">清华大学 <span class="number">0.6676785446095399</span></span><br><span class="line">硕士 <span class="number">0.0</span></span><br><span class="line">科学院 <span class="number">0.0</span></span><br><span class="line">网易 <span class="number">0.0</span></span><br><span class="line">---------------------- <span class="number">1</span> --------------------</span><br><span class="line">中国 <span class="number">0.0</span></span><br><span class="line">北京 <span class="number">0.0</span></span><br><span class="line">大厦 <span class="number">0.5254727492640658</span></span><br><span class="line">天安门 <span class="number">0.0</span></span><br><span class="line">小明 <span class="number">0.0</span></span><br><span class="line">来到 <span class="number">0.41428875116588965</span></span><br><span class="line">杭研 <span class="number">0.5254727492640658</span></span><br><span class="line">毕业 <span class="number">0.0</span></span><br><span class="line">清华大学 <span class="number">0.0</span></span><br><span class="line">硕士 <span class="number">0.0</span></span><br><span class="line">科学院 <span class="number">0.0</span></span><br><span class="line">网易 <span class="number">0.5254727492640658</span></span><br><span class="line">---------------------- <span class="number">2</span> --------------------</span><br><span class="line">中国 <span class="number">0.4472135954999579</span></span><br><span class="line">北京 <span class="number">0.0</span></span><br><span class="line">大厦 <span class="number">0.0</span></span><br><span class="line">天安门 <span class="number">0.0</span></span><br><span class="line">小明 <span class="number">0.4472135954999579</span></span><br><span class="line">来到 <span class="number">0.0</span></span><br><span class="line">杭研 <span class="number">0.0</span></span><br><span class="line">毕业 <span class="number">0.4472135954999579</span></span><br><span class="line">清华大学 <span class="number">0.0</span></span><br><span class="line">硕士 <span class="number">0.4472135954999579</span></span><br><span class="line">科学院 <span class="number">0.4472135954999579</span></span><br><span class="line">网易 <span class="number">0.0</span></span><br><span class="line">---------------------- <span class="number">3</span> --------------------</span><br><span class="line">中国 <span class="number">0.0</span></span><br><span class="line">北京 <span class="number">0.6191302964899972</span></span><br><span class="line">大厦 <span class="number">0.0</span></span><br><span class="line">天安门 <span class="number">0.7852882757103967</span></span><br><span class="line">小明 <span class="number">0.0</span></span><br><span class="line">来到 <span class="number">0.0</span></span><br><span class="line">杭研 <span class="number">0.0</span></span><br><span class="line">毕业 <span class="number">0.0</span></span><br><span class="line">清华大学 <span class="number">0.0</span></span><br><span class="line">硕士 <span class="number">0.0</span></span><br><span class="line">科学院 <span class="number">0.0</span></span><br><span class="line">网易 <span class="number">0.0</span></span><br></pre></td></tr></table></figure>
+</details>
+<ul>
+<li><strong>NLTK计算TF-IDF</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.text <span class="keyword">import</span> TextCollection</span><br><span class="line"></span><br><span class="line">corpus = [<span class="string">'I come to China to travel'</span>,</span><br><span class="line">          <span class="string">'This is a car polupar in China'</span>,</span><br><span class="line">          <span class="string">'I love tea and Apple'</span>,</span><br><span class="line">          <span class="string">'The work is to write some papers in science'</span>]</span><br><span class="line"></span><br><span class="line">corpus = TextCollection(corpus)</span><br><span class="line"><span class="comment"># 直接就能算出TF-IDF</span></span><br><span class="line">print(corpus.tf_idf(<span class="string">'China'</span>, <span class="string">'I come to China to travel'</span>))</span><br><span class="line"><span class="comment"># 0.027725887222397813</span></span><br></pre></td></tr></table></figure>
+<h2 id="nltk">NLTK</h2>
+<p><img src="https://img2020.cnblogs.com/blog/817161/202009/817161-20200905175021602-2048815200.png" style="width:330px;height:200px"></p>
+<ul>
+<li><strong>示例</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line">sentence = <span class="string">"""At eight o'clock on Thursday morning</span></span><br><span class="line"><span class="string">Arthur didn't feel very good.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">tokens = nltk.word_tokenize(sentence)</span><br><span class="line">print(tokens)</span><br><span class="line"><span class="comment"># ['At', 'eight', "o'clock", 'on', 'Thursday', 'morning', 'Arthur', 'did', "n't", 'feel', 'very', 'good', '.']</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 词性标注</span></span><br><span class="line">targed = nltk.pos_tag(tokens)</span><br><span class="line">print(targed[<span class="number">0</span>:<span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># [('At', 'IN'), ('eight', 'CD'), ("o'clock", 'NN'), ('on', 'IN'), ('Thursday', 'NNP'), ('morning', 'NN')]</span></span><br></pre></td></tr></table></figure>
+<h2 id="预料及词性标注">预料及词性标注</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 中文词性标注, jieba</span></span><br><span class="line"><span class="keyword">import</span> jieba.posseg <span class="keyword">as</span> pseg</span><br><span class="line"></span><br><span class="line">words = pseg.cut(<span class="string">'我爱北京天安门'</span>)</span><br><span class="line"><span class="keyword">for</span> word, flag <span class="keyword">in</span> words:</span><br><span class="line">    print(word, flag)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 我 r</span></span><br><span class="line"><span class="comment"># 爱 v</span></span><br><span class="line"><span class="comment"># 北京 ns</span></span><br><span class="line"><span class="comment"># 天安门 ns</span></span><br></pre></td></tr></table></figure>
+<h1 id="检索类聊天机器人客服">检索类聊天机器人(客服)</h1>
+<h1 id="生成类聊天机器人娱乐">生成类聊天机器人(娱乐)</h1>
+<h1 id="pytorch基础">pytorch基础</h1>
+<h1 id="机器人发展方向与seqgan实战">机器人发展方向与seqGAN实战</h1>
+<h1 id="基于pytorch聊天机器人代码实战">基于pytorch聊天机器人代码实战</h1>
 ]]></content>
       <categories>
         <category>深度学习</category>
-        <category>Coursera Deep Learning</category>
       </categories>
       <tags>
         <tag>深度学习</tag>
-        <tag>python</tag>
+        <tag>pytorch</tag>
+        <tag>自然语言处理</tag>
       </tags>
   </entry>
   <entry>
@@ -883,6 +1151,40 @@ cost:J(w,b) = -\frac{1}{m} \sum^{m}_{i=1} \mathcal{L}(\hat{y}^{(i)}, y^{(i)})
       </categories>
       <tags>
         <tag>python</tag>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>深度学习代码索引</title>
+    <url>/posts/8245.html</url>
+    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
+<a id="more"></a>
+<h1 id="机器学习">机器学习</h1>
+<h2 id="分类性能度量">分类性能度量</h2>
+<h3 id="精准率和召回率">精准率和召回率</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 混淆矩阵</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line">confusion_matrix(y_test, y_log_predict)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 精确率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_score</span><br><span class="line">precision_score(y_test, y_log_predict)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> recall_score</span><br><span class="line">recall_score(y_test, y_log_predict)</span><br></pre></td></tr></table></figure>
+<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="特征处理">特征处理</h2>
+<h3 id="量纲缩放标准化缩放法和区间缩放法">量纲缩放(标准化缩放法和区间缩放法)</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">演示内容：量纲的特征缩放</span></span><br><span class="line"><span class="string">（两种方法：标准化缩放法和区间缩放法。每种方法举了两个例子：简单二维矩阵和iris数据集）</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment">#方法1：标准化缩放法 例1：对简单示例二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing   </span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np  </span><br><span class="line"><span class="comment">#采用numpy的array表示，因为要用到其mean等函数，而list没有这些函数</span></span><br><span class="line">X = np.array([[<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">100</span>, <span class="number">1</span>], </span><br><span class="line">        [<span class="number">1</span>, <span class="number">1</span>]])  </span><br><span class="line"><span class="comment"># calculate mean  </span></span><br><span class="line">X_mean = X.mean(axis=<span class="number">0</span>)  </span><br><span class="line"><span class="comment"># calculate variance   </span></span><br><span class="line">X_std = X.std(axis=<span class="number">0</span>)  </span><br><span class="line"><span class="comment">#print (X_std)</span></span><br><span class="line"><span class="comment"># standardize X  </span></span><br><span class="line">X1 = (X-X_mean)/X_std</span><br><span class="line"><span class="keyword">print</span> (X1)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">""</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># we can also use function preprocessing.scale to standardize X  </span></span><br><span class="line">X_scale = preprocessing.scale(X)  </span><br><span class="line"><span class="keyword">print</span> (X_scale)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法1： 标准化缩放法 例2：对iris数据二维矩阵的列数据进行。这次采用一个集成的方法StandardScaler</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X_scale = preprocessing.scale(iris.data)  </span><br><span class="line"><span class="keyword">print</span> (X_scale)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法2： 区间缩放法 例3：对简单示例二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"> </span><br><span class="line">data = [[<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">100</span>, <span class="number">1</span>], </span><br><span class="line">        [<span class="number">1</span>, <span class="number">1</span>]]</span><br><span class="line"> </span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">print(scaler.fit(data))</span><br><span class="line">print(scaler.transform(data))</span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法2： 区间缩放法 例4：对iris数据二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"> </span><br><span class="line">data = iris.data</span><br><span class="line"> </span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">print(scaler.fit(data))</span><br><span class="line">print(scaler.transform(data))</span><br></pre></td></tr></table></figure>
+<h3 id="特征向量化">特征向量化</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#特征向量化</span></span><br><span class="line"><span class="comment">#法一：布尔权重</span></span><br><span class="line"><span class="comment">#输入单词列表和句子列表</span></span><br><span class="line"><span class="comment">#返回特征向量</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">boolCountVectorizer</span><span class="params">(wordlst,senlst)</span>:</span></span><br><span class="line">    wordCount = len(wordlst)                 <span class="comment"># 总单词数，向量共wordCount列</span></span><br><span class="line">    senCount = len(senlst)                  <span class="comment"># 总句子数，向量共senCount行</span></span><br><span class="line">    mat = np.zeros((senCount,wordCount), dtype=int)</span><br><span class="line">    word_index=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(wordlst)):            <span class="comment">#提前记录每个单词在wordlst中的序号</span></span><br><span class="line">        word_index[str(wordlst[i])] = i</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(senCount):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(senlst[i])):</span><br><span class="line">            <span class="keyword">if</span> senlst[i][j] <span class="keyword">in</span> wordlst:</span><br><span class="line">                idx = word_index[str(senlst[i][j])]</span><br><span class="line">                mat[i][idx] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> mat</span><br><span class="line"></span><br><span class="line"><span class="comment"># mat=boolCountVectorizer(wordlst, senlst)      </span></span><br><span class="line"><span class="comment"># print('mat.shape=',mat.shape)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#法二：tf-idf权重</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tfidfCountVectorizer</span><span class="params">(wordlst, senlst)</span>:</span></span><br><span class="line">    </span><br><span class="line">    wordCount=len(wordlst)</span><br><span class="line">    senCount=len(senlst)</span><br><span class="line">    weight = np.zeros((senCount,wordCount), dtype=float)</span><br><span class="line">    </span><br><span class="line">    n3 = senCount            <span class="comment">#n3表示句子总数</span></span><br><span class="line">    <span class="keyword">for</span> j,word <span class="keyword">in</span> enumerate(wordlst):</span><br><span class="line">        n4 = <span class="number">0</span>               <span class="comment">#n4表示包含该word的句子数</span></span><br><span class="line">        <span class="keyword">for</span> eve <span class="keyword">in</span> senlst:</span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> eve:</span><br><span class="line">                n4 += <span class="number">1</span></span><br><span class="line">        idf = math.log(((n3+<span class="number">1</span>)/(n4+<span class="number">1</span>))+<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(senCount):</span><br><span class="line">            n1 = senlst[i].count(word)</span><br><span class="line">            n2 = len(senlst[i])</span><br><span class="line">            tf = n1/n2            <span class="comment">#tf表示word在句子senlst[i]中的出现频率</span></span><br><span class="line"></span><br><span class="line">            weight[i][j]=tf*idf   <span class="comment">#weight[i][j]表示第j个词在i个句子中的tf-idf权重</span></span><br><span class="line">    <span class="keyword">return</span> weight</span><br><span class="line"> </span><br><span class="line"><span class="comment"># mat=tfidfCountVectorizer(wordlst,senlst)</span></span><br><span class="line"><span class="comment"># print(mat)</span></span><br><span class="line"><span class="comment"># print(mat.shape)</span></span><br><span class="line"><span class="comment"># print(np.sum(mat!=0.0))</span></span><br></pre></td></tr></table></figure>
+<h3 id="特征选择">特征选择</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#特征选择</span></span><br><span class="line"><span class="comment">#法一：方差选择法  </span></span><br><span class="line"><span class="comment">#输入特征向量mat，参数p，单词列表wordlst</span></span><br><span class="line"><span class="comment">#返回特征选择后的向量mat，特征单词wordlst</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">featureSupport1</span><span class="params">(mat, p, wordlst)</span>:</span>  </span><br><span class="line">    wordlst = np.array(wordlst)</span><br><span class="line">    </span><br><span class="line">    var = p * (<span class="number">1</span> - p)</span><br><span class="line">    lst = np.var(mat, axis=<span class="number">0</span>)               <span class="comment"># 计算每列的方差</span></span><br><span class="line">    mu = lst &gt;= var                    <span class="comment"># mu得到一个bool矩阵</span></span><br><span class="line">    <span class="keyword">return</span> mat[:,mu],wordlst[mu]</span><br><span class="line"></span><br><span class="line"><span class="comment">#法二：皮尔森相关系数法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">featureSupport2</span><span class="params">(mat,threshold,wordlst,y_train)</span>:</span></span><br><span class="line">    wordlst=np.array(wordlst)</span><br><span class="line">    y_train=np.array(y_train)</span><br><span class="line">    </span><br><span class="line">    lst=[pearsonr(mat[:,i],y_train.T)[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(mat.shape[<span class="number">1</span>])]</span><br><span class="line">    mu=np.abs(np.array(lst))&gt;=threshold</span><br><span class="line">    <span class="keyword">return</span> mat[:,mu],wordlst[mu]</span><br></pre></td></tr></table></figure>
+<h1 id="深度学习">深度学习</h1>
+<h1 id="自然语言处理">自然语言处理</h1>
+<h2 id="分词">分词</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#过滤掉标点</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_tokens</span><span class="params">(text)</span>:</span></span><br><span class="line">    lowers = text.lower()</span><br><span class="line">    remove_punctuation_map = dict((ord(char), <span class="literal">None</span>) <span class="keyword">for</span> char <span class="keyword">in</span> string.punctuation)</span><br><span class="line">    no_punctuation = lowers.translate(remove_punctuation_map)</span><br><span class="line">    tokens = nltk.word_tokenize(no_punctuation)</span><br><span class="line">    <span class="keyword">return</span> tokens</span><br><span class="line"></span><br><span class="line"><span class="comment">#单词词形还原</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stem_tokens</span><span class="params">(tokens, stemmer)</span>:</span></span><br><span class="line">    stemmed = []</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> tokens:</span><br><span class="line">        stemmed.append(stemmer.stem(item))</span><br><span class="line">    <span class="keyword">return</span> stemmed</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>python</tag>
+        <tag>pytorch</tag>
+        <tag>自然语言处理</tag>
         <tag>机器学习</tag>
       </tags>
   </entry>
@@ -1539,40 +1841,6 @@ x^{&#39;} =
       <tags>
         <tag>深度学习</tag>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>深度学习代码索引</title>
-    <url>/posts/8245.html</url>
-    <content><![CDATA[<p>本篇博客总结了，可能会重复使用的代码的索引，方便查找</p>
-<a id="more"></a>
-<h1 id="机器学习">机器学习</h1>
-<h2 id="分类性能度量">分类性能度量</h2>
-<h3 id="精准率和召回率">精准率和召回率</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 混淆矩阵</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line">confusion_matrix(y_test, y_log_predict)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 精确率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_score</span><br><span class="line">precision_score(y_test, y_log_predict)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> recall_score</span><br><span class="line">recall_score(y_test, y_log_predict)</span><br></pre></td></tr></table></figure>
-<h3 id="p-r曲线绘制">P-R曲线绘制</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#利用鸢尾花数据集绘制P-R曲线</span></span><br><span class="line">print(__doc__)      <span class="comment">#打印注释</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm, datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve    <span class="comment"># 精确率和召回率</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score   </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> label_binarize      <span class="comment"># 标签的标准化处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier    <span class="comment">#一对其余（每次将一个类作为正类，剩下的类作为负类）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># from sklearn.cross_validation import train_test_split  #适用于anaconda 3.6及以前版本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split     <span class="comment">#适用于anaconda 3.7，训练集和数据集拆分模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#以iris数据为例，画出P-R曲线</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data    <span class="comment">#150*4</span></span><br><span class="line">y = iris.target  <span class="comment">#150*1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签二值化,将三个类转为001, 010, 100的格式.因为这是个多类分类问题，后面将要采用</span></span><br><span class="line"><span class="comment">#OneVsRestClassifier策略转为二类分类问题</span></span><br><span class="line">y = label_binarize(y, classes=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])    <span class="comment">#将150*1转化成150*3</span></span><br><span class="line">n_classes = y.shape[<span class="number">1</span>]                      <span class="comment">#列的个数，等于3</span></span><br><span class="line"><span class="keyword">print</span> (y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加了800维的噪声特征</span></span><br><span class="line">random_state = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">n_samples, n_features = X.shape</span><br><span class="line"></span><br><span class="line">X = np.c_[X, random_state.randn(n_samples, <span class="number">200</span> * n_features)]   <span class="comment">#行不变，只增加了列，150*804</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练集和测试集拆分，比例为0.5</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.5</span>, random_state=random_state) <span class="comment">#随机数，填0或不填，每次都会不一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对其余，转换成两类，构建新的分类器</span></span><br><span class="line">classifier = OneVsRestClassifier(svm.SVC(kernel=<span class="string">'linear'</span>, probability=<span class="literal">True</span>, random_state=random_state))</span><br><span class="line"><span class="comment">#训练集送给fit函数进行拟合训练，训练完后将测试集的样本特征注入，得到测试集中每个样本预测的分数</span></span><br><span class="line">y_score = classifier.fit(X_train, y_train).decision_function(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute Precision-Recall and plot curve</span></span><br><span class="line"><span class="comment">#下面的下划线是返回的阈值。作为一个名称：此时“_”作为临时性的名称使用。</span></span><br><span class="line"><span class="comment">#表示分配了一个特定的名称，但是并不会在后面再次用到该名称。</span></span><br><span class="line">precision = dict()</span><br><span class="line">recall = dict()</span><br><span class="line">average_precision = dict()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    <span class="comment">#对于每一类，计算精确率和召回率的序列（:表示所有行，i表示第i列）</span></span><br><span class="line">    precision[i], recall[i], _ = precision_recall_curve(y_test[:, i],  y_score[:, i])</span><br><span class="line">    average_precision[i] = average_precision_score(y_test[:, i], y_score[:, i])<span class="comment">#切片，第i个类的分类结果性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute micro-average curve and area. ravel()将多维数组降为一维</span></span><br><span class="line">precision[<span class="string">"micro"</span>], recall[<span class="string">"micro"</span>], _ = precision_recall_curve(y_test.ravel(),  y_score.ravel())</span><br><span class="line">average_precision[<span class="string">"micro"</span>] = average_precision_score(y_test, y_score, average=<span class="string">"micro"</span>) <span class="comment">#This score corresponds to the area under the precision-recall curve.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot Precision-Recall curve for each class</span></span><br><span class="line">plt.clf()<span class="comment">#clf 函数用于清除当前图像窗口</span></span><br><span class="line">plt.plot(recall[<span class="string">"micro"</span>], precision[<span class="string">"micro"</span>],</span><br><span class="line">         label=<span class="string">'micro-average Precision-recall curve (area = &#123;0:0.2f&#125;)'</span>.format(average_precision[<span class="string">"micro"</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n_classes):</span><br><span class="line">    plt.plot(recall[i], precision[i],</span><br><span class="line">             label=<span class="string">'Precision-recall curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)'</span>.format(i, average_precision[i]))</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>]) <span class="comment">#xlim、ylim：分别设置X、Y轴的显示范围。</span></span><br><span class="line">plt.xlabel(<span class="string">'Recall'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Precision'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">'Extension of Precision-Recall curve to multi-class'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"lower right"</span>)<span class="comment">#legend 是用于设置图例的函数</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h2 id="特征处理">特征处理</h2>
-<h3 id="量纲缩放标准化缩放法和区间缩放法">量纲缩放(标准化缩放法和区间缩放法)</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">演示内容：量纲的特征缩放</span></span><br><span class="line"><span class="string">（两种方法：标准化缩放法和区间缩放法。每种方法举了两个例子：简单二维矩阵和iris数据集）</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment">#方法1：标准化缩放法 例1：对简单示例二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing   </span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np  </span><br><span class="line"><span class="comment">#采用numpy的array表示，因为要用到其mean等函数，而list没有这些函数</span></span><br><span class="line">X = np.array([[<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">100</span>, <span class="number">1</span>], </span><br><span class="line">        [<span class="number">1</span>, <span class="number">1</span>]])  </span><br><span class="line"><span class="comment"># calculate mean  </span></span><br><span class="line">X_mean = X.mean(axis=<span class="number">0</span>)  </span><br><span class="line"><span class="comment"># calculate variance   </span></span><br><span class="line">X_std = X.std(axis=<span class="number">0</span>)  </span><br><span class="line"><span class="comment">#print (X_std)</span></span><br><span class="line"><span class="comment"># standardize X  </span></span><br><span class="line">X1 = (X-X_mean)/X_std</span><br><span class="line"><span class="keyword">print</span> (X1)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">""</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># we can also use function preprocessing.scale to standardize X  </span></span><br><span class="line">X_scale = preprocessing.scale(X)  </span><br><span class="line"><span class="keyword">print</span> (X_scale)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法1： 标准化缩放法 例2：对iris数据二维矩阵的列数据进行。这次采用一个集成的方法StandardScaler</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X_scale = preprocessing.scale(iris.data)  </span><br><span class="line"><span class="keyword">print</span> (X_scale)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法2： 区间缩放法 例3：对简单示例二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"> </span><br><span class="line">data = [[<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>], </span><br><span class="line">        [<span class="number">100</span>, <span class="number">1</span>], </span><br><span class="line">        [<span class="number">1</span>, <span class="number">1</span>]]</span><br><span class="line"> </span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">print(scaler.fit(data))</span><br><span class="line">print(scaler.transform(data))</span><br><span class="line"> </span><br><span class="line"><span class="comment">#方法2： 区间缩放法 例4：对iris数据二维矩阵的列数据进行</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"> </span><br><span class="line">data = iris.data</span><br><span class="line"> </span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">print(scaler.fit(data))</span><br><span class="line">print(scaler.transform(data))</span><br></pre></td></tr></table></figure>
-<h3 id="特征向量化">特征向量化</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#特征向量化</span></span><br><span class="line"><span class="comment">#法一：布尔权重</span></span><br><span class="line"><span class="comment">#输入单词列表和句子列表</span></span><br><span class="line"><span class="comment">#返回特征向量</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">boolCountVectorizer</span><span class="params">(wordlst,senlst)</span>:</span></span><br><span class="line">    wordCount = len(wordlst)                 <span class="comment"># 总单词数，向量共wordCount列</span></span><br><span class="line">    senCount = len(senlst)                  <span class="comment"># 总句子数，向量共senCount行</span></span><br><span class="line">    mat = np.zeros((senCount,wordCount), dtype=int)</span><br><span class="line">    word_index=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(wordlst)):            <span class="comment">#提前记录每个单词在wordlst中的序号</span></span><br><span class="line">        word_index[str(wordlst[i])] = i</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(senCount):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(senlst[i])):</span><br><span class="line">            <span class="keyword">if</span> senlst[i][j] <span class="keyword">in</span> wordlst:</span><br><span class="line">                idx = word_index[str(senlst[i][j])]</span><br><span class="line">                mat[i][idx] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> mat</span><br><span class="line"></span><br><span class="line"><span class="comment"># mat=boolCountVectorizer(wordlst, senlst)      </span></span><br><span class="line"><span class="comment"># print('mat.shape=',mat.shape)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#法二：tf-idf权重</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tfidfCountVectorizer</span><span class="params">(wordlst, senlst)</span>:</span></span><br><span class="line">    </span><br><span class="line">    wordCount=len(wordlst)</span><br><span class="line">    senCount=len(senlst)</span><br><span class="line">    weight = np.zeros((senCount,wordCount), dtype=float)</span><br><span class="line">    </span><br><span class="line">    n3 = senCount            <span class="comment">#n3表示句子总数</span></span><br><span class="line">    <span class="keyword">for</span> j,word <span class="keyword">in</span> enumerate(wordlst):</span><br><span class="line">        n4 = <span class="number">0</span>               <span class="comment">#n4表示包含该word的句子数</span></span><br><span class="line">        <span class="keyword">for</span> eve <span class="keyword">in</span> senlst:</span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> eve:</span><br><span class="line">                n4 += <span class="number">1</span></span><br><span class="line">        idf = math.log(((n3+<span class="number">1</span>)/(n4+<span class="number">1</span>))+<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(senCount):</span><br><span class="line">            n1 = senlst[i].count(word)</span><br><span class="line">            n2 = len(senlst[i])</span><br><span class="line">            tf = n1/n2            <span class="comment">#tf表示word在句子senlst[i]中的出现频率</span></span><br><span class="line"></span><br><span class="line">            weight[i][j]=tf*idf   <span class="comment">#weight[i][j]表示第j个词在i个句子中的tf-idf权重</span></span><br><span class="line">    <span class="keyword">return</span> weight</span><br><span class="line"> </span><br><span class="line"><span class="comment"># mat=tfidfCountVectorizer(wordlst,senlst)</span></span><br><span class="line"><span class="comment"># print(mat)</span></span><br><span class="line"><span class="comment"># print(mat.shape)</span></span><br><span class="line"><span class="comment"># print(np.sum(mat!=0.0))</span></span><br></pre></td></tr></table></figure>
-<h3 id="特征选择">特征选择</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#特征选择</span></span><br><span class="line"><span class="comment">#法一：方差选择法  </span></span><br><span class="line"><span class="comment">#输入特征向量mat，参数p，单词列表wordlst</span></span><br><span class="line"><span class="comment">#返回特征选择后的向量mat，特征单词wordlst</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">featureSupport1</span><span class="params">(mat, p, wordlst)</span>:</span>  </span><br><span class="line">    wordlst = np.array(wordlst)</span><br><span class="line">    </span><br><span class="line">    var = p * (<span class="number">1</span> - p)</span><br><span class="line">    lst = np.var(mat, axis=<span class="number">0</span>)               <span class="comment"># 计算每列的方差</span></span><br><span class="line">    mu = lst &gt;= var                    <span class="comment"># mu得到一个bool矩阵</span></span><br><span class="line">    <span class="keyword">return</span> mat[:,mu],wordlst[mu]</span><br><span class="line"></span><br><span class="line"><span class="comment">#法二：皮尔森相关系数法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">featureSupport2</span><span class="params">(mat,threshold,wordlst,y_train)</span>:</span></span><br><span class="line">    wordlst=np.array(wordlst)</span><br><span class="line">    y_train=np.array(y_train)</span><br><span class="line">    </span><br><span class="line">    lst=[pearsonr(mat[:,i],y_train.T)[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(mat.shape[<span class="number">1</span>])]</span><br><span class="line">    mu=np.abs(np.array(lst))&gt;=threshold</span><br><span class="line">    <span class="keyword">return</span> mat[:,mu],wordlst[mu]</span><br></pre></td></tr></table></figure>
-<h1 id="深度学习">深度学习</h1>
-<h1 id="自然语言处理">自然语言处理</h1>
-<h2 id="分词">分词</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#过滤掉标点</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_tokens</span><span class="params">(text)</span>:</span></span><br><span class="line">    lowers = text.lower()</span><br><span class="line">    remove_punctuation_map = dict((ord(char), <span class="literal">None</span>) <span class="keyword">for</span> char <span class="keyword">in</span> string.punctuation)</span><br><span class="line">    no_punctuation = lowers.translate(remove_punctuation_map)</span><br><span class="line">    tokens = nltk.word_tokenize(no_punctuation)</span><br><span class="line">    <span class="keyword">return</span> tokens</span><br><span class="line"></span><br><span class="line"><span class="comment">#单词词形还原</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stem_tokens</span><span class="params">(tokens, stemmer)</span>:</span></span><br><span class="line">    stemmed = []</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> tokens:</span><br><span class="line">        stemmed.append(stemmer.stem(item))</span><br><span class="line">    <span class="keyword">return</span> stemmed</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-        <tag>python</tag>
-        <tag>机器学习</tag>
-        <tag>自然语言处理</tag>
-        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
